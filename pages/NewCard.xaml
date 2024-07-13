@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="theflashcards.pages.NewCard"
+             Title="NewCard">
+    <VerticalStackLayout
+        Padding="30"
+        Spacing="25">
+            <Label 
+                Text="Novo Card:"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Entry x:Name = "Quest" 
+               BackgroundColor="Beige"/>
+            <Entry x:Name = "Resp" 
+               BackgroundColor="Beige"/>
+
+            <Button
+                x:Name="SaveCardBtn"
+                Text="Crie um novo card" 
+                SemanticProperties.Hint="Mudança de Pagina"
+                Clicked="SaveCard"
+                HorizontalOptions="Fill" 
+                BackgroundColor="Beige"
+                FontSize="Subtitle"
+                MaximumWidthRequest="400"
+                TextColor="Black"/>
+    </VerticalStackLayout>
+</ContentPage>
