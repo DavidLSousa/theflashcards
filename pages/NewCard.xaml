@@ -27,7 +27,7 @@
         <Editor x:Name = "Quest" 
             BackgroundColor="{StaticResource WhiteIce}"
             TextColor="Black"
-            MaximumWidthRequest="600"
+            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
             HeightRequest="100" />
 
         <Label 
@@ -39,7 +39,7 @@
         <Editor x:Name = "Resp" 
             BackgroundColor="{StaticResource WhiteIce}"
             TextColor="Black" 
-            MaximumWidthRequest="600"
+            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
             HeightRequest="100" />
 
         <Button
@@ -50,7 +50,7 @@
             HorizontalOptions="Fill" 
             BackgroundColor="{StaticResource BlueMedium}"
             FontSize="Subtitle"
-            MaximumWidthRequest="600"
+            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
             TextColor="{StaticResource WhiteIce}"/>
     </VerticalStackLayout>
 </ContentPage>

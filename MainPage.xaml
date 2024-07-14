@@ -25,7 +25,7 @@
                 HorizontalOptions="Fill" 
                 BackgroundColor="{StaticResource BlueMedium}"
                 FontSize="Subtitle"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}"/>
 
             <Button
@@ -36,7 +36,7 @@
                 HorizontalOptions="Fill" 
                 BackgroundColor="{StaticResource BlueMedium}"
                 FontSize="Subtitle"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}"/>
 
             <Button
@@ -47,7 +47,7 @@
                 HorizontalOptions="Fill" 
                 BackgroundColor="{StaticResource BlueMedium}"
                 FontSize="Subtitle"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}"/>
 
             <Button
@@ -58,7 +58,7 @@
                 HorizontalOptions="Fill" 
                 BackgroundColor="{StaticResource BlueMedium}"
                 FontSize="Subtitle"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}" />
 
         </VerticalStackLayout>
