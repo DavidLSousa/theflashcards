@@ -2,31 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="theflashcards.pages.NewCard"
-             Title="NewCard">
+             Shell.NavBarIsVisible="False">
+    
     <VerticalStackLayout
         Padding="30"
-        Spacing="25">
-            <Label 
-                Text="Novo Card:"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+        Spacing="25"
+        BackgroundColor="{StaticResource BlueLight}" >
+        
+        <Label 
+            Text="Novo Card"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1"
+            TextColor="{StaticResource WhiteIce}"/>
 
-            <Entry x:Name = "Quest" 
-               BackgroundColor="Beige"/>
-            <Entry x:Name = "Resp" 
-               BackgroundColor="Beige"/>
 
-            <Button
-                x:Name="SaveCardBtn"
-                Text="Crie um novo card" 
-                SemanticProperties.Hint="Mudança de Pagina"
-                Clicked="SaveCard"
-                HorizontalOptions="Fill" 
-                BackgroundColor="Beige"
-                FontSize="Subtitle"
-                MaximumWidthRequest="400"
-                TextColor="Black"/>
+        <Label 
+            Text="Pergunta"
+            TextColor="{StaticResource teste}"
+            FontSize="Medium"
+            Margin="-20"
+            WidthRequest="600"/>
+        <Editor x:Name = "Quest" 
+            BackgroundColor="{StaticResource WhiteIce}"
+            TextColor="Black"
+            MaximumWidthRequest="600"
+            HeightRequest="100" />
+
+        <Label 
+            Text="Resposta"
+            TextColor="{StaticResource WhiteIce}"
+            FontSize="Medium"
+            Margin="-20"
+            WidthRequest="600"/>
+        <Editor x:Name = "Resp" 
+            BackgroundColor="{StaticResource WhiteIce}"
+            TextColor="Black" 
+            MaximumWidthRequest="600"
+            HeightRequest="100" />
+
+        <Button
+            x:Name="SaveCardBtn"
+            Text="Crie um novo card" 
+            SemanticProperties.Hint="Mudança de Pagina"
+            Clicked="SaveCard"
+            HorizontalOptions="Fill" 
+            BackgroundColor="{StaticResource BlueMedium}"
+            FontSize="Subtitle"
+            MaximumWidthRequest="600"
+            TextColor="{StaticResource WhiteIce}"/>
     </VerticalStackLayout>
 </ContentPage>
