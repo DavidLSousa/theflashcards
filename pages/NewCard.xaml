@@ -5,8 +5,8 @@
              Shell.NavBarIsVisible="False">
     
     <VerticalStackLayout
-        Padding="30"
-        Spacing="25"
+        Padding="{StaticResource DefaultPadding}"
+        Spacing="{StaticResource DefaultSpacing}"
         BackgroundColor="{StaticResource BlueLight}" >
         
         <Label 
@@ -41,6 +41,18 @@
             TextColor="Black" 
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
             HeightRequest="100" />
+
+        <Label 
+            Text="Categoria"
+            TextColor="{StaticResource WhiteIce}"
+            FontSize="Medium"
+            Margin="-20"
+            WidthRequest="600"/>
+        <Entry x:Name = "Category" 
+            Text="../theflashcards/allcards/ ..."
+            BackgroundColor="{StaticResource WhiteIce}"
+            TextColor="Black" 
+            MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
 
         <Button
             x:Name="SaveCardBtn"

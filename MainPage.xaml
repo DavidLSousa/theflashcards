@@ -6,15 +6,14 @@
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25"
+            Padding="{StaticResource DefaultPadding}"
+            Spacing="{StaticResource DefaultSpacing}"
             BackgroundColor="{StaticResource BlueLight}">
 
             <Label
                 Text="The Flash Cards!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" 
-                Padding="20"
                 TextColor="{StaticResource WhiteIce}"/>
 
             <Button
