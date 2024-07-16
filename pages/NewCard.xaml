@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="theflashcards.pages.NewCard"
              Shell.NavBarIsVisible="False">
-    
+
     <VerticalStackLayout
         Padding="{StaticResource DefaultPadding}"
         Spacing="{StaticResource DefaultSpacing}"
         BackgroundColor="{StaticResource BlueLight}" >
-        
+
         <Label 
             Text="Novo Card"
             VerticalOptions="Center" 
@@ -49,7 +49,7 @@
             Margin="-20"
             WidthRequest="600"/>
         <Entry x:Name = "Category" 
-            Text="../theflashcards/allcards/ ..."
+            Text="Teste"
             BackgroundColor="{StaticResource WhiteIce}"
             TextColor="Black" 
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
