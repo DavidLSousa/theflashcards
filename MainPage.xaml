@@ -16,8 +16,7 @@
                 SemanticProperties.HeadingLevel="Level1" 
                 TextColor="{StaticResource WhiteIce}"/>
 
-            <Button
-                x:Name="NewCardBtn"
+            <Button x:Name="NewCardBtn"
                 Text="Crie um novo card" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="GoToNewCardPage"
@@ -27,19 +26,17 @@
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}"/>
 
-            <Button
-                x:Name="SearchCardsBtn"
-                Text="Procure por um card" 
+            <Button x:Name="AllCardsBtn"
+                Text="Todos seus Cards" 
                 SemanticProperties.Hint="Mudança de Pagina"
-                Clicked="SearchCards"
+                Clicked="GotToAllCardsPage"
                 HorizontalOptions="Fill" 
                 BackgroundColor="{StaticResource BlueMedium}"
                 FontSize="Subtitle"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}"/>
 
-            <Button
-                x:Name="BuildTestBtn"
+            <Button x:Name="BuildTestBtn"
                 Text="Monte um Mini Teste" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="BuildTest"
@@ -49,8 +46,7 @@
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource WhiteIce}"/>
 
-            <Button
-                x:Name="LogoutBtn"
+            <Button x:Name="LogoutBtn"
                 Text="Sair" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="Logout"

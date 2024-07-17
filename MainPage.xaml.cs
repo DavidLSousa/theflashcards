@@ -13,7 +13,10 @@ namespace theflashcards
         {
             await Navigation.PushAsync(new NewCard());
         }
-        private void SearchCards(object sender, EventArgs e) { }
+        private async void GotToAllCardsPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AllCards());
+        }
         private void BuildTest(object sender, EventArgs e) { }
         private void Logout(object sender, EventArgs e) { }
     }

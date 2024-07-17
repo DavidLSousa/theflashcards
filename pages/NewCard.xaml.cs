@@ -24,8 +24,8 @@ public partial class NewCard : ContentPage
 }
 
 /*
- [ ] Lista de objs json
- [ ] Add novo card em um json ja existente
+ [x] Lista de objs json
+ [x] Add novo card em um json ja existente
  [ ] Deletar um card de um json 
  [ ] Criar a pagina e mostrar todos os cards na dela
     [ ] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
