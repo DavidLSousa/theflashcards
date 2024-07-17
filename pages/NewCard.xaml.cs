@@ -6,30 +6,19 @@ namespace theflashcards.pages;
 
 public partial class NewCard : ContentPage
 {
-    List<Cards> newCards = new List<Cards>();
     NewCardPageViewModel viewModel = new NewCardPageViewModel();
     public NewCard()
     {
         InitializeComponent();
     }
-    public async void SaveCard(object sender, EventArgs e)
+    public void SaveCard(object sender, EventArgs e)
     {
         Cards card = new Cards();
         card.Quest = Quest.Text;
         card.Resp = Resp.Text;
         card.Category = Category.Text;
 
-        newCards.Add(card);
-
-        // Rever essa List para criação do json, a ideia é criar caso n exista um json no diretorio e caso exista, editar ou add algo nele
-        //List<string> newCardJsonSerialized = new List<string>
-        //{
-        //    JsonSerializer.Serialize(newCard)
-        //};
-
-        var options = new JsonSerializerOptions { WriteIndented = true };
-
-        viewModel.SaveCard(card.Category, JsonSerializer.Serialize(newCards, options));
+        viewModel.SaveCard(card.Category, card);
     }
 
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
+using theflashcards.Model;
 
 namespace theflashcards.Services
 {
@@ -33,5 +30,17 @@ namespace theflashcards.Services
             return Path.Combine(rootDir, $"{category}Cards.json");
         }
 
+        public async Task<List<Cards>> GetDeserializedFile(string filePath)
+        {
+            string contentStringJson = await ReadFile(filePath);
+
+            return JsonSerializer.Deserialize<List<Cards>>(contentStringJson);
+        }
+        private async Task<string> ReadFile(string filePath)
+        {
+            if (!File.Exists(filePath)) return "";
+
+            return await File.ReadAllTextAsync(filePath);
+        }
     }
 }

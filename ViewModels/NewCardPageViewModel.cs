@@ -4,35 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using theflashcards.Services;
+using theflashcards.Model;
+using System.Text.Json;
 
 namespace theflashcards.ViewModels
 {
     class NewCardPageViewModel
     {
         readonly CardsServices cardServices = new CardsServices();
-        public async void SaveCard(string category, string dataSerialized)
+        JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+
+        public void SaveCard(string category, Cards newCardData)
         {
             string rootDir = cardServices.GetRootDirSpecificPlataform();
 
             string filePath = cardServices.GetFilePathForSave(rootDir, category);
 
-            // Descobrir se o filePath ja existe, se ja existe precisa abrir o arquivo json dentro desse path e edita-lo
             if (!PathExists(filePath))
-                await File.WriteAllTextAsync(filePath, dataSerialized);
+                CreateAndWriteFile(filePath, newCardData);
             else
-            {
-                // Abrir o arquivo json do path que ja existe passado no category e add a ele o novo card
-
-            }
-
-            System.Diagnostics.Debug.WriteLine($"Directory path: {filePath}");
+                GetAndAddNewCardDataInFile(filePath, newCardData);
         }
 
-        bool PathExists(string filePath)
-        {
-            System.Diagnostics.Debug.WriteLine($"Path exists: {File.Exists(filePath)}");
+        private bool PathExists(string filePath) => File.Exists(filePath);
 
-            return File.Exists(filePath);
+        private async void CreateAndWriteFile(string filePath, Cards newCardData)
+        {
+            List<Cards> newCards = new List<Cards>();
+            newCards.Add(newCardData);
+
+            await File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(newCards, options));
+        }
+
+        private async void GetAndAddNewCardDataInFile(string filePath, Cards newCardData) 
+        {
+            List<Cards> cards = await cardServices.GetDeserializedFile(filePath);
+
+            cards.Add(newCardData);
+
+            await File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(cards, options));
         }
 
     }
