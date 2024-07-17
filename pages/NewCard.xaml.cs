@@ -1,22 +1,25 @@
 using System.Text.Json;
 using theflashcards.Model;
+using theflashcards.ViewModels;
 
 namespace theflashcards.pages;
 
 public partial class NewCard : ContentPage
 {
+    List<Cards> newCards = new List<Cards>();
+    NewCardPageViewModel viewModel = new NewCardPageViewModel();
     public NewCard()
     {
         InitializeComponent();
     }
     public async void SaveCard(object sender, EventArgs e)
     {
+        Cards card = new Cards();
+        card.Quest = Quest.Text;
+        card.Resp = Resp.Text;
+        card.Category = Category.Text;
 
-        Cards newCard = new Cards();
-
-        newCard.Quest = Quest.Text;
-        newCard.Resp = Resp.Text;
-        newCard.Category = Category.Text;
+        newCards.Add(card);
 
         // Rever essa List para criação do json, a ideia é criar caso n exista um json no diretorio e caso exista, editar ou add algo nele
         //List<string> newCardJsonSerialized = new List<string>
@@ -24,34 +27,9 @@ public partial class NewCard : ContentPage
         //    JsonSerializer.Serialize(newCard)
         //};
 
-        string rootDir = GetRootDirSpecificPlataform();
+        var options = new JsonSerializerOptions { WriteIndented = true };
 
-        if (!Directory.Exists(rootDir))
-        {
-            Directory.CreateDirectory(rootDir);
-        }
-
-        string filePath = Path.Combine(rootDir, "dataCards.json");
-
-        await File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(newCard));
-
-    }
-
-    private string GetRootDirSpecificPlataform()
-    {
-        string folderPath;
-#if ANDROID
-        folderPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDocuments).AbsolutePath;
-#elif WINDOWS
-        folderPath = @"C:\";
-#else
-        throw new PlatformNotSupportedException("Plataforma não suportada.");
-#endif
-        string appSpecificPath = Path.Combine(folderPath, "theflashcards");
-
-        System.Diagnostics.Debug.WriteLine($"Root directory path: {appSpecificPath}");
-
-        return appSpecificPath;
+        viewModel.SaveCard(card.Category, JsonSerializer.Serialize(newCards, options));
     }
 
 }
