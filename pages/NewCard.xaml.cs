@@ -1,4 +1,3 @@
-using System.Text.Json;
 using theflashcards.Model;
 using theflashcards.ViewModels;
 
@@ -13,6 +12,7 @@ public partial class NewCard : ContentPage
     }
     public void SaveCard(object sender, EventArgs e)
     {
+        // Esse obj deveria ser instanciado e montado ja na viewModel?
         Cards card = new Cards();
         card.Quest = Quest.Text;
         card.Resp = Resp.Text;

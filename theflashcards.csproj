@@ -63,6 +63,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="pages\AllCards.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="pages\NewCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
