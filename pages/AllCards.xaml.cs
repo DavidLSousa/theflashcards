@@ -1,9 +1,14 @@
-namespace theflashcards.pages;
+using Microsoft.Maui.Controls;
+using theflashcards.ViewModels;
 
-public partial class AllCards : ContentPage
+namespace theflashcards.pages
 {
-	public AllCards()
-	{
-		InitializeComponent();
-	}
+    public partial class AllCards : ContentPage
+    {
+        public AllCards()
+        {
+            InitializeComponent();
+            BindingContext = new AllCardsViewModel();
+        }
+    }
 }

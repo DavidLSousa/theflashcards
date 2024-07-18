@@ -5,7 +5,7 @@ namespace theflashcards.pages;
 
 public partial class NewCard : ContentPage
 {
-    NewCardPageViewModel viewModel = new NewCardPageViewModel();
+    readonly NewCardPageViewModel viewModel = new NewCardPageViewModel();
     public NewCard()
     {
         InitializeComponent();
@@ -13,10 +13,12 @@ public partial class NewCard : ContentPage
     public void SaveCard(object sender, EventArgs e)
     {
         // Esse obj deveria ser instanciado e montado ja na viewModel?
-        Cards card = new Cards();
-        card.Quest = Quest.Text;
-        card.Resp = Resp.Text;
-        card.Category = Category.Text;
+        Cards card = new Cards
+        {
+            Quest = Quest.Text,
+            Resp = Resp.Text,
+            Category = Category.Text
+        };
 
         viewModel.SaveCard(card.Category, card);
     }

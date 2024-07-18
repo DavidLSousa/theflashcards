@@ -4,24 +4,35 @@
              x:Class="theflashcards.pages.AllCards"
              Shell.NavBarIsVisible="False">
 
-
     <ScrollView>
         <VerticalStackLayout
             Padding="{StaticResource DefaultPadding}"
             Spacing="{StaticResource DefaultSpacing}"
-            BackgroundColor="{StaticResource BlueLight}" >
+            BackgroundColor="{StaticResource BlueLight}">
 
-            <Label 
-                Text="Todos os Cards"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" 
+            <Label
+                Text="Todos os Cards!"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1"
+                SemanticProperties.HeadingLevel="Level1" 
                 TextColor="{StaticResource WhiteIce}"/>
-            
-            <!--Add collecionView para criar a viewModel e o model(se necessario) para essa page;-->
-            <!--Esse collectionView deve carregar os itens do json, usando IPageLifecycleAware, INotifyPropertyChanged e etc...-->
+
+            <CollectionView ItemsSource="{Binding CardsCollection}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout 
+                        ItemSpacing="10"
+                        Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="10">
+                            <Label Text="{Binding Quest}" FontSize="20"/>
+                            <Label Text="{Binding Resp}" FontSize="14"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
