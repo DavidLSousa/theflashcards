@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using theflashcards.Services;
+﻿using theflashcards.Services;
 using theflashcards.Model;
 using System.Text.Json;
 
@@ -16,9 +11,7 @@ namespace theflashcards.ViewModels
 
         public void SaveCard(string category, Cards newCardData)
         {
-            string rootDir = cardServices.GetRootDirSpecificPlataform();
-
-            string filePath = cardServices.GetFilePathForSave(rootDir, category);
+            string filePath = cardServices.GetFilePathForSave(category);
 
             if (!PathExists(filePath))
                 CreateAndWriteFile(filePath, newCardData);

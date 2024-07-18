@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using theflashcards.Model;
+using theflashcards.Services;
 
 namespace theflashcards.ViewModels
 {
     public class AllCardsViewModel : INotifyPropertyChanged
     {
+        readonly CardsServices cardsServices = new CardsServices();
         private ObservableCollection<Cards> _cardsCollection;
 
         public ObservableCollection<Cards> CardsCollection
@@ -21,11 +23,19 @@ namespace theflashcards.ViewModels
 
         public AllCardsViewModel()
         {
-            // Inicializa a coleção de Cards com um único item
-            CardsCollection = new ObservableCollection<Cards>
+            CardsCollection = new ObservableCollection<Cards>();
+            LoadCards();
+        }
+
+        private async void LoadCards()
+        {
+            List<Cards> dataCards = await cardsServices.GetDeserializedFile(cardsServices.GetFilePathForSave("Teste"));
+            
+            foreach (var card in dataCards)
             {
-                new Cards { Quest = "Teste?", Resp = "Teste!?" }
-            };
+                CardsCollection.Add(card);
+            }
+            System.Diagnostics.Debug.WriteLine(dataCards);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

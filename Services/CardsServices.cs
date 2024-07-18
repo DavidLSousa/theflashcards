@@ -5,7 +5,7 @@ namespace theflashcards.Services
 {
     class CardsServices
     {
-        public string GetRootDirSpecificPlataform()
+        private string GetRootDirSpecificPlataform()
         {
             string folderPath;
 #if ANDROID
@@ -19,9 +19,16 @@ namespace theflashcards.Services
 
             return appSpecificPath;
         }
-
-        public string GetFilePathForSave(string rootDir, string category)
+        private async Task<string> ReadFile(string filePath)
         {
+            if (!File.Exists(filePath)) return "";
+
+            return await File.ReadAllTextAsync(filePath);
+        }
+        public string GetFilePathForSave(string category)
+        {
+            string rootDir = GetRootDirSpecificPlataform();
+
             if (!Directory.Exists(rootDir))
             {
                 Directory.CreateDirectory(rootDir);
@@ -35,12 +42,6 @@ namespace theflashcards.Services
             string contentStringJson = await ReadFile(filePath);
 
             return JsonSerializer.Deserialize<List<Cards>>(contentStringJson);
-        }
-        private async Task<string> ReadFile(string filePath)
-        {
-            if (!File.Exists(filePath)) return "";
-
-            return await File.ReadAllTextAsync(filePath);
         }
     }
 }
