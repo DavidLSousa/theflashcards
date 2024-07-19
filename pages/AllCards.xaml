@@ -16,18 +16,54 @@
                 SemanticProperties.HeadingLevel="Level1" 
                 TextColor="{StaticResource WhiteIce}"/>
 
-            <CollectionView ItemsSource="{Binding CardsCollection}">
+            <CollectionView ItemsSource="{Binding CardsCollection}"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout 
                         ItemSpacing="10"
                         Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout Padding="10">
-                            <Label Text="{Binding Quest}" FontSize="20"/>
-                            <Label Text="{Binding Resp}" FontSize="14"/>
-                        </VerticalStackLayout>
+                        <Frame Background="{StaticResource BlueMedium}"
+                               HasShadow="False"
+                               BorderColor="Transparent">
+                            <VerticalStackLayout>
+                                <Label 
+                                    Text="{Binding Quest}" 
+                                    FontSize="20"
+                                    HorizontalOptions="Center"
+                                    Padding="10"/>
+                                <Label 
+                                    x:Name="Resplbl"
+                                    Text="{Binding Resp}" 
+                                    FontSize="14"
+                                    HorizontalOptions="Center"
+                                    IsVisible="False"
+                                    Padding="10"/>          
+                                <Grid ColumnDefinitions="*,*"
+                                      ColumnSpacing="10">
+                                    <Button x:Name="showResp"
+                                        Text="Ver resposta" 
+                                        SemanticProperties.Hint="Mostrando resposta"
+                                        Clicked="ShowResp"
+                                        BackgroundColor="{StaticResource BlueLight}"
+                                        FontSize="Subtitle"
+                                        TextColor="{StaticResource Black}"
+                                        Grid.Column="0"/>
+                                    <Button x:Name="next"
+                                        Text="Seguir" 
+                                        SemanticProperties.Hint="Mostrando resposta"
+                                        Clicked="Next"
+                                        BackgroundColor="{StaticResource BlueLight}"
+                                        FontSize="Subtitle"
+                                        TextColor="{StaticResource Black}"
+                                        Grid.Column="1"/>           
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Frame>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
