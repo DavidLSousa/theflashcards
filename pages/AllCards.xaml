@@ -49,25 +49,14 @@
                                     HorizontalOptions="Center"
                                     Padding="10"          
                                     IsVisible="{Binding IsAnswerVisible}"/>
-                                <Grid ColumnDefinitions="*,*"
-                                      ColumnSpacing="10">
-                                    <Button 
-                                        Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
-                                        SemanticProperties.Hint="Mostrar resposta"
-                                        Command="{Binding BindingContext.ToggleVisibilityAnswerCommand, Source={x:Reference AllCardsPage}}"
-                                        CommandParameter="{Binding .}"
-                                        BackgroundColor="{StaticResource BlueLight}"
-                                        FontSize="Subtitle"
-                                        TextColor="{StaticResource Black}"
-                                        Grid.Column="0"/>
-                                    <Button 
-                                        Text="Proxima" 
-                                        SemanticProperties.Hint="Proxima pergunta"
-                                        BackgroundColor="{StaticResource BlueLight}"
-                                        FontSize="Subtitle"
-                                        TextColor="{StaticResource Black}"
-                                        Grid.Column="1"/>
-                                </Grid>
+                                <Button 
+                                    Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
+                                    SemanticProperties.Hint="Mostrar resposta"
+                                    Command="{Binding BindingContext.ToggleVisibilityAnswerCommand, Source={x:Reference AllCardsPage}}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="{StaticResource BlueLight}"
+                                    FontSize="Subtitle"
+                                    TextColor="{StaticResource Black}"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
