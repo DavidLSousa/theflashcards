@@ -28,10 +28,12 @@ public partial class NewCard : ContentPage
 /*
  [x] Lista de objs json
  [x] Add novo card em um json ja existente
- [ ] Deletar um card de um json 
- [ ] Fazer a funcionalidade de mostrar resposta no AllCard pages ao clicar no botao
-    [ ] Verificar erro comentado na linha 60 da AllCardsViewModel.cs
+ [x] Fazer a funcionalidade de mostrar resposta no AllCard pages ao clicar no botao
+    [x] Verificar erro comentado na linha 60 da AllCardsViewModel.cs
+ [x] Criar a pagina e mostrar todos os cards na dela
+    [x] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
  [ ] Criar uma animação para mostrar na tela que o card foi criado com sucesso
- [ ] Criar a pagina e mostrar todos os cards na dela
-    [ ] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
+ [ ] Deletar um card de um json 
+ [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
+ [ ] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
  */

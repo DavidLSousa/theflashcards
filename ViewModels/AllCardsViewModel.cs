@@ -48,7 +48,6 @@ namespace theflashcards.ViewModels
             //card.IsAnswerVisible = true; // Isso no funciona
             UpdateDataCards(card);
         }
-
         private async void UpdateDataCards(Card card)
         {
             string filePath = cardsServices.GetFilePath(card.Category);
@@ -63,8 +62,8 @@ namespace theflashcards.ViewModels
             CardsCollection = new ObservableCollection<Card>(cards);
         }
 
+        // PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
