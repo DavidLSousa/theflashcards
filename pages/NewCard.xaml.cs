@@ -12,15 +12,7 @@ public partial class NewCard : ContentPage
     }
     public void SaveCard(object sender, EventArgs e)
     {
-        // Esse obj deveria ser instanciado e montado ja na viewModel?
-        Card card = new Card
-        {
-            Quest = Quest.Text,
-            Resp = Resp.Text,
-            Category = Category.Text
-        };
-
-        viewModel.SaveCard(card.Category, card);
+        viewModel.SaveCard(Quest.Text, Resp.Text, Category.Text);
     }
 
 }
@@ -33,7 +25,17 @@ public partial class NewCard : ContentPage
  [x] Criar a pagina e mostrar todos os cards na dela
     [x] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
  [ ] Criar uma animação para mostrar na tela que o card foi criado com sucesso
- [ ] Deletar um card de um json 
+ [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
+    [ ] Deletar card
+    [ ] Editar card
+    [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
  [ ] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
+    [ ] A propriedade categora precisa virr uma lista: List<string>
+ 
+ OBS:
+    [ ] AllCardsViewModel - LoadAllCards e UpdateDataCards - "filePath"
+        // Salvar de maneira duplicada todos arquivos quando criados, na categoria e em um arquivo "allCards"
+            // Vai ser necessário atualizar sempre em 2 lugares quando for editado ou deletado um json, como a informação estara duplicada em sua categoria e no arquivos com todas as categorias
+        
  */

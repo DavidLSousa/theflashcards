@@ -43,7 +43,7 @@ namespace theflashcards.Services
 
             return JsonSerializer.Deserialize<List<Card>>(contentStringJson);
         }
-        public async Task SaveSerializedFile(string filePath, List<Card> newDataCards)
+        public async void SaveSerializedFile(string filePath, List<Card> newDataCards)
         {
             string jsonString = JsonSerializer.Serialize(newDataCards, options);
 

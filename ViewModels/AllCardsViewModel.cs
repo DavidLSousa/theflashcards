@@ -26,13 +26,12 @@ namespace theflashcards.ViewModels
         public AllCardsViewModel()
         {
             CardsCollection = new ObservableCollection<Card>();
-            LoadCards();
+            LoadAllCards();
             ToggleVisibilityAnswerCommand = new Command<Card>(ToggleAnswerVisibility);
         }
 
-        private async void LoadCards()
+        private async void LoadAllCards()
         {
-            // Depois vai precisar receber o filePath de onde vai ser carregado o json
             string filePath = cardsServices.GetFilePath("Teste");
             List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
 
@@ -41,7 +40,7 @@ namespace theflashcards.ViewModels
                 CardsCollection.Add(card);
             }
         }
-        public void ToggleAnswerVisibility(Card card)
+        private void ToggleAnswerVisibility(Card card)
         {
             if (card == null) return;
 
