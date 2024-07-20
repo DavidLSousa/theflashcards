@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:theflashcards.Converters"
              x:Class="theflashcards.pages.AllCards"
              x:Name="AllCardsPage"
              Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToTextConverter x:Key="BooleanToTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout
@@ -45,17 +52,17 @@
                                 <Grid ColumnDefinitions="*,*"
                                       ColumnSpacing="10">
                                     <Button 
-                                        Text="Ver resposta" 
-                                        SemanticProperties.Hint="Mostrando resposta"
-                                        Command="{Binding BindingContext.ShowAnswerCommand, Source={x:Reference AllCardsPage}}"
+                                        Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
+                                        SemanticProperties.Hint="Mostrar resposta"
+                                        Command="{Binding BindingContext.ToggleVisibilityAnswerCommand, Source={x:Reference AllCardsPage}}"
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="{StaticResource BlueLight}"
                                         FontSize="Subtitle"
                                         TextColor="{StaticResource Black}"
                                         Grid.Column="0"/>
                                     <Button 
-                                        Text="Seguir" 
-                                        SemanticProperties.Hint="Mostrando resposta"
+                                        Text="Proxima" 
+                                        SemanticProperties.Hint="Proxima pergunta"
                                         BackgroundColor="{StaticResource BlueLight}"
                                         FontSize="Subtitle"
                                         TextColor="{StaticResource Black}"

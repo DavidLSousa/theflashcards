@@ -11,7 +11,7 @@ namespace theflashcards.ViewModels
     {
         readonly CardsServices cardsServices = new CardsServices();
         private ObservableCollection<Card> _cardsCollection;
-        public ICommand ShowAnswerCommand { get; }
+        public ICommand ToggleVisibilityAnswerCommand { get; }
 
         public ObservableCollection<Card> CardsCollection
         {
@@ -27,7 +27,7 @@ namespace theflashcards.ViewModels
         {
             CardsCollection = new ObservableCollection<Card>();
             LoadCards();
-            ShowAnswerCommand = new Command<Card>(ShowAnswer);
+            ToggleVisibilityAnswerCommand = new Command<Card>(ToggleAnswerVisibility);
         }
 
         private async void LoadCards()
@@ -41,7 +41,7 @@ namespace theflashcards.ViewModels
                 CardsCollection.Add(card);
             }
         }
-        public void ShowAnswer(Card card)
+        public void ToggleAnswerVisibility(Card card)
         {
             if (card == null) return;
 
@@ -55,7 +55,8 @@ namespace theflashcards.ViewModels
             List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
 
             foreach (var currentCard in cards)
-                if (currentCard.Id == card.Id) currentCard.IsAnswerVisible = true;
+                if (currentCard.Id == card.Id) 
+                    currentCard.IsAnswerVisible = !currentCard.IsAnswerVisible;
 
             cardsServices.SaveSerializedFile(filePath, cards);
 

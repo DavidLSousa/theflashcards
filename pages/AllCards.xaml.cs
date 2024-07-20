@@ -9,5 +9,6 @@ namespace theflashcards.pages
             InitializeComponent();
             BindingContext = new AllCardsViewModel();
         }
+
     } 
 }
