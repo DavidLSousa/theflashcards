@@ -35,7 +35,7 @@
             TextColor="{StaticResource WhiteIce}"
             FontSize="Medium"
             Margin="-20"
-            WidthRequest="600"/>
+            WidthRequest="{StaticResource MaxDefaultWidth}"/>
         <Editor x:Name = "Resp" 
             BackgroundColor="{StaticResource WhiteIce}"
             TextColor="Black" 
@@ -47,7 +47,7 @@
             TextColor="{StaticResource WhiteIce}"
             FontSize="Medium"
             Margin="-20"
-            WidthRequest="600"/>
+            WidthRequest="{StaticResource MaxDefaultWidth}"/>
         <Entry x:Name = "Category" 
             Text="Teste"
             BackgroundColor="{StaticResource WhiteIce}"

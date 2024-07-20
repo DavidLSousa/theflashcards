@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="theflashcards.pages.BuildTest"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="{StaticResource DefaultPadding}"
+            Spacing="{StaticResource DefaultSpacing}"
+            BackgroundColor="{StaticResource BlueLight}">
+
+            <Label
+                Text="Monte seu Mini Teste!"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" 
+                TextColor="{StaticResource WhiteIce}"
+                Margin="30"/>
+
+            <Label Text="Categoria"
+                   TextColor="{StaticResource WhiteIce}"
+                   FontSize="Medium"
+                   Margin="-20"
+                   WidthRequest="{StaticResource MaxDefaultWidth}"/>
+            <Entry x:Name = "Category"
+                   Placeholder="Qual categoria quer buscar?"
+                   PlaceholderColor="{StaticResource Gray200}"
+                   BackgroundColor="{StaticResource WhiteIce}"
+                   TextColor="Black" 
+                   MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+
+            <Button x:Name="BuildTestBtn"
+                    Text="Criar" 
+                    SemanticProperties.Hint="Mudança de Pagina"
+                    HorizontalOptions="Fill" 
+                    BackgroundColor="{StaticResource BlueMedium}"
+                    FontSize="Subtitle"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                    TextColor="{StaticResource WhiteIce}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

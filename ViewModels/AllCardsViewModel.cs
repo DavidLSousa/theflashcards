@@ -32,6 +32,7 @@ namespace theflashcards.ViewModels
 
         private async void LoadAllCards()
         {
+            // OBS
             string filePath = cardsServices.GetFilePath("Teste");
             List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
 
@@ -49,6 +50,7 @@ namespace theflashcards.ViewModels
         }
         private async void UpdateDataCards(Card card)
         {
+            // OBS
             string filePath = cardsServices.GetFilePath(card.Category);
             List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
 
