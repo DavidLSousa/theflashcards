@@ -1,10 +1,12 @@
-﻿using System.Text.Json;
+﻿using System.Collections.ObjectModel;
+using System.Text.Json;
 using theflashcards.Model;
 
 namespace theflashcards.Services
 {
     class CardsServices
     {
+        JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
         private string GetRootDirSpecificPlataform()
         {
             string folderPath;
@@ -25,7 +27,7 @@ namespace theflashcards.Services
 
             return await File.ReadAllTextAsync(filePath);
         }
-        public string GetFilePathForSave(string category)
+        public string GetFilePath(string category)
         {
             string rootDir = GetRootDirSpecificPlataform();
 
@@ -36,12 +38,17 @@ namespace theflashcards.Services
 
             return Path.Combine(rootDir, $"{category}Cards.json");
         }
-
-        public async Task<List<Cards>> GetDeserializedFile(string filePath)
+        public async Task<List<Card>> GetDeserializedFile(string filePath)
         {
             string contentStringJson = await ReadFile(filePath);
 
-            return JsonSerializer.Deserialize<List<Cards>>(contentStringJson);
+            return JsonSerializer.Deserialize<List<Card>>(contentStringJson);
+        }
+        public async Task SaveSerializedFile(string filePath, List<Card> newDataCards)
+        {
+            string jsonString = JsonSerializer.Serialize(newDataCards, options);
+
+            await File.WriteAllTextAsync(filePath, jsonString);
         }
     }
 }

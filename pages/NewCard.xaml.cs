@@ -13,7 +13,7 @@ public partial class NewCard : ContentPage
     public void SaveCard(object sender, EventArgs e)
     {
         // Esse obj deveria ser instanciado e montado ja na viewModel?
-        Cards card = new Cards
+        Card card = new Card
         {
             Quest = Quest.Text,
             Resp = Resp.Text,
@@ -30,6 +30,7 @@ public partial class NewCard : ContentPage
  [x] Add novo card em um json ja existente
  [ ] Deletar um card de um json 
  [ ] Fazer a funcionalidade de mostrar resposta no AllCard pages ao clicar no botao
+    [ ] Verificar erro comentado na linha 60 da AllCardsViewModel.cs
  [ ] Criar uma animação para mostrar na tela que o card foi criado com sucesso
  [ ] Criar a pagina e mostrar todos os cards na dela
     [ ] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 

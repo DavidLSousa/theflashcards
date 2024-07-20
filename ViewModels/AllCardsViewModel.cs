@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using theflashcards.Model;
 using theflashcards.Services;
 
@@ -9,9 +10,10 @@ namespace theflashcards.ViewModels
     public class AllCardsViewModel : INotifyPropertyChanged
     {
         readonly CardsServices cardsServices = new CardsServices();
-        private ObservableCollection<Cards> _cardsCollection;
+        private ObservableCollection<Card> _cardsCollection;
+        public ICommand ShowAnswerCommand { get; }
 
-        public ObservableCollection<Cards> CardsCollection
+        public ObservableCollection<Card> CardsCollection
         {
             get { return _cardsCollection; }
             set
@@ -23,19 +25,41 @@ namespace theflashcards.ViewModels
 
         public AllCardsViewModel()
         {
-            CardsCollection = new ObservableCollection<Cards>();
+            CardsCollection = new ObservableCollection<Card>();
             LoadCards();
+            ShowAnswerCommand = new Command<Card>(ShowAnswer);
         }
 
         private async void LoadCards()
         {
-            List<Cards> dataCards = await cardsServices.GetDeserializedFile(cardsServices.GetFilePathForSave("Teste"));
-            
-            foreach (var card in dataCards)
+            // Depois vai precisar receber o filePath de onde vai ser carregado o json
+            string filePath = cardsServices.GetFilePath("Teste");
+            List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
+
+            foreach (var card in cards)
             {
                 CardsCollection.Add(card);
             }
-            System.Diagnostics.Debug.WriteLine(dataCards);
+        }
+        public void ShowAnswer(Card card)
+        {
+            if (card == null) return;
+
+            //card.IsAnswerVisible = true; // Isso no funciona
+            UpdateDataCards(card);
+        }
+
+        private async void UpdateDataCards(Card card)
+        {
+            string filePath = cardsServices.GetFilePath(card.Category);
+            List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
+
+            foreach (var currentCard in cards)
+                if (currentCard.Id == card.Id) currentCard.IsAnswerVisible = true;
+
+            cardsServices.SaveSerializedFile(filePath, cards);
+
+            CardsCollection = new ObservableCollection<Card>(cards);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

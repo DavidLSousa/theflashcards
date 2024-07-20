@@ -9,9 +9,9 @@ namespace theflashcards.ViewModels
         readonly CardsServices cardServices = new CardsServices();
         JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
 
-        public void SaveCard(string category, Cards newCardData)
+        public void SaveCard(string category, Card newCardData)
         {
-            string filePath = cardServices.GetFilePathForSave(category);
+            string filePath = cardServices.GetFilePath(category);
 
             if (!PathExists(filePath))
                 CreateAndWriteFile(filePath, newCardData);
@@ -21,17 +21,17 @@ namespace theflashcards.ViewModels
 
         private bool PathExists(string filePath) => File.Exists(filePath);
 
-        private async void CreateAndWriteFile(string filePath, Cards newCardData)
+        private async void CreateAndWriteFile(string filePath, Card newCardData)
         {
-            List<Cards> newCards = new List<Cards>();
+            List<Card> newCards = new List<Card>();
             newCards.Add(newCardData);
 
             await File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(newCards, options));
         }
 
-        private async void GetAndAddNewCardDataInFile(string filePath, Cards newCardData) 
+        private async void GetAndAddNewCardDataInFile(string filePath, Card newCardData) 
         {
-            List<Cards> cards = await cardServices.GetDeserializedFile(filePath);
+            List<Card> cards = await cardServices.GetDeserializedFile(filePath);
 
             cards.Add(newCardData);
 
