@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace theflashcards.Model
 {
-    public class Card
+    public partial class Card : ObservableObject
     {
         public Guid Id { get; private set; }
         public string Quest { get; set; }
@@ -17,16 +18,8 @@ namespace theflashcards.Model
             set { _category = value.ToLower(); }
         }
 
+        [ObservableProperty]
         private bool _isAnswerVisible;
-        public bool IsAnswerVisible
-        {
-            get { return _isAnswerVisible; }
-            set
-            {
-                _isAnswerVisible = value;
-                OnPropertyChanged();
-            }
-        }
 
         public Card()
         {
@@ -42,12 +35,6 @@ namespace theflashcards.Model
             Resp = resp;
             Category = category;
             IsAnswerVisible = isAnswerVisible;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
