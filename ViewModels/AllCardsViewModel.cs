@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+
 using theflashcards.Model;
 using theflashcards.Services;
 
@@ -9,6 +10,14 @@ namespace theflashcards.ViewModels
 {
     public class AllCardsViewModel : INotifyPropertyChanged
     {
+        // PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Props
         readonly CardsServices cardsServices = new CardsServices();
         private ObservableCollection<Card> _cardsCollection;
         public ICommand ToggleVisibilityAnswerCommand { get; }
@@ -23,6 +32,7 @@ namespace theflashcards.ViewModels
             }
         }
 
+        // Methods
         public AllCardsViewModel()
         {
             CardsCollection = new ObservableCollection<Card>();
@@ -61,13 +71,6 @@ namespace theflashcards.ViewModels
             cardsServices.SaveSerializedFile(filePath, cards);
 
             CardsCollection = new ObservableCollection<Card>(cards);
-        }
-
-        // PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

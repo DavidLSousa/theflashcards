@@ -12,6 +12,7 @@ public partial class NewCard : ContentPage
     }
     public void SaveCard(object sender, EventArgs e)
     {
+        // Add um try/cacth e caso a viewmodel retorne um erro, deve ser informado que não foi salvo
         viewModel.SaveCard(Quest.Text, Resp.Text, Category.Text);
     }
 
@@ -25,6 +26,7 @@ public partial class NewCard : ContentPage
  [x] Criar a pagina e mostrar todos os cards na dela
     [x] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
  [ ] Criar uma animação para mostrar na tela que o card foi criado com sucesso
+    // ToastNotification ou displayAlert ?
  [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
     [ ] Deletar card
     [ ] Editar card
