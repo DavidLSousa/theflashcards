@@ -7,21 +7,30 @@ namespace theflashcards.ViewModels
     {
         readonly CardsServices cardServices = new CardsServices();
 
-        public void SaveCard(string quest, string resp, string category)
+        public bool SaveCard(string quest, string resp, string category)
         {
-            Card card = new Card
+            try
             {
-                Quest = quest,
-                Resp = resp,
-                Category = category
-            };
+                Card card = new Card
+                {
+                    Quest = quest,
+                    Resp = resp,
+                    Category = category
+                };
 
-            string filePath = cardServices.GetFilePath(card.Category);
+                string filePath = cardServices.GetFilePath(card.Category);
 
-            if (!PathExists(filePath))
-                CreateAndWriteFile(filePath, card);
-            else
-                GetAndAddCardInFile(filePath, card);
+                if (!PathExists(filePath))
+                    CreateAndWriteFile(filePath, card);
+                else
+                    GetAndAddCardInFile(filePath, card);
+
+                return true;
+
+            }catch(Exception e)
+            {
+                return false;
+            }
         }
 
         private bool PathExists(string filePath) => File.Exists(filePath);

@@ -1,4 +1,4 @@
-using theflashcards.Model;
+using CommunityToolkit.Maui.Alerts;
 using theflashcards.ViewModels;
 
 namespace theflashcards.pages;
@@ -13,7 +13,18 @@ public partial class NewCard : ContentPage
     public void SaveCard(object sender, EventArgs e)
     {
         // Add um try/cacth e caso a viewmodel retorne um erro, deve ser informado que não foi salvo
-        viewModel.SaveCard(Quest.Text, Resp.Text, Category.Text);
+        bool savedSuccessfully = viewModel.SaveCard(Quest.Text, Resp.Text, Category.Text);
+
+        if (!savedSuccessfully)
+        {
+            var errorToast = Toast.Make("Erro ao salvar Cards :(");
+            errorToast.Show();
+
+            return;
+        }
+
+        var successToast = Toast.Make("Salvo com sucesso :)");
+        successToast.Show();
     }
 
 }
@@ -25,8 +36,9 @@ public partial class NewCard : ContentPage
     [x] Verificar erro comentado na linha 60 da AllCardsViewModel.cs
  [x] Criar a pagina e mostrar todos os cards na dela
     [x] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
- [ ] Criar uma animação para mostrar na tela que o card foi criado com sucesso
+ [x] Criar uma animação para mostrar na tela que o card foi criado com sucesso
     // ToastNotification ou displayAlert ?
+ [ ] Add botao que limpa os campos para uma novo Card
  [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
     [ ] Deletar card
     [ ] Editar card
