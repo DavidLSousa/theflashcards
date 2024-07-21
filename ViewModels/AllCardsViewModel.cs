@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -8,38 +10,31 @@ using theflashcards.Services;
 
 namespace theflashcards.ViewModels
 {
-    public class AllCardsViewModel : INotifyPropertyChanged
+    public partial class AllCardsViewModel : ObservableObject
     {
-        // PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         // Props
         readonly CardsServices cardsServices = new CardsServices();
+        [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
-        public ICommand ToggleVisibilityAnswerCommand { get; }
 
-        public ObservableCollection<Card> CardsCollection
+        // Commands
+        [RelayCommand]
+        private void ToggleAnswerVisibility(Card card)
         {
-            get { return _cardsCollection; }
-            set
-            {
-                _cardsCollection = value;
-                OnPropertyChanged();
-            }
+            if (card == null) return;
+
+            //card.IsAnswerVisible = true; // Isso no funciona
+            UpdateDataCards(card);
         }
 
-        // Methods
+        // Constructor
         public AllCardsViewModel()
         {
             CardsCollection = new ObservableCollection<Card>();
             LoadAllCards();
-            ToggleVisibilityAnswerCommand = new Command<Card>(ToggleAnswerVisibility);
         }
 
+        // Methods
         private async void LoadAllCards()
         {
             // OBS
@@ -50,13 +45,6 @@ namespace theflashcards.ViewModels
             {
                 CardsCollection.Add(card);
             }
-        }
-        private void ToggleAnswerVisibility(Card card)
-        {
-            if (card == null) return;
-
-            //card.IsAnswerVisible = true; // Isso no funciona
-            UpdateDataCards(card);
         }
         private async void UpdateDataCards(Card card)
         {
@@ -72,5 +60,6 @@ namespace theflashcards.ViewModels
 
             CardsCollection = new ObservableCollection<Card>(cards);
         }
+
     }
 }

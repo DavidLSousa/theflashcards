@@ -52,7 +52,7 @@
                                 <Button 
                                     Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
                                     SemanticProperties.Hint="Mostrar resposta"
-                                    Command="{Binding BindingContext.ToggleVisibilityAnswerCommand, Source={x:Reference AllCardsPage}}"
+                                    Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="{StaticResource BlueLight}"
                                     FontSize="Subtitle"
