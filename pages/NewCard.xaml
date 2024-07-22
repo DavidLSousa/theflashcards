@@ -4,10 +4,16 @@
              x:Class="theflashcards.pages.NewCard"
              Shell.NavBarIsVisible="False">
 
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
     <VerticalStackLayout
         Padding="{StaticResource DefaultPadding}"
-        Spacing="{StaticResource DefaultSpacing}"
-        BackgroundColor="{StaticResource BlueLight}" >
+        Spacing="{StaticResource DefaultSpacing}">
 
         <Label 
             Text="Novo Card"
@@ -15,43 +21,43 @@
             HorizontalOptions="Center" 
             Style="{StaticResource Headline}"
             SemanticProperties.HeadingLevel="Level1"
-            TextColor="{StaticResource WhiteIce}"/>
+            TextColor="{StaticResource Platinum}"/>
 
 
         <Label 
             Text="Pergunta"
-            TextColor="{StaticResource teste}"
+            TextColor="{StaticResource Platinum}"
             FontSize="Medium"
             Margin="-20"
             WidthRequest="600"/>
         <Editor x:Name = "Quest" 
-            BackgroundColor="{StaticResource WhiteIce}"
-            TextColor="Black"
+            BackgroundColor="{StaticResource Platinum}"
+            TextColor="{StaticResource BlueDark}"
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
             HeightRequest="100" />
 
         <Label 
             Text="Resposta"
-            TextColor="{StaticResource WhiteIce}"
+            TextColor="{StaticResource Platinum}"
             FontSize="Medium"
             Margin="-20"
             WidthRequest="{StaticResource MaxDefaultWidth}"/>
         <Editor x:Name = "Resp" 
-            BackgroundColor="{StaticResource WhiteIce}"
-            TextColor="Black" 
+            BackgroundColor="{StaticResource Platinum}"
+            TextColor="{StaticResource BlueDark}" 
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
             HeightRequest="100" />
 
         <Label 
             Text="Categoria"
-            TextColor="{StaticResource WhiteIce}"
+            TextColor="{StaticResource Platinum}"
             FontSize="Medium"
             Margin="-20"
             WidthRequest="{StaticResource MaxDefaultWidth}"/>
         <Entry x:Name = "Category" 
             Text="Teste"
-            BackgroundColor="{StaticResource WhiteIce}"
-            TextColor="Black" 
+            BackgroundColor="{StaticResource Platinum}"
+            TextColor="{StaticResource BlueDark}" 
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
 
         <Button
@@ -60,9 +66,9 @@
             SemanticProperties.Hint="Mudança de Pagina"
             Clicked="SaveCard"
             HorizontalOptions="Fill" 
-            BackgroundColor="{StaticResource BlueMedium}"
+            BackgroundColor="{StaticResource Platinum}"
             FontSize="Subtitle"
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-            TextColor="{StaticResource WhiteIce}"/>
+            TextColor="{StaticResource BlueDark}"/>
     </VerticalStackLayout>
 </ContentPage>

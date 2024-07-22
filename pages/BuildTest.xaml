@@ -4,17 +4,23 @@
              x:Class="theflashcards.pages.BuildTest"
              Shell.NavBarIsVisible="False">
 
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
     <ScrollView>
         <VerticalStackLayout
             Padding="{StaticResource DefaultPadding}"
-            Spacing="{StaticResource DefaultSpacing}"
-            BackgroundColor="{StaticResource BlueLight}">
+            Spacing="{StaticResource DefaultSpacing}">
 
             <Label
                 Text="Monte seu Mini Teste!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" 
-                TextColor="{StaticResource WhiteIce}"
+                TextColor="{StaticResource Platinum}"
                 Margin="30"/>
 
             <Label Text="Categoria"

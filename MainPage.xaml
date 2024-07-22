@@ -4,57 +4,63 @@
              x:Class="theflashcards.MainPage"
              Shell.NavBarIsVisible="False">
 
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
     <ScrollView>
         <VerticalStackLayout
             Padding="{StaticResource DefaultPadding}"
-            Spacing="{StaticResource DefaultSpacing}"
-            BackgroundColor="{StaticResource BlueLight}">
+            Spacing="{StaticResource DefaultSpacing}">
 
             <Label
                 Text="The Flash Cards!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" 
-                TextColor="{StaticResource WhiteIce}"/>
+                TextColor="{StaticResource Platinum}"/>
 
             <Button x:Name="NewCardBtn"
                 Text="Crie um novo card" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="GoToNewCardPage"
                 HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource BlueMedium}"
+                BackgroundColor="{StaticResource Platinum}"
                 FontSize="Subtitle"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource WhiteIce}"/>
+                TextColor="{StaticResource BlueDark}"/>
 
             <Button x:Name="AllCardsBtn"
                 Text="Todos seus Cards" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="GoToAllCardsPage"
                 HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource BlueMedium}"
+                BackgroundColor="{StaticResource Platinum}"
                 FontSize="Subtitle"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource WhiteIce}"/>
+                TextColor="{StaticResource BlueDark}"/>
 
             <Button x:Name="BuildTestBtn"
                 Text="Monte um Mini Teste" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="GoToBuildTestPage"
                 HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource BlueMedium}"
+                BackgroundColor="{StaticResource Platinum}"
                 FontSize="Subtitle"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource WhiteIce}"/>
+                TextColor="{StaticResource BlueDark}"/>
 
             <Button x:Name="LogoutBtn"
                 Text="Sair" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 Clicked="Logout"
                 HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource BlueMedium}"
+                BackgroundColor="{StaticResource Platinum}"
                 FontSize="Subtitle"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource WhiteIce}" />
+                TextColor="{StaticResource BlueDark}" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -6,6 +6,13 @@
              x:Name="AllCardsPage"
              Shell.NavBarIsVisible="False">
 
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BooleanToTextConverter x:Key="BooleanToTextConverter" />
@@ -15,14 +22,13 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="{StaticResource DefaultPadding}"
-            Spacing="{StaticResource DefaultSpacing}"
-            BackgroundColor="{StaticResource BlueLight}">
+            Spacing="{StaticResource DefaultSpacing}">
 
             <Label
                 Text="Todos os Cards!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" 
-                TextColor="{StaticResource WhiteIce}"/>
+                TextColor="{StaticResource Platinum}"/>
 
             <CollectionView ItemsSource="{Binding CardsCollection}"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
@@ -34,7 +40,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Background="{StaticResource BlueMedium}"
+                        <Frame Background="{StaticResource Platinum}"
                                HasShadow="False"
                                BorderColor="Transparent">
                             <VerticalStackLayout>
@@ -42,21 +48,23 @@
                                     Text="{Binding Quest}" 
                                     FontSize="20"
                                     HorizontalOptions="Center"
-                                    Padding="10"/>
+                                    Padding="10"
+                                    TextColor="{StaticResource BlueDark}"/>
                                 <Label 
                                     Text="{Binding Resp}" 
-                                    FontSize="14"
+                                    FontSize="16"
                                     HorizontalOptions="Center"
-                                    Padding="10"          
+                                    Padding="10"   
+                                    TextColor="{StaticResource BlueMedium}"
                                     IsVisible="{Binding IsAnswerVisible}"/>
                                 <Button 
                                     Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
                                     SemanticProperties.Hint="Mostrar resposta"
                                     Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
                                     CommandParameter="{Binding .}"
-                                    BackgroundColor="{StaticResource BlueLight}"
+                                    BackgroundColor="{StaticResource BlueDark}"
                                     FontSize="Subtitle"
-                                    TextColor="{StaticResource Black}"/>
+                                    TextColor="{StaticResource Platinum}"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
