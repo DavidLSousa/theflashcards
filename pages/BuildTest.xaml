@@ -16,12 +16,24 @@
             Padding="{StaticResource DefaultPadding}"
             Spacing="{StaticResource DefaultSpacing}">
 
-            <Label
-                Text="Monte seu Mini Teste!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" 
-                TextColor="{StaticResource Platinum}"
-                Margin="30"/>
+            <Grid 
+                ColumnDefinitions="*,*"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                ColumnSpacing="-50">
+                <Image 
+                    Source="logo_theflashcards_sem_fundo.png" 
+                    MaximumWidthRequest="100"
+                    Grid.Column="0"/>
+
+                <Label
+                    Text="Monte seu Mini Teste!"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    TextColor="{StaticResource Platinum}"
+                    Margin="30"
+                    VerticalOptions="Center"
+                    Grid.Column="1"/>
+            </Grid>
 
             <Label Text="Categoria"
                    TextColor="{StaticResource WhiteIce}"
@@ -39,10 +51,10 @@
                     Text="Criar" 
                     SemanticProperties.Hint="Mudança de Pagina"
                     HorizontalOptions="Fill" 
-                    BackgroundColor="{StaticResource BlueMedium}"
+                    BackgroundColor="{StaticResource WhiteIce}"
                     FontSize="Subtitle"
                     MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                    TextColor="{StaticResource WhiteIce}"/>
+                    TextColor="{StaticResource BlueDark}"/>
         </VerticalStackLayout>
     </ScrollView>
     

@@ -24,11 +24,23 @@
             Padding="{StaticResource DefaultPadding}"
             Spacing="{StaticResource DefaultSpacing}">
 
-            <Label
-                Text="Todos os Cards!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" 
-                TextColor="{StaticResource Platinum}"/>
+            <Grid 
+                ColumnDefinitions="*,*"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                ColumnSpacing="-50">
+                <Image 
+                    Source="logo_theflashcards_sem_fundo.png" 
+                    MaximumWidthRequest="100"
+                    Grid.Column="0"/>
+
+                <Label
+                    Text="Todos os Cards!"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    TextColor="{StaticResource Platinum}"
+                    VerticalOptions="Center"
+                    Grid.Column="1"/>
+            </Grid>
 
             <CollectionView ItemsSource="{Binding CardsCollection}"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}">

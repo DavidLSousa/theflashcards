@@ -46,7 +46,9 @@ public partial class NewCard : ContentPage
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
  [ ] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
     [ ] A propriedade categora precisa virr uma lista: List<string>
- 
+ [ ] Add Imagem ao icone do app
+ [ ]
+
  OBS:
     [ ] AllCardsViewModel - LoadAllCards e UpdateDataCards - "filePath"
         // Salvar de maneira duplicada todos arquivos quando criados, na categoria e em um arquivo "allCards"

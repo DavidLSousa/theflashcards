@@ -21,10 +21,10 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>theflashcards</ApplicationTitle>
+		<ApplicationTitle>The Flash Cards</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.theflashcards</ApplicationId>
+		<ApplicationId>com.davidlsousa.theflashcards</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -47,7 +47,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<!--<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />-->
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
