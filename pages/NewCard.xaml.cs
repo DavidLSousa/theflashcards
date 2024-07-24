@@ -12,7 +12,7 @@ public partial class NewCard : ContentPage
     }
     public void SaveCard(object sender, EventArgs e)
     {
-        // Isso precisa passar ora view movel e usar o Binding
+        // Isso precisa passar pra view movel e usar o Binding
         bool savedSuccessfully = viewModel.SaveCard(Quest.Text, Resp.Text, Category.Text);
 
         if (!savedSuccessfully)
@@ -46,7 +46,8 @@ public partial class NewCard : ContentPage
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
  [ ] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
     [ ] A propriedade categora precisa virr uma lista: List<string>
- [ ] Add Imagem ao icone do app
+ [x] Add Imagem ao icone do app
+ [ ] Add Splash Screen
  [ ]
 
  OBS:
