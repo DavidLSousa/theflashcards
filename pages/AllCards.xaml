@@ -53,8 +53,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Background="{StaticResource Platinum}"
-                               HasShadow="False"
-                               BorderColor="Transparent">
+                               HasShadow="True"
+                               BorderColor="Transparent" >
                             <VerticalStackLayout>
                                 <Label 
                                     Text="{Binding Quest}" 

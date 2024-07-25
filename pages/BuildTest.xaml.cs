@@ -9,10 +9,6 @@ public partial class BuildTest : ContentPage
     public BuildTest()
 	{
 		InitializeComponent();
-	}
-
-	public void BuildMiniTest(object sender, EventArgs e)
-	{
-		viewModel.BuildTest();
+		BindingContext = new BuildTestViewModel();
 	}
 }

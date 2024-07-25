@@ -26,6 +26,7 @@ namespace theflashcards.ViewModels
                     GetAndAddCardInFile(card);
 
                 cardServices.SaveInAllCardsFile(card);
+                cardServices.SaveInCategoryFile(card.Category);
 
                 return true;
 

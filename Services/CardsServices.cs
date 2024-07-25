@@ -26,6 +26,7 @@ namespace theflashcards.Services
 
             return await File.ReadAllTextAsync(filePath);
         }
+        
         public List<string> BuildFilePath(List<string> categories)
         {
             string rootDirApp = GetRootDirSpecificPlataform();
@@ -34,6 +35,7 @@ namespace theflashcards.Services
             {
                 Directory.CreateDirectory(rootDirApp);
                 Directory.CreateDirectory(Path.Combine(rootDirApp, "allCards"));
+                Directory.CreateDirectory(Path.Combine(rootDirApp, "categories"));
             }
 
             // Building directories for all categories
@@ -63,14 +65,14 @@ namespace theflashcards.Services
 
         public async void SaveInAllCardsFile(Card card)
         {
-            var filePathAllCards = GetfilePathAllCards();
+            var filePathAllCards = GetfilePathFor("allCards");
 
             if (!File.Exists(filePathAllCards))
             {
                 var newCards = new List<Card> { card };
 
-                string allCardsDeserialized = JsonSerializer.Serialize(newCards, options);
-                await File.WriteAllTextAsync(filePathAllCards, allCardsDeserialized);
+                string allCardsSerialized = JsonSerializer.Serialize(newCards, options);
+                await File.WriteAllTextAsync(filePathAllCards, allCardsSerialized);
             }
             else
             {
@@ -79,18 +81,42 @@ namespace theflashcards.Services
 
                 allCardsJson.Add(card);
 
-                string allCardsDeserialized = JsonSerializer.Serialize(allCardsJson, options);
-                await File.WriteAllTextAsync(filePathAllCards, allCardsDeserialized);
+                string allCardsSerialized = JsonSerializer.Serialize(allCardsJson, options);
+                await File.WriteAllTextAsync(filePathAllCards, allCardsSerialized);
             }
 
 
 
         }
-        
-        public string GetfilePathAllCards()
+        public async void SaveInCategoryFile(List<string> categories)
+        {
+            var filePathCategory = GetfilePathFor("categories");
+
+            if (!File.Exists(filePathCategory))
+            {
+                string categoriesSerialized = JsonSerializer.Serialize(categories, options);
+                await File.WriteAllTextAsync(filePathCategory, categoriesSerialized);
+            }
+            else
+            {
+                string contentCategories = await ReadFile(filePathCategory);
+                var categoriesJson = JsonSerializer.Deserialize<List<string>>(contentCategories);
+
+                // checking if it already exists
+                foreach (var currentCategory in categoriesJson)
+                    if (categories.Contains(currentCategory)) categories.Remove(currentCategory);
+                
+                var allCategoriesJson = categoriesJson.Concat(categories);
+
+                string categoriesSerialized = JsonSerializer.Serialize(allCategoriesJson, options);
+                await File.WriteAllTextAsync(filePathCategory, categoriesSerialized);
+            }
+        }
+
+        public string GetfilePathFor(string fileName)
         {
             var rootDirSpecificPlataform = GetRootDirSpecificPlataform();
-            return @$"{rootDirSpecificPlataform}/allCards/allCards.json";
+            return @$"{rootDirSpecificPlataform}/{fileName}/{fileName}.json";
         }
     }
 }

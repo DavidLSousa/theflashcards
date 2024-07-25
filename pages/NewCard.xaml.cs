@@ -48,7 +48,7 @@ public partial class NewCard : ContentPage
  [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
     [ ] Deletar card
     [ ] Editar card
-    [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher
+        [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
     [ ] Mostrar as categorias ja criadas
         // Para isso salvar dentro da pasta allCards(que ja pode mudar de nome depois disso), um json com uma lista das categorias criadas

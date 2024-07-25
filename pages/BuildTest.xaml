@@ -20,11 +20,11 @@
             <Grid 
                 ColumnDefinitions="*,*"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                ColumnSpacing="-50">
+                >
                 <Image 
                     Source="logo_theflashcards_sem_fundo.png" 
                     MaximumWidthRequest="100"
-                    Grid.Column="0"/>
+                    Grid.Column="-50"/>
 
                 <Label
                     Text="Monte seu Mini Teste!"
@@ -51,7 +51,8 @@
             <Button x:Name="BuildTestBtn"
                     Text="Criar" 
                     SemanticProperties.Hint="Mudança de Pagina"
-                    Clicked="BuildMiniTest"
+                    Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
+                    CommandParameter="{Binding .}"
                     HorizontalOptions="Fill" 
                     BackgroundColor="{StaticResource WhiteIce}"
                     FontSize="Subtitle"

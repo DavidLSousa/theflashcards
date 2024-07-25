@@ -35,7 +35,7 @@ namespace theflashcards.ViewModels
         // Methods
         private async void LoadAllCards()
         {
-            var filePathAllCards = cardsServices.GetfilePathAllCards();
+            var filePathAllCards = cardsServices.GetfilePathFor("allCards");
 
             List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
 
@@ -46,7 +46,7 @@ namespace theflashcards.ViewModels
         }
         private async void UpdateVisibilityCards(Card card)
         {
-            var filePathAllCards = cardsServices.GetfilePathAllCards();
+            var filePathAllCards = cardsServices.GetfilePathFor("allCards");
 
             List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
 
