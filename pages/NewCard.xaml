@@ -34,15 +34,6 @@
         </Grid>
 
         <Label 
-            Text="Novo Card"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            Style="{StaticResource Headline}"
-            SemanticProperties.HeadingLevel="Level1"
-            TextColor="{StaticResource Platinum}"/>
-
-
-        <Label 
             Text="Pergunta"
             TextColor="{StaticResource Platinum}"
             FontSize="Medium"

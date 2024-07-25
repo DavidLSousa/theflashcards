@@ -47,7 +47,7 @@ public partial class NewCard : ContentPage
  [ ] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
     [ ] A propriedade categora precisa virr uma lista: List<string>
  [x] Add Imagem ao icone do app
- [ ] Add Splash Screen
+ [x] Add Splash Screen
  [ ]
 
  OBS:
