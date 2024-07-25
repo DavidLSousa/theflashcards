@@ -1,9 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 using theflashcards.Model;
 using theflashcards.Services;
@@ -14,7 +11,7 @@ namespace theflashcards.ViewModels
     {
         // Props
         readonly string filePathAllCards = @"C:\theflashcards\allCards\allCards.json";
-        readonly CardsServices cardsServices = new CardsServices();
+        readonly CardsServices cardsServices = new();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
 
@@ -24,14 +21,15 @@ namespace theflashcards.ViewModels
         {
             if (card == null) return;
 
-            //card.IsAnswerVisible = true; // Isso no funciona
             UpdateVisibilityCards(card);
         }
 
         // Constructor
         public AllCardsViewModel()
         {
-            CardsCollection = new ObservableCollection<Card>();
+            //CardsCollection = new ObservableCollection<Card>();
+            CardsCollection = [];
+
             LoadAllCards();
         }
 

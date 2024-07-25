@@ -5,7 +5,7 @@ namespace theflashcards.ViewModels
 {
     class NewCardPageViewModel
     {
-        readonly CardsServices cardServices = new CardsServices();
+        readonly CardsServices cardServices = new();
 
         public bool SaveCard(string quest, string resp, List<string> category)
         {

@@ -5,7 +5,7 @@ namespace theflashcards.pages;
 
 public partial class NewCard : ContentPage
 {
-    readonly NewCardPageViewModel viewModel = new NewCardPageViewModel();
+    readonly NewCardPageViewModel viewModel = new();
     public NewCard()
     {
         InitializeComponent();
@@ -42,16 +42,21 @@ public partial class NewCard : ContentPage
     [x] Animação para mostrar a pergunta e ao clicar em cima aparecer a resp como um popup 
  [x] Criar uma animação para mostrar na tela que o card foi criado com sucesso
     // ToastNotification ou displayAlert ?
+ [x] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
+    [x] A propriedade categora precisa virr uma lista: List<string>
  [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
  [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
     [ ] Deletar card
     [ ] Editar card
     [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
- [ ] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
-    [ ] A propriedade categora precisa virr uma lista: List<string>
+    [ ] Mostrar as categorias ja criadas
+        // Para isso salvar dentro da pasta allCards(que ja pode mudar de nome depois disso), um json com uma lista das categorias criadas
+        // Verificar para não repetir categorias
+        // Será necessário criar um obj para isso?
  [x] Add Imagem ao icone do app
  [x] Add Splash Screen
+ [ ] Implementar pag de simulado automatico, gerado por uma IA;
  [ ]
 
  OBS:

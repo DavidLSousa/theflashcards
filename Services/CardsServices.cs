@@ -5,7 +5,7 @@ namespace theflashcards.Services
 {
     class CardsServices
     {
-        JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+        readonly JsonSerializerOptions options = new() { WriteIndented = true };
         private string GetRootDirSpecificPlataform()
         {
             string folderPath;
@@ -43,7 +43,7 @@ namespace theflashcards.Services
                 filePath = Path.Combine(filePath, category);
             }
 
-            string lastCategoryName = categories[categories.Count - 1];
+            string lastCategoryName = categories[^1];
             string filePathWithCategory = Path.Combine(filePath, $"{lastCategoryName}_cards.json");
 
             return [filePathWithCategory, filePath]; 

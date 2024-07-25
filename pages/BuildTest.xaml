@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="theflashcards.pages.BuildTest"
+             x:Name="BuildTestPage"
              Shell.NavBarIsVisible="False">
 
     <ContentPage.Background>
@@ -50,6 +51,7 @@
             <Button x:Name="BuildTestBtn"
                     Text="Criar" 
                     SemanticProperties.Hint="Mudança de Pagina"
+                    Clicked="BuildMiniTest"
                     HorizontalOptions="Fill" 
                     BackgroundColor="{StaticResource WhiteIce}"
                     FontSize="Subtitle"

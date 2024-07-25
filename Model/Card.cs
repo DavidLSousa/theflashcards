@@ -17,7 +17,7 @@ namespace theflashcards.Model
             get { return _category; }
             set 
             {
-                _category = new List<string>();
+                _category = [];
                 foreach (var currentValue in value)
                 {
                     _category.Add(currentValue.ToLower()); 
