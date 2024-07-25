@@ -63,7 +63,7 @@ namespace theflashcards.Services
 
         public async void SaveInAllCardsFile(Card card)
         {
-            var filePathAllCards = @"C:\theflashcards\allCards\allCards.json";
+            var filePathAllCards = GetfilePathAllCards();
 
             if (!File.Exists(filePathAllCards))
             {
@@ -85,6 +85,12 @@ namespace theflashcards.Services
 
 
 
+        }
+        
+        public string GetfilePathAllCards()
+        {
+            var rootDirSpecificPlataform = GetRootDirSpecificPlataform();
+            return @$"{rootDirSpecificPlataform}/allCards/allCards.json";
         }
     }
 }

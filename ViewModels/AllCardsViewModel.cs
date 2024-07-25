@@ -10,7 +10,6 @@ namespace theflashcards.ViewModels
     public partial class AllCardsViewModel : ObservableObject
     {
         // Props
-        readonly string filePathAllCards = @"C:\theflashcards\allCards\allCards.json";
         readonly CardsServices cardsServices = new();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
@@ -36,6 +35,8 @@ namespace theflashcards.ViewModels
         // Methods
         private async void LoadAllCards()
         {
+            var filePathAllCards = cardsServices.GetfilePathAllCards();
+
             List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
 
             foreach (var card in cards)
@@ -45,6 +46,8 @@ namespace theflashcards.ViewModels
         }
         private async void UpdateVisibilityCards(Card card)
         {
+            var filePathAllCards = cardsServices.GetfilePathAllCards();
+
             List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
 
             foreach (var currentCard in cards)
