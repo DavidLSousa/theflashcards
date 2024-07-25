@@ -1,23 +1,40 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
+using System.Text.Json;
+using theflashcards.Services;
 
 namespace theflashcards.ViewModels
 {
-    // Verificar comand no xaml, deve estra errado no button
-    // Fazer aparecer as categorias na tela, para pode selecionar
-    class BuildTestViewModel : ObservableObject
+    public partial class BuildTestViewModel : ObservableObject
     {
-        //public void BuildTest(string categoriesText)
-        //{
-        //    var categoryList = categoriesText
-        //        .Split('/')
-        //        .ToList();
-            
+        readonly CardsServices cardServices = new();
+        [ObservableProperty]
+        private ObservableCollection<string> _categories;
 
-        //}
+        [RelayCommand]
+        private async void ShowCategory()
+        {
+            string filePathCategory = cardServices.GetfilePathFor("categories");
+            string contentCategories = await cardServices.ReadFile(filePathCategory);
+
+            var categories = JsonSerializer.Deserialize<List<string>>(contentCategories);
+
+            Categories = new ObservableCollection<string>(categories);
+        }
+
+        [RelayCommand]
+        private void BuildTest()
+        {
+            // Pegar as categorias marcadas
+                // Talvez usando um Dicionario para manter o estado
+            // Levar a outra pagina, e nela deve estar o mini teste
+        }
+
+        public BuildTestViewModel()
+        {
+            Categories = [];
+            ShowCategory();
+        }
     }
 }

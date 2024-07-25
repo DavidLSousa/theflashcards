@@ -3,7 +3,7 @@ using theflashcards.Model;
 
 namespace theflashcards.Services
 {
-    class CardsServices
+    public class CardsServices
     {
         readonly JsonSerializerOptions options = new() { WriteIndented = true };
         private string GetRootDirSpecificPlataform()
@@ -20,7 +20,7 @@ namespace theflashcards.Services
 
             return appSpecificPath;
         }
-        private async Task<string> ReadFile(string filePath)
+        public async Task<string> ReadFile(string filePath)
         {
             if (!File.Exists(filePath)) return "";
 
@@ -38,15 +38,13 @@ namespace theflashcards.Services
                 Directory.CreateDirectory(Path.Combine(rootDirApp, "categories"));
             }
 
-            // Building directories for all categories
-            string filePath = rootDirApp;
-            foreach (var category in categories)
-            {
-                filePath = Path.Combine(filePath, category);
-            }
+            string fullPathCategory = categories[^1];
+            string lastCategoryName = fullPathCategory.Split('/').ToList()[^1];
 
-            string lastCategoryName = categories[^1];
-            string filePathWithCategory = Path.Combine(filePath, $"{lastCategoryName}_cards.json");
+            // Building directories for all categories
+            string filePath = @$"{rootDirApp}/{fullPathCategory}";
+            string filePathWithCategory = Path
+                .Combine(filePath, $"{lastCategoryName}_cards.json");
 
             return [filePathWithCategory, filePath]; 
         }

@@ -13,11 +13,20 @@ public partial class NewCard : ContentPage
     public void SaveCard(object sender, EventArgs e)
     {
         // Isso precisa passar pra view movel e usar o Binding
-        var categoryList = Category.Text
-            .Split('/')
-            .ToList();
+        var categoryList = new List<string>();
+        var currentPathCategory = string.Empty;
 
-        bool savedSuccessfully = viewModel.SaveCard(Quest.Text, Resp.Text, categoryList);
+        foreach (var currentCategory in Category.Text.Split('/').ToList())
+        {
+            currentPathCategory = string.IsNullOrEmpty(currentPathCategory) 
+                ? currentCategory 
+                : $"{currentPathCategory}/{currentCategory}";
+
+            categoryList.Add(currentPathCategory);
+        }
+
+        bool savedSuccessfully = viewModel
+            .SaveCard(Quest.Text, Resp.Text, categoryList);
 
         if (!savedSuccessfully)
         {
@@ -44,18 +53,17 @@ public partial class NewCard : ContentPage
     // ToastNotification ou displayAlert ?
  [x] Implementar a funcionalidade de caterogia, para salvar na pasta de acordo com a categoria passada
     [x] A propriedade categora precisa virr uma lista: List<string>
+ [x] Add Imagem ao icone do app
+ [x] Add Splash Screen
  [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
+    [ ] Pode ser um botao ao lado no entry que limpe isso ?
  [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
     [ ] Deletar card
     [ ] Editar card
         [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
-    [ ] Mostrar as categorias ja criadas
-        // Para isso salvar dentro da pasta allCards(que ja pode mudar de nome depois disso), um json com uma lista das categorias criadas
-        // Verificar para não repetir categorias
-        // Será necessário criar um obj para isso?
- [x] Add Imagem ao icone do app
- [x] Add Splash Screen
+    [x] Mostrar as categorias ja criadas
+    [ ] As categorias precisam ser salva com todo o seu path
  [ ] Implementar pag de simulado automatico, gerado por uma IA;
  [ ]
 

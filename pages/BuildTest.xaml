@@ -36,22 +36,39 @@
                     Grid.Column="1"/>
             </Grid>
 
-            <Label Text="Categoria"
+            <Label Text="Categorias"
                    TextColor="{StaticResource WhiteIce}"
                    FontSize="Medium"
                    Margin="-20"
                    WidthRequest="{StaticResource MaxDefaultWidth}"/>
-            <Entry x:Name = "Category"
-                   Placeholder="Qual categoria quer buscar?"
-                   PlaceholderColor="{StaticResource Gray200}"
-                   BackgroundColor="{StaticResource WhiteIce}"
-                   TextColor="Black" 
-                   MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+
+            <CollectionView ItemsSource="{Binding Categories}"
+                            MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10"
+                                       Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox 
+                                IsChecked="False"
+                                Color="{StaticResource Platinum}"/>
+                            <Label
+                                Text="{Binding .}" 
+                                FontSize="20"
+                                Padding="10"
+                                TextColor="{StaticResource Platinum}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <Button x:Name="BuildTestBtn"
                     Text="Criar" 
                     SemanticProperties.Hint="Mudança de Pagina"
-                    Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
+                    Command="{Binding BindingContext.BuildTestCommand, Source={x:Reference BuildTestPage}}"
                     CommandParameter="{Binding .}"
                     HorizontalOptions="Fill" 
                     BackgroundColor="{StaticResource WhiteIce}"
