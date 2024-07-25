@@ -13,7 +13,11 @@ public partial class NewCard : ContentPage
     public void SaveCard(object sender, EventArgs e)
     {
         // Isso precisa passar pra view movel e usar o Binding
-        bool savedSuccessfully = viewModel.SaveCard(Quest.Text, Resp.Text, Category.Text);
+        var categoryList = Category.Text
+            .Split('/')
+            .ToList();
+
+        bool savedSuccessfully = viewModel.SaveCard(Quest.Text, Resp.Text, categoryList);
 
         if (!savedSuccessfully)
         {
@@ -51,8 +55,8 @@ public partial class NewCard : ContentPage
  [ ]
 
  OBS:
-    [ ] AllCardsViewModel - LoadAllCards e UpdateDataCards - "filePath"
+    [x] AllCardsViewModel - LoadAllCards e UpdateDataCards - "filePath"
         // Salvar de maneira duplicada todos arquivos quando criados, na categoria e em um arquivo "allCards"
-            // Vai ser necessário atualizar sempre em 2 lugares quando for editado ou deletado um json, como a informação estara duplicada em sua categoria e no arquivos com todas as categorias
-        
+    [ ] Ajustar o cardServices.BuildFilePath, para retornar um obj e não um array
+        // Rever o noe da variavel, n é sem categoria e sim sem arquivo json no path
  */

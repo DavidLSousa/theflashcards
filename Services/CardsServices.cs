@@ -26,16 +26,27 @@ namespace theflashcards.Services
 
             return await File.ReadAllTextAsync(filePath);
         }
-        public string GetFilePath(string category)
+        public List<string> BuildFilePath(List<string> categories)
         {
-            string rootDir = GetRootDirSpecificPlataform();
+            string rootDirApp = GetRootDirSpecificPlataform();
 
-            if (!Directory.Exists(rootDir))
+            if (!Directory.Exists(rootDirApp))
             {
-                Directory.CreateDirectory(rootDir);
+                Directory.CreateDirectory(rootDirApp);
+                Directory.CreateDirectory(Path.Combine(rootDirApp, "allCards"));
             }
 
-            return Path.Combine(rootDir, $"{category}Cards.json");
+            // Building directories for all categories
+            string filePath = rootDirApp;
+            foreach (var category in categories)
+            {
+                filePath = Path.Combine(filePath, category);
+            }
+
+            string lastCategoryName = categories[categories.Count - 1];
+            string filePathWithCategory = Path.Combine(filePath, $"{lastCategoryName}_cards.json");
+
+            return [filePathWithCategory, filePath]; 
         }
         public async Task<List<Card>> GetDeserializedFile(string filePath)
         {
@@ -48,6 +59,32 @@ namespace theflashcards.Services
             string jsonString = JsonSerializer.Serialize(newDataCards, options);
 
             await File.WriteAllTextAsync(filePath, jsonString);
+        }
+
+        public async void SaveInAllCardsFile(Card card)
+        {
+            var filePathAllCards = @"C:\theflashcards\allCards\allCards.json";
+
+            if (!File.Exists(filePathAllCards))
+            {
+                var newCards = new List<Card> { card };
+
+                string allCardsDeserialized = JsonSerializer.Serialize(newCards, options);
+                await File.WriteAllTextAsync(filePathAllCards, allCardsDeserialized);
+            }
+            else
+            {
+                string contentAllCards = await ReadFile(filePathAllCards);
+                var allCardsJson = JsonSerializer.Deserialize<List<Card>>(contentAllCards);
+
+                allCardsJson.Add(card);
+
+                string allCardsDeserialized = JsonSerializer.Serialize(allCardsJson, options);
+                await File.WriteAllTextAsync(filePathAllCards, allCardsDeserialized);
+            }
+
+
+
         }
     }
 }

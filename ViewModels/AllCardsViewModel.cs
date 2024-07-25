@@ -13,6 +13,7 @@ namespace theflashcards.ViewModels
     public partial class AllCardsViewModel : ObservableObject
     {
         // Props
+        readonly string filePathAllCards = @"C:\theflashcards\allCards\allCards.json";
         readonly CardsServices cardsServices = new CardsServices();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
@@ -24,7 +25,7 @@ namespace theflashcards.ViewModels
             if (card == null) return;
 
             //card.IsAnswerVisible = true; // Isso no funciona
-            UpdateDataCards(card);
+            UpdateVisibilityCards(card);
         }
 
         // Constructor
@@ -37,26 +38,22 @@ namespace theflashcards.ViewModels
         // Methods
         private async void LoadAllCards()
         {
-            // OBS
-            string filePath = cardsServices.GetFilePath("Teste");
-            List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
+            List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
 
             foreach (var card in cards)
             {
                 CardsCollection.Add(card);
             }
         }
-        private async void UpdateDataCards(Card card)
+        private async void UpdateVisibilityCards(Card card)
         {
-            // OBS
-            string filePath = cardsServices.GetFilePath(card.Category);
-            List<Card> cards = await cardsServices.GetDeserializedFile(filePath);
+            List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
 
             foreach (var currentCard in cards)
                 if (currentCard.Id == card.Id) 
                     currentCard.IsAnswerVisible = !currentCard.IsAnswerVisible;
 
-            cardsServices.SaveSerializedFile(filePath, cards);
+            cardsServices.SaveSerializedFile(filePathAllCards, cards);
 
             CardsCollection = new ObservableCollection<Card>(cards);
         }

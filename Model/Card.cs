@@ -11,11 +11,18 @@ namespace theflashcards.Model
         public string Quest { get; set; }
         public string Resp { get; set; }
 
-        private string _category;
-        public string Category
+        private List<string> _category;
+        public List<string> Category
         {
             get { return _category; }
-            set { _category = value.ToLower(); }
+            set 
+            {
+                _category = new List<string>();
+                foreach (var currentValue in value)
+                {
+                    _category.Add(currentValue.ToLower()); 
+                }
+            }
         }
 
         [ObservableProperty]
@@ -28,7 +35,7 @@ namespace theflashcards.Model
         }
 
         [JsonConstructor]
-        public Card(Guid id, string quest, string resp, string category, bool isAnswerVisible)
+        public Card(Guid id, string quest, string resp, List<string> category, bool isAnswerVisible)
         {
             Id = id;
             Quest = quest;
