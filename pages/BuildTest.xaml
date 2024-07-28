@@ -53,10 +53,10 @@
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
                             <CheckBox 
-                                IsChecked="False"
+                                IsChecked="{Binding IsChecked, Mode=TwoWay}"
                                 Color="{StaticResource Platinum}"/>
                             <Label
-                                Text="{Binding .}" 
+                                Text="{Binding Name}" 
                                 FontSize="20"
                                 Padding="10"
                                 TextColor="{StaticResource Platinum}"/>

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Text.Json;
+using theflashcards.Model;
 using theflashcards.Services;
 
 namespace theflashcards.ViewModels
@@ -9,32 +10,45 @@ namespace theflashcards.ViewModels
     public partial class BuildTestViewModel : ObservableObject
     {
         readonly CardsServices cardServices = new();
+
         [ObservableProperty]
-        private ObservableCollection<string> _categories;
+        private ObservableCollection<Category> _categories;
+        
+
+        public BuildTestViewModel()
+        {
+            Categories = [];
+            _ = ShowCategory();
+        }
 
         [RelayCommand]
-        private async void ShowCategory()
+        private async Task ShowCategory()
         {
             string filePathCategory = cardServices.GetfilePathFor("categories");
             string contentCategories = await cardServices.ReadFile(filePathCategory);
 
-            var categories = JsonSerializer.Deserialize<List<string>>(contentCategories);
+            var categoryNames = JsonSerializer.Deserialize<List<string>>(contentCategories);
 
-            Categories = new ObservableCollection<string>(categories);
+            Categories = new ObservableCollection<Category>(categoryNames
+                .Select(name => new Category 
+                { 
+                    Name = name, 
+                    IsChecked = false 
+                }));
+
         }
 
         [RelayCommand]
         private void BuildTest()
         {
-            // Pegar as categorias marcadas
-                // Talvez usando um Dicionario para manter o estado
-            // Levar a outra pagina, e nela deve estar o mini teste
+            var selectedCategories = Categories
+                .Where(c => c.IsChecked)
+                .Select(c => c.Name)
+                .ToList();
+
+            var message = string.Join(", ", selectedCategories);
+            System.Diagnostics.Debug.WriteLine($"Selected categories: {message}");
         }
 
-        public BuildTestViewModel()
-        {
-            Categories = [];
-            ShowCategory();
-        }
     }
 }

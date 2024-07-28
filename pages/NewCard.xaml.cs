@@ -63,8 +63,9 @@ public partial class NewCard : ContentPage
         [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
     [x] Mostrar as categorias ja criadas
-    [ ] As categorias precisam ser salva com todo o seu path
+    [x] As categorias precisam ser salva com todo o seu path
  [ ] Implementar pag de simulado automatico, gerado por uma IA;
+ [ ] Satinização dos dados
  [ ]
 
  OBS:
