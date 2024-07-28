@@ -37,7 +37,7 @@ namespace theflashcards.ViewModels
         {
             var filePathAllCards = cardsServices.GetfilePathFor("allCards");
 
-            List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
+            var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
 
             foreach (var card in cards)
             {
@@ -48,7 +48,7 @@ namespace theflashcards.ViewModels
         {
             var filePathAllCards = cardsServices.GetfilePathFor("allCards");
 
-            List<Card> cards = await cardsServices.GetDeserializedFile(filePathAllCards);
+            var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
 
             foreach (var currentCard in cards)
                 if (currentCard.Id == card.Id) 

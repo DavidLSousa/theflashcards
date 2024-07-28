@@ -20,7 +20,7 @@ namespace theflashcards.Services
 
             return appSpecificPath;
         }
-        public async Task<string> ReadFile(string filePath)
+        private async Task<string> ReadFile(string filePath)
         {
             if (!File.Exists(filePath)) return "";
 
@@ -48,11 +48,11 @@ namespace theflashcards.Services
 
             return [filePathWithCategory, filePath]; 
         }
-        public async Task<List<Card>> GetDeserializedFile(string filePath)
+        public async Task<T> GetDeserializedFile<T>(string filePath)
         {
             string contentStringJson = await ReadFile(filePath);
 
-            return JsonSerializer.Deserialize<List<Card>>(contentStringJson);
+            return JsonSerializer.Deserialize<T>(contentStringJson);
         }
         public async void SaveSerializedFile(string filePath, List<Card> newDataCards)
         {

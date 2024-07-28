@@ -25,9 +25,8 @@ namespace theflashcards.ViewModels
         private async Task ShowCategory()
         {
             string filePathCategory = cardServices.GetfilePathFor("categories");
-            string contentCategories = await cardServices.ReadFile(filePathCategory);
 
-            var categoryNames = JsonSerializer.Deserialize<List<string>>(contentCategories);
+            var categoryNames = await cardServices.GetDeserializedFile<List<string>>(filePathCategory);
 
             Categories = new ObservableCollection<Category>(categoryNames
                 .Select(name => new Category 

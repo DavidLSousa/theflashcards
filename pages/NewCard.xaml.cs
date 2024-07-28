@@ -66,6 +66,7 @@ public partial class NewCard : ContentPage
     [x] As categorias precisam ser salva com todo o seu path
  [ ] Implementar pag de simulado automatico, gerado por uma IA;
  [ ] Satinização dos dados
+ [ ] Transformar metodo para usar uma generic -> ReadFile
  [ ]
 
  OBS:

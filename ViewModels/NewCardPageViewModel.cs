@@ -55,7 +55,7 @@ namespace theflashcards.ViewModels
         {
             string filePathWithCategory = cardServices.BuildFilePath(newCardData.Category)[0];
 
-            var cards = await cardServices.GetDeserializedFile(filePathWithCategory);
+            var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathWithCategory);
             cards.Add(newCardData);
 
             cardServices.SaveSerializedFile(filePathWithCategory, cards);
