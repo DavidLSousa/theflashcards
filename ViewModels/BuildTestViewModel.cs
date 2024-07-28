@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Text.Json;
 using theflashcards.Model;
 using theflashcards.Services;
 
@@ -38,15 +37,18 @@ namespace theflashcards.ViewModels
         }
 
         [RelayCommand]
-        private void BuildTest()
+        private async Task BuildTest()
         {
             var selectedCategories = Categories
                 .Where(c => c.IsChecked)
                 .Select(c => c.Name)
                 .ToList();
 
-            var message = string.Join(", ", selectedCategories);
-            System.Diagnostics.Debug.WriteLine($"Selected categories: {message}");
+
+
+            var selectedCategoriesString = string.Join(",", selectedCategories);
+
+            await Shell.Current.GoToAsync($"//PageTest?selectedCategories={selectedCategoriesString}");
         }
 
     }

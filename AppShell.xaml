@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:theflashcards"
+    xmlns:pages="clr-namespace:theflashcards.pages"
     Shell.FlyoutBehavior="Disabled"
     Title="theflashcards">
 
@@ -11,5 +12,8 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <!-- Register the route -->
+    <ShellContent Route="PageTest" ContentTemplate="{DataTemplate pages:PageTest}" />
 
 </Shell>

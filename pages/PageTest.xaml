@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:theflashcards.Converters"
+             x:Class="theflashcards.pages.PageTest"
+             x:Name="PageTestPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToTextConverter x:Key="BooleanToTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout 
+        Padding="{StaticResource DefaultPadding}">
+
+        <Grid ColumnDefinitions="*,*"
+              MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+              ColumnSpacing="-50">
+            <Image Source="logo_theflashcards_sem_fundo.png" 
+                   MaximumWidthRequest="100"
+                   Grid.Column="0"/>
+
+            <Label Text="Mini Teste!"
+                   Style="{StaticResource Headline}" 
+                   SemanticProperties.HeadingLevel="Level1" 
+                   TextColor="{StaticResource Platinum}"
+                   VerticalOptions="Center"
+                   Grid.Column="1"/>
+        </Grid>
+
+        <CollectionView ItemsSource="{Binding CardsForTest}"
+                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout 
+                    ItemSpacing="10"
+                    Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Background="{StaticResource Platinum}"
+                           HasShadow="True"
+                           BorderColor="Transparent" >
+                        <VerticalStackLayout>
+                            <Label 
+                                Text="{Binding Quest}" 
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Padding="10"
+                                TextColor="{StaticResource BlueDark}"/>
+                            <Label 
+                                Text="{Binding Resp}" 
+                                FontSize="16"
+                                HorizontalOptions="Center"
+                                Padding="10"   
+                                TextColor="{StaticResource BlueMedium}"
+                                IsVisible="{Binding IsAnswerVisible}"/>
+                            <Button 
+                                Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
+                                SemanticProperties.Hint="Mostrar resposta"
+                                Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="{StaticResource BlueDark}"
+                                FontSize="Subtitle"
+                                TextColor="{StaticResource Platinum}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
