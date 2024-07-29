@@ -39,10 +39,6 @@ namespace theflashcards.ViewModels
                 allCards.AddRange(cards);
             }
 
-            System.Diagnostics.Debug.WriteLine(allCards);
-            System.Diagnostics.Debug.WriteLine(CardsForTest);
-
-
             CardsForTest = new ObservableCollection<Card>(allCards);
         }
 

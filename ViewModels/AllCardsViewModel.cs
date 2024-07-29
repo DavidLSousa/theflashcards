@@ -26,7 +26,6 @@ namespace theflashcards.ViewModels
         // Constructor
         public AllCardsViewModel()
         {
-            //CardsCollection = new ObservableCollection<Card>();
             CardsCollection = [];
 
             LoadAllCards();

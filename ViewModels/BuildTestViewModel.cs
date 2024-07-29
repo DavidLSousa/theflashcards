@@ -24,10 +24,8 @@ namespace theflashcards.ViewModels
         {
             string filePathCategory = cardServices.GetfilePathFor("categories");
 
-            var categoryNames = await cardServices.GetDeserializedFile<List<string>>(filePathCategory);
-
-            // Checar se existe arquivo json em cada path passado 
-            var validsCategoriesPaths = cardServices.GetValidsCategoriesPaths(categoryNames);
+            var allCategoriesPaths = await cardServices.GetDeserializedFile<List<string>>(filePathCategory);
+            var validsCategoriesPaths = cardServices.GetValidsCategoriesPaths(allCategoriesPaths);
 
             Categories = new ObservableCollection<Category>(validsCategoriesPaths
                 .Select(name => new Category 
