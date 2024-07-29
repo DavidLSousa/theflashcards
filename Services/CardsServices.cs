@@ -113,6 +113,7 @@ namespace theflashcards.Services
 
         public string GetfilePathFor(string fileName)
         {
+            // Apenas para diretorios: AllCards e Categories
             var rootDirSpecificPlataform = GetRootDirSpecificPlataform();
             return @$"{rootDirSpecificPlataform}/{fileName}/{fileName}.json";
         }
@@ -125,6 +126,26 @@ namespace theflashcards.Services
             var filePathWithCategory = $"{rootPath}/{category}/{fileName}";
 
             return await GetDeserializedFile<List<Card>>(filePathWithCategory);
+        }
+        public List<string> GetValidsCategoriesPaths(List<string> categories)
+        {
+            var rootPath = GetRootDirSpecificPlataform();
+
+            var CategoriesValids = new List<string>();
+
+            foreach (var category in categories)
+            {
+                var fileName = $"{category.Split("/").ToList()[^1]}_cards.json";
+                
+                var filePathWithCategory = $"{rootPath}/{category}/{fileName}";
+
+                if ( File.Exists(filePathWithCategory) )
+                {
+                    CategoriesValids.Add(category);   
+                }
+            }
+
+            return CategoriesValids;
         }
     }
 }

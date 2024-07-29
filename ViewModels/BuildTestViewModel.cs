@@ -12,7 +12,6 @@ namespace theflashcards.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<Category> _categories;
-        
 
         public BuildTestViewModel()
         {
@@ -27,7 +26,10 @@ namespace theflashcards.ViewModels
 
             var categoryNames = await cardServices.GetDeserializedFile<List<string>>(filePathCategory);
 
-            Categories = new ObservableCollection<Category>(categoryNames
+            // Checar se existe arquivo json em cada path passado 
+            var validsCategoriesPaths = cardServices.GetValidsCategoriesPaths(categoryNames);
+
+            Categories = new ObservableCollection<Category>(validsCategoriesPaths
                 .Select(name => new Category 
                 { 
                     Name = name, 

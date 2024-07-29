@@ -64,7 +64,7 @@ public partial class NewCard : ContentPage
  [ ] Criar a pagina simulado, onde vai mostrar uma pergunta por vez e de forma aleatoria
     [x] Mostrar as categorias ja criadas
     [x] As categorias precisam ser salva com todo o seu path
-    [ ] Implementar interação com a pagina de botoes
+    [ ] Implementar interação com os botoes da pagina
     [ ] Ajustar problema de navegação depagina, não tem botao de voltar
         // Add botão no finla da pagina "Sair do simulado?"
  [ ] Implementar pag de simulado automatico, gerado por uma IA;
@@ -77,6 +77,6 @@ public partial class NewCard : ContentPage
         // Salvar de maneira duplicada todos arquivos quando criados, na categoria e em um arquivo "allCards"
     [ ] Ajustar o cardServices.BuildFilePath, para retornar um obj e não um array
         // Rever o noe da variavel, n é sem categoria e sim sem arquivo json no path
-    [ ] Esta sendo mostrando a caterogia teste como categoria valida pra montar o teste, porem da erro pq n foi criado nada dentro de tste, so das suas subcategorias
+    [x] Esta sendo mostrando a caterogia teste como categoria valida pra montar o teste, porem da erro pq n foi criado nada dentro de tste, so das suas subcategorias
         // Fazer checagem na hora de mostrar as categorias disponiveis, se existe ou não json naquela pasta
  */
