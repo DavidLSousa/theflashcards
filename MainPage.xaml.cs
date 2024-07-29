@@ -21,10 +21,6 @@ namespace theflashcards
         {
             await Navigation.PushAsync(new BuildTest());
         }
-        private async void Logout(object sender, EventArgs e)
-        {
-            
-        }
     }
 
 }

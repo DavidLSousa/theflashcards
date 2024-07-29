@@ -51,16 +51,6 @@
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 TextColor="{StaticResource BlueDark}"/>
 
-            <Button x:Name="LogoutBtn"
-                Text="Sair" 
-                SemanticProperties.Hint="Mudança de Pagina"
-                Clicked="Logout"
-                HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource Platinum}"
-                FontSize="Subtitle"
-                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource BlueDark}" />
-
         </VerticalStackLayout>
     </ScrollView>
 

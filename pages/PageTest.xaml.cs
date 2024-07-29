@@ -9,7 +9,8 @@ public partial class PageTest : ContentPage
         InitializeComponent();
         BindingContext = new PageTestViewModel()
         {
-            Categories = selectedCategoriesString?.Split(',').ToList()
+            //Categories = selectedCategoriesString.Split(',').ToList()
+            Categories = [.. selectedCategoriesString.Split(',')]
         };
     }
 }
