@@ -1,4 +1,5 @@
-﻿using theflashcards.pages;
+﻿using CommunityToolkit.Maui.Alerts;
+using theflashcards.pages;
 
 namespace theflashcards
 {

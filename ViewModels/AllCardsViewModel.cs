@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -34,13 +35,21 @@ namespace theflashcards.ViewModels
         // Methods
         private async void LoadAllCards()
         {
-            var filePathAllCards = cardsServices.GetfilePathFor("allCards");
-
-            var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
-
-            foreach (var card in cards)
+            try
             {
-                CardsCollection.Add(card);
+                var filePathAllCards = cardsServices.GetfilePathFor("allCards");
+
+                var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
+
+                foreach (var card in cards)
+                {
+                    CardsCollection.Add(card);
+                }
+
+            } catch (Exception ex)
+            {
+                var errorToast = Toast.Make("Erro ao carrgar cards");
+                await errorToast.Show();
             }
         }
         private async void UpdateVisibilityCards(Card card)

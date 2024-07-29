@@ -15,6 +15,3 @@
  OBS:
     [ ] Ajustar o cardServices.BuildFilePath, para retornar um obj e não um array
         // Rever o noe da variavel, n é sem categoria e sim sem arquivo json no path
-    [ ] Tratar erro caso tente ver os cards quando n foi criado nada ainda
-    [ ] Tamanho da letra das categorias no simulado, esta mt pequeno
-    [ ] Ajustar front end das paginas
