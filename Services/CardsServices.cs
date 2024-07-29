@@ -117,16 +117,14 @@ namespace theflashcards.Services
             var rootDirSpecificPlataform = GetRootDirSpecificPlataform();
             return @$"{rootDirSpecificPlataform}/{fileName}/{fileName}.json";
         }
-    
-        public async Task<List<Card>> GetCardsData(string category)
+        public string GetFilePathForCategory(string category)
         {
             var rootPath = GetRootDirSpecificPlataform();
             var fileName = $"{category.Split("/").ToList()[^1]}_cards.json";
 
-            var filePathWithCategory = $"{rootPath}/{category}/{fileName}";
-
-            return await GetDeserializedFile<List<Card>>(filePathWithCategory);
+            return $"{rootPath}/{category}/{fileName}";
         }
+        
         public List<string> GetValidsCategoriesPaths(List<string> categories)
         {
             var rootPath = GetRootDirSpecificPlataform();

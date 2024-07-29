@@ -20,71 +20,73 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <VerticalStackLayout 
-        Padding="{StaticResource DefaultPadding}">
+    <ScrollView>
+        <VerticalStackLayout 
+    Padding="{StaticResource DefaultPadding}">
 
-        <Grid ColumnDefinitions="*,*"
-              MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-              ColumnSpacing="-50">
-            <Image Source="logo_theflashcards_sem_fundo.png" 
-                   MaximumWidthRequest="100"
-                   Grid.Column="0"/>
+            <Grid ColumnDefinitions="*,*"
+          MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+          ColumnSpacing="-50">
+                <Image Source="logo_theflashcards_sem_fundo.png" 
+               MaximumWidthRequest="100"
+               Grid.Column="0"/>
 
-            <Label Text="Mini Teste!"
-                   Style="{StaticResource Headline}" 
-                   SemanticProperties.HeadingLevel="Level1" 
-                   TextColor="{StaticResource Platinum}"
-                   VerticalOptions="Center"
-                   Grid.Column="1"/>
-        </Grid>
+                <Label Text="Mini Teste!"
+               Style="{StaticResource Headline}" 
+               SemanticProperties.HeadingLevel="Level1" 
+               TextColor="{StaticResource Platinum}"
+               VerticalOptions="Center"
+               Grid.Column="1"/>
+            </Grid>
 
-        <CollectionView ItemsSource="{Binding CardsForTest}"
-                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout 
-                    ItemSpacing="10"
-                    Orientation="Vertical"/>
-            </CollectionView.ItemsLayout>
+            <CollectionView ItemsSource="{Binding CardsForTest}"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout 
+                ItemSpacing="10"
+                Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Background="{StaticResource Platinum}"
-                           HasShadow="True"
-                           BorderColor="Transparent" >
-                        <VerticalStackLayout>
-                            <Label 
-                                Text="{Binding Path=Category, Converter={StaticResource LastItemCategoryConverter}}" 
-                                FontSize="10"
-                                Margin="-10"
-                                TextColor="{StaticResource BlueMedium}"/>
-                            <Label 
-                                Text="{Binding Quest}" 
-                                FontSize="20"
-                                HorizontalOptions="Center"
-                                Padding="10"
-                                TextColor="{StaticResource BlueDark}"/>
-                            <Label 
-                                Text="{Binding Resp}" 
-                                FontSize="16"
-                                HorizontalOptions="Center"
-                                Padding="10"   
-                                TextColor="{StaticResource BlueMedium}"
-                                IsVisible="{Binding IsAnswerVisible}"/>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Background="{StaticResource Platinum}"
+                       HasShadow="True"
+                       BorderColor="Transparent" >
+                            <VerticalStackLayout>
+                                <Label 
+                            Text="{Binding Path=Category, Converter={StaticResource LastItemCategoryConverter}}" 
+                            FontSize="10"
+                            Margin="-10"
+                            TextColor="{StaticResource BlueMedium}"/>
+                                <Label 
+                            Text="{Binding Quest}" 
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Padding="10"
+                            TextColor="{StaticResource BlueDark}"/>
+                                <Label 
+                            Text="{Binding Resp}" 
+                            FontSize="16"
+                            HorizontalOptions="Center"
+                            Padding="10"   
+                            TextColor="{StaticResource BlueMedium}"
+                            IsVisible="{Binding IsAnswerVisible}"/>
 
-                            <Button 
-                                Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
-                                SemanticProperties.Hint="Mostrar resposta"
-                                Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
-                                CommandParameter="{Binding .}"
-                                BackgroundColor="{StaticResource BlueDark}"
-                                FontSize="Subtitle"
-                                TextColor="{StaticResource Platinum}"/>       
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Button 
+                            Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
+                            SemanticProperties.Hint="Mostrar resposta"
+                            Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference PageTestPage}}"
+                            CommandParameter="{Binding .}"
+                            BackgroundColor="{StaticResource BlueDark}"
+                            FontSize="Subtitle"
+                            TextColor="{StaticResource Platinum}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>
