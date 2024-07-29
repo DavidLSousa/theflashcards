@@ -2,23 +2,29 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using theflashcards.Model;
+using theflashcards.pages;
 using theflashcards.Services;
 
 namespace theflashcards.ViewModels
 {
+    // Props
     public partial class BuildTestViewModel : ObservableObject
     {
         readonly CardsServices cardServices = new();
+        private readonly INavigation _navigation;
 
         [ObservableProperty]
         private ObservableCollection<Category> _categories;
 
-        public BuildTestViewModel()
+        // Constructor
+        public BuildTestViewModel(INavigation navigation)
         {
+            _navigation = navigation;
             Categories = [];
             _ = ShowCategory();
         }
 
+        // Commands
         [RelayCommand]
         private async Task ShowCategory()
         {
@@ -33,7 +39,6 @@ namespace theflashcards.ViewModels
                     Name = name, 
                     IsChecked = false 
                 }));
-
         }
 
         [RelayCommand]
@@ -44,11 +49,9 @@ namespace theflashcards.ViewModels
                 .Select(c => c.Name)
                 .ToList();
 
-
-
             var selectedCategoriesString = string.Join(",", selectedCategories);
 
-            await Shell.Current.GoToAsync($"//PageTest?selectedCategories={selectedCategoriesString}");
+            await _navigation.PushAsync(new PageTest(selectedCategoriesString));
         }
 
     }

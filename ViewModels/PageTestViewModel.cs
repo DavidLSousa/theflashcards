@@ -56,6 +56,7 @@ namespace theflashcards.ViewModels
             CardsForTest = new ObservableCollection<Card>(allCards);
         }
 
+        // Methods
         private async void UpdateVisibilityCards(Card card)
         {
             var allCards = new List<Card>();

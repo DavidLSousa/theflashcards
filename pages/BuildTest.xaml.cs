@@ -4,11 +4,9 @@ namespace theflashcards.pages;
 
 public partial class BuildTest : ContentPage
 {
-    readonly BuildTestViewModel viewModel = new();
-
     public BuildTest()
 	{
 		InitializeComponent();
-		BindingContext = new BuildTestViewModel();
+		BindingContext = new BuildTestViewModel(Navigation);
 	}
 }
