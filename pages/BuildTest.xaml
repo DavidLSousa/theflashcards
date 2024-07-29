@@ -18,13 +18,13 @@
             Spacing="{StaticResource DefaultSpacing}">
 
             <Grid 
-                ColumnDefinitions="*,*"
+                ColumnDefinitions="100,*"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 >
                 <Image 
                     Source="logo_theflashcards_sem_fundo.png" 
                     MaximumWidthRequest="100"
-                    Grid.Column="-50"/>
+                    Grid.Column="0"/>
 
                 <Label
                     Text="Monte seu Mini Teste!"

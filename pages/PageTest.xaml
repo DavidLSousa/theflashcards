@@ -24,9 +24,9 @@
         <VerticalStackLayout 
     Padding="{StaticResource DefaultPadding}">
 
-            <Grid ColumnDefinitions="*,*"
+            <Grid ColumnDefinitions="100,*"
           MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-          ColumnSpacing="-50">
+          ColumnSpacing="0">
                 <Image Source="logo_theflashcards_sem_fundo.png" 
                MaximumWidthRequest="100"
                Grid.Column="0"/>
@@ -40,46 +40,44 @@
             </Grid>
 
             <CollectionView ItemsSource="{Binding CardsForTest}"
-                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
+                            MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout 
-                ItemSpacing="10"
-                Orientation="Vertical"/>
+                    <LinearItemsLayout ItemSpacing="10" 
+                                       Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Background="{StaticResource Platinum}"
-                       HasShadow="True"
-                       BorderColor="Transparent" >
+                           HasShadow="True"
+                           BorderColor="Transparent" >
                             <VerticalStackLayout>
                                 <Label 
-                            Text="{Binding Path=Category, Converter={StaticResource LastItemCategoryConverter}}" 
-                            FontSize="10"
-                            Margin="-10"
-                            TextColor="{StaticResource BlueMedium}"/>
+                                    Text="{Binding Path=Category, Converter={StaticResource LastItemCategoryConverter}}" 
+                                    FontSize="10"
+                                    TextColor="{StaticResource BlueMedium}"/>
                                 <Label 
-                            Text="{Binding Quest}" 
-                            FontSize="20"
-                            HorizontalOptions="Center"
-                            Padding="10"
-                            TextColor="{StaticResource BlueDark}"/>
+                                    Text="{Binding Quest}" 
+                                    FontSize="20"
+                                    HorizontalOptions="Center"
+                                    Padding="10"
+                                    TextColor="{StaticResource BlueDark}"/>
                                 <Label 
-                            Text="{Binding Resp}" 
-                            FontSize="16"
-                            HorizontalOptions="Center"
-                            Padding="10"   
-                            TextColor="{StaticResource BlueMedium}"
-                            IsVisible="{Binding IsAnswerVisible}"/>
+                                    Text="{Binding Resp}" 
+                                    FontSize="16"
+                                    HorizontalOptions="Center"
+                                    Padding="10"   
+                                    TextColor="{StaticResource BlueMedium}"
+                                    IsVisible="{Binding IsAnswerVisible}"/>
 
                                 <Button 
-                            Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
-                            SemanticProperties.Hint="Mostrar resposta"
-                            Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference PageTestPage}}"
-                            CommandParameter="{Binding .}"
-                            BackgroundColor="{StaticResource BlueDark}"
-                            FontSize="Subtitle"
-                            TextColor="{StaticResource Platinum}"/>
+                                    Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
+                                    SemanticProperties.Hint="Mostrar resposta"
+                                    Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference PageTestPage}}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="{StaticResource BlueDark}"
+                                    FontSize="Subtitle"
+                                    TextColor="{StaticResource Platinum}"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

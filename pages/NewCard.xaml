@@ -17,9 +17,9 @@
         Spacing="{StaticResource DefaultSpacing}">
 
         <Grid 
-            ColumnDefinitions="*,*"
+            ColumnDefinitions="100,*"
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-            ColumnSpacing="-50">
+            ColumnSpacing="0">
             <Image 
                 Source="logo_theflashcards_sem_fundo.png" 
                 MaximumWidthRequest="100"
@@ -65,7 +65,8 @@
             Margin="-20"
             WidthRequest="{StaticResource MaxDefaultWidth}"/>
         <Entry x:Name = "Category" 
-            Text="Teste"
+            Placeholder="residência/pediatria"
+            PlaceholderColor="{StaticResource BlueMedium}"
             BackgroundColor="{StaticResource Platinum}"
             TextColor="{StaticResource BlueDark}" 
             MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
