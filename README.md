@@ -22,3 +22,4 @@ OBS:
         // Preto ou azul será colocado?
     [ ] Porque a imagem na tela de carregamento esta sem fundo e nas paginas tem uam borda mais escura?
     [x] Dar espaço entre o cabeçalho e os cards na PageTest
+    [ ] Precisa de em buscador para fazer: "Usar essa pasta" ? para permitir usar uma pasta flashcards ja criada antes?
