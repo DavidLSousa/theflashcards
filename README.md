@@ -13,6 +13,7 @@
 [ ] 
 
 [ ] Implementar pag de simulado automatico, gerado por uma IA;
+    [ ] Interação com API ou salvar em diretorio cards pre-gerados?
 [ ] 
 
 OBS:
