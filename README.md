@@ -10,6 +10,7 @@
 [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
    // Pode ser um botao ao lado no entry que limpe isso ?
 [ ] Add animação no botão para mostrar que foi clicado?
+[ ] Mostrar as categorias que ja existem na hor de criar um novo card, para poder selecionar
 [ ] 
 
 [ ] Implementar pag de simulado automatico, gerado por uma IA;

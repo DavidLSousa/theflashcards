@@ -52,33 +52,59 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Background="{StaticResource Platinum}"
-                               HasShadow="True"
-                               BorderColor="Transparent" >
-                            <VerticalStackLayout>
-                                <Label 
-                                    Text="{Binding Quest}" 
-                                    FontSize="20"
-                                    HorizontalOptions="Center"
-                                    Padding="10"
-                                    TextColor="{StaticResource BlueDark}"/>
-                                <Label 
-                                    Text="{Binding Resp}" 
-                                    FontSize="16"
-                                    HorizontalOptions="Center"
-                                    Padding="10"   
-                                    TextColor="{StaticResource BlueMedium}"
-                                    IsVisible="{Binding IsAnswerVisible}"/>
-                                <Button 
-                                    Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
-                                    SemanticProperties.Hint="Mostrar resposta"
-                                    Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
-                                    CommandParameter="{Binding .}"
-                                    BackgroundColor="{StaticResource BlueDark}"
-                                    FontSize="Subtitle"
-                                    TextColor="{StaticResource Platinum}"/>
-                            </VerticalStackLayout>
-                        </Frame>
+                        <Grid
+                            ColumnDefinitions="*, 70"
+                            ColumnSpacing="10"
+                            RowDefinitions="*,*"
+                            RowSpacing="10">
+
+                            <Frame Background="{StaticResource Platinum}"
+                                   HasShadow="True"
+                                   BorderColor="Transparent" 
+                                   Grid.Column="0"
+                                   Grid.RowSpan="2">
+                                <VerticalStackLayout>
+                                    
+                                    <Label 
+                                        Text="{Binding Quest}" 
+                                        FontSize="20"
+                                        HorizontalOptions="Center"
+                                        Padding="10"
+                                        TextColor="{StaticResource BlueDark}"/>
+                                    <Label 
+                                        Text="{Binding Resp}" 
+                                        FontSize="16"
+                                        HorizontalOptions="Center"
+                                        Padding="10"   
+                                        TextColor="{StaticResource BlueMedium}"
+                                        IsVisible="{Binding IsAnswerVisible}"/>
+                                    <Button 
+                                        Text="{Binding IsAnswerVisible, Converter={StaticResource BooleanToTextConverter}}" 
+                                        SemanticProperties.Hint="Mostrar resposta"
+                                        Command="{Binding BindingContext.ToggleAnswerVisibilityCommand, Source={x:Reference AllCardsPage}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{StaticResource BlueDark}"
+                                        FontSize="Subtitle"
+                                        TextColor="{StaticResource Platinum}"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Button 
+                                ImageSource="edit.png" 
+                                SemanticProperties.Hint="Editar"
+                                BackgroundColor="{StaticResource BlueDark}"
+                                Grid.Column="1"
+                                Grid.Row="0"/>
+
+                            <Button
+                                ImageSource="delete.png" 
+                                SemanticProperties.Hint="Deletar"
+                                BackgroundColor="{StaticResource BlueDark}"
+                                Grid.Column="1"
+                                Grid.Row="1"/>
+
+                        </Grid>
+                        
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
