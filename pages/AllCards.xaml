@@ -16,6 +16,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BooleanToTextConverter x:Key="BooleanToTextConverter" />
+            <converters:LastItemCategoryConverter x:Key="LastItemCategoryConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -64,7 +65,10 @@
                                    Grid.Column="0"
                                    Grid.RowSpan="2">
                                 <VerticalStackLayout>
-                                    
+                                    <Label 
+                                        Text="{Binding Path=Category, Converter={StaticResource LastItemCategoryConverter}}" 
+                                        FontSize="10"
+                                        TextColor="{StaticResource BlueMedium}"/>
                                     <Label 
                                         Text="{Binding Quest}" 
                                         FontSize="20"
