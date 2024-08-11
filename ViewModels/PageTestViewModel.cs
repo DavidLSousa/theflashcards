@@ -41,19 +41,25 @@ namespace theflashcards.ViewModels
         [RelayCommand]
         private async Task ShowCards()
         {
-            var allCards = new List<Card>();
-
-            foreach (var category in Categories)
+            try
             {
-                //var cards = await cardServices.GetCardsData(category);
+                var allCards = new List<Card>();
 
-                var filePathWithCategory = cardServices.GetFilePathForCategory(category);
-                var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathWithCategory);
+                foreach (var category in Categories)
+                {
+                    var filePathWithCategory = cardServices.GetFilePathForCategory(category);
+                    var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathWithCategory);
 
-                allCards.AddRange(cards);
+                    allCards.AddRange(cards);
+                }
+
+                CardsForTest = new ObservableCollection<Card>(allCards);
+            } 
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($" --- Show Cards Simulado ---");
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
-
-            CardsForTest = new ObservableCollection<Card>(allCards);
         }
 
         // Methods

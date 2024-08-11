@@ -3,7 +3,9 @@
 
 ### Tarefas para serem executadas:
 [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
-   [ ] Deletar card
+   [x] Deletar card
+       [ ] Verificar se a pasta ficou completamente vazia, se sim, deletar a pasta tbm
+       [ ] Verificar se o arquivo json ficou vazio, se sim, deletar esse arquivo
    [ ] Editar card
        [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher?
 [ ] Satinização dos dados
@@ -25,3 +27,10 @@ OBS:
     [ ] Porque a imagem na tela de carregamento esta sem fundo e nas paginas tem uam borda mais escura?
     [x] Dar espaço entre o cabeçalho e os cards na PageTest
     [ ] Precisa de em buscador para fazer: "Usar essa pasta" ? para permitir usar uma pasta flashcards ja criada antes?
+    [ ]
+    [ ] Solicitação de permição ainda não funciona
+        // olhar: https://github.com/dotnet/maui/issues/6015
+        // Storage Access Framework - Scope Storages
+        // https://developer.android.com/training/data-storage/shared/documents-files?hl=pt-br#java
+            // Restrições de acesso - Conceder acesso ao conteúdo de um diretório - Manutenção de regras
+    [ ]
