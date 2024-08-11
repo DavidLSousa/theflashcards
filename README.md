@@ -4,10 +4,12 @@
 ### Tarefas para serem executadas:
 [ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
    [x] Deletar card
-       [ ] Verificar se a pasta ficou completamente vazia, se sim, deletar a pasta tbm
-       [ ] Verificar se o arquivo json ficou vazio, se sim, deletar esse arquivo
+       [x] Verificar se a pasta ficou completamente vazia, se sim, deletar a pasta tbm
+       [x] Verificar se o arquivo json ficou vazio, se sim, deletar esse arquivo
+       [ ] So faz para o atual, precisa ter um for para verificar ate um diretorio que tem algo, para deletar em cascata
    [ ] Editar card
        [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher?
+
 [ ] Satinização dos dados
 [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
    // Pode ser um botao ao lado no entry que limpe isso ?
@@ -22,10 +24,7 @@
 OBS:
     [ ] Ajustar o cardServices.BuildFilePath, para retornar um obj e não um array
         // Rever o noe da variavel, n é sem categoria e sim sem arquivo json no path
-    [x] Mudar com da barra de notificação
-        // Preto ou azul será colocado?
     [ ] Porque a imagem na tela de carregamento esta sem fundo e nas paginas tem uam borda mais escura?
-    [x] Dar espaço entre o cabeçalho e os cards na PageTest
     [ ] Precisa de em buscador para fazer: "Usar essa pasta" ? para permitir usar uma pasta flashcards ja criada antes?
     [ ]
     [ ] Solicitação de permição ainda não funciona

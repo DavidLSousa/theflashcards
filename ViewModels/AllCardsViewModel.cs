@@ -15,12 +15,12 @@ namespace theflashcards.ViewModels
 {
     public partial class AllCardsViewModel : ObservableObject
     {
-        // Propriedades
+        // Props
         readonly CardsServices cardsServices = new();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
 
-        // Comandos
+        // Commands
         [RelayCommand]
         private void ToggleAnswerVisibility(Card card)
         {
@@ -40,26 +40,21 @@ namespace theflashcards.ViewModels
         [RelayCommand]
         private async Task Delete(Card card)
         {
-            // Obtendo de onde remover
+            // AllCards
             var filePathAllCards = cardsServices.GetfilePathFor("allCards");
-            var filePathSpecificDirectory = cardsServices.GetFilePathForCategory(card.Category[^1]);
-
             var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
-            var cardsSpecificDirectory = await cardsServices.GetDeserializedFile<List<Card>>(filePathSpecificDirectory);
 
-            // Achando card pra remover
-            var cardToRemove = cards.FirstOrDefault(c => c.Id == card.Id);
-            var cardSpecificDirectoryToRemove = cardsSpecificDirectory.FirstOrDefault(c => c.Id == card.Id);
-
-            if (cardToRemove == null) await Toast.Make("Erro ao deletar o card").Show();
-            if (cardSpecificDirectoryToRemove == null) await Toast.Make("Erro ao deletar o card").Show();
-
-            // Removendo e Salvando
-            cards.Remove(cardToRemove);
+            await RemoveCards(cards, card.Id);
             cardsServices.SaveSerializedFile(filePathAllCards, cards);
 
-            cardsSpecificDirectory.Remove(cardSpecificDirectoryToRemove);
+            // Specific Directory
+            var filePathSpecificDirectory = cardsServices.GetFilePathForCategory(card.Category[^1]);
+            var cardsSpecificDirectory = await cardsServices.GetDeserializedFile<List<Card>>(filePathSpecificDirectory);
+
+            await RemoveCards(cardsSpecificDirectory, card.Id);
             cardsServices.SaveSerializedFile(filePathSpecificDirectory, cardsSpecificDirectory);
+
+            DeleteDirectoriesAndJson(cardsSpecificDirectory, filePathSpecificDirectory, card.Category[^1]);
 
             // Atualizando view
             CardsCollection = new ObservableCollection<Card>(cards);
@@ -100,6 +95,7 @@ namespace theflashcards.ViewModels
                 await Toast.Make("Erro ao carregar cards").Show();
             }
         }
+        
         private async void UpdateVisibilityCards(Card card)
         {
             var filePathAllCards = cardsServices.GetfilePathFor("allCards");
@@ -114,6 +110,39 @@ namespace theflashcards.ViewModels
 
             CardsCollection = new ObservableCollection<Card>(cards);
         }
+        private void DeleteDirectoriesAndJson(List<Card> cardsSpecificDirectory, string filePathSpecificDirectory, string category)
+        {
+            if (cardsSpecificDirectory.Count == 0)
+                File.Delete(filePathSpecificDirectory);
+
+            var directoryPath = cardsServices.GetFilePathForCategoryWithoutJson(category);
+            DeleteEmptyDirectories(directoryPath);
+        }
+        private void DeleteEmptyDirectories(string directoryPath)
+        {
+            bool isDirectoryEmpty = !Directory.EnumerateFileSystemEntries(directoryPath).Any();
+
+            if (isDirectoryEmpty)
+            {
+                Directory.Delete(directoryPath);
+
+                var parentDirectory = Directory.GetParent(directoryPath)?.FullName;
+
+                if (!string.IsNullOrEmpty(parentDirectory))
+                {
+                    DeleteEmptyDirectories(parentDirectory);
+                }
+            }
+        }
+        private async Task RemoveCards(List<Card> cardsSpecificDirectory, Guid id)
+        {
+            var cardToRemove = cardsSpecificDirectory.FirstOrDefault(c => c.Id == id);
+
+            if (cardToRemove == null) await Toast.Make("Erro ao deletar o card").Show();
+
+            cardsSpecificDirectory.Remove(cardToRemove);
+        }
+
 
 //#if ANDROID
 //        // Método para lidar com o resultado da solicitação de acesso ao diretório

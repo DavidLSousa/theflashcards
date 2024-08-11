@@ -124,7 +124,13 @@ namespace theflashcards.Services
 
             return $"{rootPath}/{category}/{fileName}";
         }
-        
+        public string GetFilePathForCategoryWithoutJson(string category)
+        {
+            var rootPath = GetRootDirSpecificPlataform();
+
+            return $"{rootPath}/{category}";
+        }
+
         public List<string> GetValidsCategoriesPaths(List<string> categories)
         {
             var rootPath = GetRootDirSpecificPlataform();
