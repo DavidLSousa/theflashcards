@@ -6,7 +6,8 @@
    [x] Deletar card
        [x] Verificar se a pasta ficou completamente vazia, se sim, deletar a pasta tbm
        [x] Verificar se o arquivo json ficou vazio, se sim, deletar esse arquivo
-       [ ] So faz para o atual, precisa ter um for para verificar ate um diretorio que tem algo, para deletar em cascata
+       [x] So faz para o atual, precisa ter um for para verificar ate um diretorio que tem algo, para deletar em cascata
+       [ ] Add confirmação pra exclusao
    [ ] Editar card
        [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher?
 

@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using theflashcards.Model;
+using theflashcards.pages;
 using theflashcards.Services;
 
 //#if ANDROID
@@ -19,6 +21,7 @@ namespace theflashcards.ViewModels
         readonly CardsServices cardsServices = new();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
+        private readonly Action<Popup> _showPopup;
 
         // Commands
         [RelayCommand]
@@ -30,11 +33,10 @@ namespace theflashcards.ViewModels
         }
 
         [RelayCommand]
-        private async Task Edit(Card card)
+        private void Edit(Card card)
         {
-            System.Diagnostics.Debug.WriteLine(card);
-            // Precisa abrir um popup para add o novo conteudo
-            // Esse novo conteudo será add em allcards e em seu diretorio especifico
+            var popup = new EditPopup();
+            _showPopup?.Invoke(popup);
         }
 
         [RelayCommand]
@@ -61,10 +63,12 @@ namespace theflashcards.ViewModels
         }
 
         // Construtor
-        public AllCardsViewModel()
+        public AllCardsViewModel(Action<Popup> showPopup)
         {
             CardsCollection = new ObservableCollection<Card>();
             LoadAllCards();
+
+            _showPopup = showPopup;
         }
 
         // Métodos

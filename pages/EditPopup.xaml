@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="theflashcards.pages.EditPopup"
+               x:Name="EditPopupPage">
+
+    <Frame  Background="{StaticResource BlueDark}"
+            BorderColor="Transparent"
+            Padding="0">
+
+        <Grid
+            Background="{StaticResource BlueDark}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollView Grid.Row="1" 
+                        Grid.Column="1">
+                <VerticalStackLayout Padding="{StaticResource DefaultPadding}"
+                                     Spacing="{StaticResource DefaultSpacing}">
+
+                    <Label
+                        Text="Modo de Edição"
+                        Style="{StaticResource Headline}"
+                        SemanticProperties.HeadingLevel="Level1" 
+                        TextColor="{StaticResource Platinum}"
+                        VerticalOptions="Center"/>
+                    
+                    <Label 
+                        Text="Pergunta"
+                        TextColor="{StaticResource Platinum}"
+                        FontSize="Medium"
+                        Margin="0, 0, 0, -20"
+                        WidthRequest="600"/>
+                    <Editor x:Name="Quest" 
+                        BackgroundColor="{StaticResource Platinum}"
+                        TextColor="{StaticResource BlueDark}"
+                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                        HeightRequest="100" />
+
+                    <Label 
+                        Text="Resposta"
+                        TextColor="{StaticResource Platinum}"
+                        FontSize="Medium"
+                        Margin="0, 0, 0, -20"
+                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+                    <Editor x:Name="Resp" 
+                        BackgroundColor="{StaticResource Platinum}"
+                        TextColor="{StaticResource BlueDark}" 
+                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                        HeightRequest="100" />
+
+                    <Label 
+                        Text="Categoria"
+                        TextColor="{StaticResource Platinum}"
+                        FontSize="Medium"
+                        Margin="0, 0, 0, -20"
+                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+                    <Entry x:Name="Category" 
+                        Placeholder="residência/pediatria"
+                        PlaceholderColor="{StaticResource BlueMedium}"
+                        BackgroundColor="{StaticResource Platinum}"
+                        TextColor="{StaticResource BlueDark}" 
+                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+
+                    <Button
+                        x:Name="EditCardBtn"
+                        Text="Editar" 
+                        SemanticProperties.Hint="Editação de Card"
+                        HorizontalOptions="Fill" 
+                        BackgroundColor="{StaticResource Platinum}"
+                        FontSize="Subtitle"
+                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                        TextColor="{StaticResource BlueDark}"/>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+    </Frame>
+
+</toolkit:Popup>
