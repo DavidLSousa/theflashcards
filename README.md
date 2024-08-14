@@ -23,6 +23,9 @@
 [ ] Implementar pag de simulado automatico, gerado por uma IA;
     [ ] Interação com API ou salvar em diretorio cards pre-gerados?
 [ ] 
+[ ] Aumentar largura dos cards
+[ ] Transformar menu em quadrados
+[ ] 
 
 OBS:
     [ ] Ajustar o cardServices.BuildFilePath, para retornar um obj e não um array

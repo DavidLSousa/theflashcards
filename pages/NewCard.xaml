@@ -12,74 +12,77 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <VerticalStackLayout
-        Padding="{StaticResource DefaultPadding}"
-        Spacing="{StaticResource DefaultSpacing}">
+    <ScrollView>
+        <VerticalStackLayout
+    Padding="{StaticResource DefaultPadding}"
+    Spacing="{StaticResource DefaultSpacing}">
 
-        <Grid 
-            ColumnDefinitions="100,*"
-            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-            ColumnSpacing="0">
-            <Image 
-                Source="logo_theflashcards_sem_fundo.png" 
-                MaximumWidthRequest="100"
-                Grid.Column="0"/>
+            <Grid 
+        ColumnDefinitions="100,*"
+        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+        ColumnSpacing="0">
+                <Image 
+            Source="logo_theflashcards_sem_fundo.png" 
+            MaximumWidthRequest="100"
+            Grid.Column="0"/>
 
-            <Label
-                Text="Novo Card"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1"
-                TextColor="{StaticResource Platinum}"
-                VerticalOptions="Center"
-                Grid.Column="1"/>
-        </Grid>
-
-        <Label 
-            Text="Pergunta"
+                <Label
+            Text="Novo Card"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1"
             TextColor="{StaticResource Platinum}"
-            FontSize="Medium"
-            Margin="-20"
-            WidthRequest="600"/>
-        <Editor x:Name = "Quest" 
-            BackgroundColor="{StaticResource Platinum}"
-            TextColor="{StaticResource BlueDark}"
-            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-            HeightRequest="100" />
+            VerticalOptions="Center"
+            Grid.Column="1"/>
+            </Grid>
 
-        <Label 
-            Text="Resposta"
-            TextColor="{StaticResource Platinum}"
-            FontSize="Medium"
-            Margin="-20"
-            WidthRequest="{StaticResource MaxDefaultWidth}"/>
-        <Editor x:Name = "Resp" 
-            BackgroundColor="{StaticResource Platinum}"
-            TextColor="{StaticResource BlueDark}" 
-            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-            HeightRequest="100" />
+            <Label 
+        Text="Pergunta"
+        TextColor="{StaticResource Platinum}"
+        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+        Margin="0, 0, 0, -20"
+        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+            <Editor x:Name = "Quest" 
+        BackgroundColor="{StaticResource Platinum}"
+        TextColor="{StaticResource BlueDark}"
+        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+        HeightRequest="100" />
 
-        <Label 
-            Text="Categoria"
-            TextColor="{StaticResource Platinum}"
-            FontSize="Medium"
-            Margin="-20"
-            WidthRequest="{StaticResource MaxDefaultWidth}"/>
-        <Entry x:Name = "Category" 
-            Placeholder="residência/pediatria"
-            PlaceholderColor="{StaticResource BlueMedium}"
-            BackgroundColor="{StaticResource Platinum}"
-            TextColor="{StaticResource BlueDark}" 
-            MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+            <Label 
+        Text="Resposta"
+        TextColor="{StaticResource Platinum}"
+        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+        Margin="0, 0, 0, -20"
+        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+            <Editor x:Name = "Resp" 
+        BackgroundColor="{StaticResource Platinum}"
+        TextColor="{StaticResource BlueDark}" 
+        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+        HeightRequest="100" />
 
-        <Button
-            x:Name="SaveCardBtn"
-            Text="Crie um novo card" 
-            SemanticProperties.Hint="Mudança de Pagina"
-            Clicked="SaveCard"
-            HorizontalOptions="Fill" 
-            BackgroundColor="{StaticResource Platinum}"
-            FontSize="Subtitle"
-            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-            TextColor="{StaticResource BlueDark}"/>
-    </VerticalStackLayout>
+            <Label 
+        Text="Categoria"
+        TextColor="{StaticResource Platinum}"
+        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+        Margin="0, 0, 0, -20"
+        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+            <Entry x:Name = "Category" 
+        Placeholder="residência/pediatria"
+        PlaceholderColor="{StaticResource BlueMedium}"
+        BackgroundColor="{StaticResource Platinum}"
+        TextColor="{StaticResource BlueDark}" 
+        MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+
+            <Button
+        x:Name="SaveCardBtn"
+        Text="Crie um novo card" 
+        SemanticProperties.Hint="Mudança de Pagina"
+        Clicked="SaveCard"
+        HorizontalOptions="Fill" 
+        BackgroundColor="{StaticResource Platinum}"
+        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+        TextColor="{StaticResource BlueDark}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+    
 </ContentPage>
