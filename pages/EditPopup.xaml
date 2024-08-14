@@ -1,107 +1,104 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-               xmlns:converters="clr-namespace:theflashcards.Converters"
-               x:Class="theflashcards.pages.EditPopup"
-               x:Name="EditPopupPage"
-               Color="Transparent"
-               HorizontalOptions="Center">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            xmlns:converters="clr-namespace:theflashcards.Converters"
+            x:Class="theflashcards.pages.EditPopup"
+            x:Name="EditPopupPage"
+            Color="Transparent"
+            HorizontalOptions="Center">
 
-    <toolkit:Popup.Resources>
-        <ResourceDictionary>
-            <converters:LastItemCategoryConverter x:Key="LastItemCategoryConverter" />
-        </ResourceDictionary>
-    </toolkit:Popup.Resources>
+<toolkit:Popup.Resources>
+    <ResourceDictionary>
+        <converters:LastItemCategoryConverter x:Key="LastItemCategoryConverter" />
+    </ResourceDictionary>
+</toolkit:Popup.Resources>
+
 
 <ScrollView>
-        <CollectionView 
-            ItemsSource="{Binding Card}"
-            Margin="{OnIdiom Phone='10', Tablet='200,0,200,0', Desktop='50'}">
+    <CollectionView 
+        ItemsSource="{Binding Card}"
+        Margin="{OnIdiom Phone='10', Tablet='200,0,200,0', Desktop='50'}">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>  
-                    <VerticalStackLayout Padding="{StaticResource DefaultPadding}"
-                                         Spacing="{StaticResource DefaultSpacing}"
-                                         Background="{StaticResource BlueDark}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout 
+                    Padding="{StaticResource DefaultPadding}"
+                    Spacing="{StaticResource DefaultSpacing}"
+                    Background="{StaticResource BlueDark}">
 
-                        <Button Text="Fechar"
-                            Style="{StaticResource Headline}"
-                            SemanticProperties.HeadingLevel="Level1" 
+                    <Button Text="Fechar"
                             HorizontalOptions="End"
                             BackgroundColor="Transparent"
-                            FontSize="Medium"
+                            FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
                             Margin="-10, -20, -10, -30"
                             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                             TextColor="{StaticResource Platinum}"
                             Clicked="OnCloseButtonClicked"/>
-                        
-                        <Label Text="Modo de Edição"
-                        Style="{StaticResource Headline}"
-                        SemanticProperties.HeadingLevel="Level1" 
-                        TextColor="{StaticResource Platinum}"
-                        VerticalOptions="Center"/>
 
-                        <Label Text="Pergunta"
-                        TextColor="{StaticResource Platinum}"
-                        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-                        Margin="0, 0, 0, -20"
-                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
-                        <Editor x:Name="Quest" 
+                    <Label Text="Modo de Edição"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" 
+                    TextColor="{StaticResource Platinum}"
+                    VerticalOptions="Center"/>
+
+                    <Label Text="Pergunta"
+                    TextColor="{StaticResource Platinum}"
+                    FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                    Margin="0, 0, 0, -20"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"/>
+                    <Editor x:Name="Quest" 
                             Text="{Binding Quest}"
                             BackgroundColor="{StaticResource Platinum}"
                             TextColor="{StaticResource BlueDark}"
                             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                             HeightRequest="100" />
 
-                        <Label Text="Resposta"
-                        TextColor="{StaticResource Platinum}"
-                        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-                        Margin="0, 0, 0, -20"
-                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
-                        <Editor x:Name="Resp" 
+                    <Label Text="Resposta"
+                    TextColor="{StaticResource Platinum}"
+                    FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                    Margin="0, 0, 0, -20"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"/>
+                    <Editor x:Name="Resp" 
                             Text="{Binding Resp}"
                             BackgroundColor="{StaticResource Platinum}"
                             TextColor="{StaticResource BlueDark}" 
                             MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                             HeightRequest="100" />
 
-                        <Label Text="Categoria"
-                        TextColor="{StaticResource Platinum}"
-                        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-                        Margin="0, 0, 0, -20"
-                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
-                        <Entry x:Name="Category" 
+                    <Label Text="Categoria"
+                    TextColor="{StaticResource Platinum}"
+                    FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                    Margin="0, 0, 0, -20"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"/>
+                    <Entry x:Name="Category" 
                             Text="{Binding Path=Category, Mode=OneWay, Converter={StaticResource LastItemCategoryConverter}}"
                             BackgroundColor="{StaticResource Platinum}"
                             TextColor="{StaticResource BlueDark}" 
                             MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
 
-                        <Label Text="Categorias so serão alteração em allcards a principio"
-                            TextColor="Red"
-                            HorizontalOptions="Center"
-                            FontSize="12"/>
+                    <Label Text="Categorias so serão alteração em allcards a principio"
+                    TextColor="Red"
+                    HorizontalOptions="Center"
+                    FontSize="12"/>
 
-                        <Button
-                        x:Name="EditBtn"
-                        Text="Editar" 
-                        SemanticProperties.Hint="Editação de Card"
-                        Command="{Binding BindingContext.EditCommand, Source={x:Reference EditPopupPage}}"
-                        CommandParameter="{Binding .}"
-                        Clicked="OnCloseButtonClicked"
-                        HorizontalOptions="Fill" 
-                        BackgroundColor="{StaticResource Platinum}"
-                        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                        TextColor="{StaticResource BlueDark}"/>
+                    <Button x:Name="EditBtn"
+                            SemanticProperties.Hint="Editação de Card"
+                            HorizontalOptions="Fill" 
+                            BackgroundColor="{StaticResource Platinum}"
+                            Text="Editar" 
+                            FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                            TextColor="{StaticResource BlueDark}"
+                            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                            Command="{Binding BindingContext.EditCommand, Source={x:Reference EditPopupPage}}"
+                            CommandParameter="{Binding .}"
+                            Clicked="OnCloseButtonClicked"/>
 
-                    </VerticalStackLayout>
-
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-    </ScrollView>
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ScrollView>
 
 
 

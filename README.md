@@ -2,16 +2,11 @@
 
 
 ### Tarefas para serem executadas:
-[ ] Criar pagina de edição para cada categoria, assim como o mostrar todos os cards, mas para mostrar todos cards de uma categoria ou subcategoria e poder apagar e editar
-   [x] Deletar card
-       [x] Verificar se a pasta ficou completamente vazia, se sim, deletar a pasta tbm
-       [x] Verificar se o arquivo json ficou vazio, se sim, deletar esse arquivo
-       [x] So faz para o atual, precisa ter um for para verificar ate um diretorio que tem algo, para deletar em cascata
-       [ ] Add confirmação pra exclusao
-   [x] Editar card
-       [ ] Permitir mudar de categoria 
-           [ ] Ao mudar de categoria, é preciso alterar a localizãção do card do seu diretorio especifico
-           [ ] Mostrar as categorias possiveis para escolher?
+[ ] Add confirmação pra exclusao
+[x] Editar card
+    [ ] Mostrar as categorias possiveis para escolher?
+    [ ] Permitir mudar de categoria 
+        [ ] Ao mudar de categoria, é preciso alterar a localizãção do card do seu diretorio especifico
 
 [ ] Satinização dos dados
 [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
@@ -23,7 +18,7 @@
 [ ] Implementar pag de simulado automatico, gerado por uma IA;
     [ ] Interação com API ou salvar em diretorio cards pre-gerados?
 [ ] 
-[ ] Aumentar largura dos cards
+[x] Aumentar largura dos cards
 [ ] Transformar menu em quadrados
 [ ] 
 
@@ -41,3 +36,8 @@ OBS:
         [ ] Importar AllCards dentro do app
     [ ] 
     [ ] EXLUIR DIRETORIOS ESPECIFICOS?
+
+PROXIMOS:
+- Popup de confirmação de Deleção
+- Excluir diretorios especificos
+    // Avaliar oq vai mudar
