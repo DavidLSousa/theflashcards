@@ -8,12 +8,6 @@ using theflashcards.Model;
 using theflashcards.pages;
 using theflashcards.Services;
 
-//#if ANDROID
-//using Android.App;
-//using Android.Content;
-//using theflashcards.Platforms.Android;
-//#endif
-
 namespace theflashcards.ViewModels
 {
     public partial class AllCardsViewModel : ObservableObject
@@ -192,16 +186,5 @@ namespace theflashcards.ViewModels
             // Category, se for mudado precis mudar a localização do card nos diretorios
         }
 
-        //#if ANDROID
-        //        // Método para lidar com o resultado da solicitação de acesso ao diretório
-        //        public void HandleActivityResult(int requestCode, Result resultCode, Intent data)
-        //        {
-        //            AndroidPermissions androidPermissions = new();
-        //            androidPermissions.HandleActivityResult(requestCode, resultCode, data);
-
-        //            // Tente carregar os cards novamente após a concessão da permissão
-        //            LoadAllCards();
-        //        }
-        //#endif
     }
 }
