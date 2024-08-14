@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+
 using theflashcards.Model;
 using theflashcards.pages;
 using theflashcards.Services;
@@ -21,7 +22,19 @@ namespace theflashcards.ViewModels
         readonly CardsServices cardsServices = new();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsCollection;
+        [ObservableProperty]
+        private ObservableCollection<Card> _card;
         private readonly Action<Popup> _showPopup;
+
+        // Construtor
+        public AllCardsViewModel(Action<Popup> showPopup)
+        {
+            CardsCollection = new ObservableCollection<Card>();
+            Card = new ObservableCollection<Card>();
+            LoadAllCards();
+
+            _showPopup = showPopup;
+        }
 
         // Commands
         [RelayCommand]
@@ -33,10 +46,40 @@ namespace theflashcards.ViewModels
         }
 
         [RelayCommand]
-        private void Edit(Card card)
+        private void ShowEditPopup(Card card)
         {
-            var popup = new EditPopup();
+            var popup = new EditPopup
+            {
+                BindingContext = this // Set the BindingContext for the popup
+            };
             _showPopup?.Invoke(popup);
+
+            Card = new ObservableCollection<Card> { card };
+        }
+        [RelayCommand]
+        private async Task Edit(Card card)
+        {
+            // AllCards
+            var filePathAllCards = cardsServices.GetfilePathFor("allCards");
+            var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
+
+            await EditCards(cards, card);
+            cardsServices.SaveSerializedFile(filePathAllCards, cards);
+
+            // Specific Directory
+            var filePathSpecificDirectory = cardsServices.GetFilePathForCategory(card.Category[^1]);
+            var cardsSpecificDirectory = await cardsServices.GetDeserializedFile<List<Card>>(filePathSpecificDirectory);
+
+            await EditCards(cardsSpecificDirectory, card);
+            cardsServices.SaveSerializedFile(filePathSpecificDirectory, cardsSpecificDirectory);
+
+            CardsCollection = new ObservableCollection<Card>(cards);
+
+            var popup = new Popup
+            {
+                BindingContext = this // Set the BindingContext for the popup
+            };
+            popup.Close();
         }
 
         [RelayCommand]
@@ -60,15 +103,6 @@ namespace theflashcards.ViewModels
 
             // Atualizando view
             CardsCollection = new ObservableCollection<Card>(cards);
-        }
-
-        // Construtor
-        public AllCardsViewModel(Action<Popup> showPopup)
-        {
-            CardsCollection = new ObservableCollection<Card>();
-            LoadAllCards();
-
-            _showPopup = showPopup;
         }
 
         // Métodos
@@ -138,26 +172,36 @@ namespace theflashcards.ViewModels
                 }
             }
         }
-        private async Task RemoveCards(List<Card> cardsSpecificDirectory, Guid id)
+        private async Task RemoveCards(List<Card> cards, Guid id)
         {
-            var cardToRemove = cardsSpecificDirectory.FirstOrDefault(c => c.Id == id);
+            var cardToRemove = cards.FirstOrDefault(c => c.Id == id);
 
             if (cardToRemove == null) await Toast.Make("Erro ao deletar o card").Show();
 
-            cardsSpecificDirectory.Remove(cardToRemove);
+            cards.Remove(cardToRemove);
+        }
+        private async Task EditCards(List<Card> cards, Card updetedCard)
+        {
+            var cardToEdit = cards.FirstOrDefault(c => c.Id == updetedCard.Id);
+
+            if (cardToEdit == null) await Toast.Make("Erro ao editar o card").Show();
+
+            cardToEdit.Quest = updetedCard.Quest;
+            cardToEdit.Resp = updetedCard.Resp;
+            cardToEdit.Category = updetedCard.Category;
+            // Category, se for mudado precis mudar a localização do card nos diretorios
         }
 
+        //#if ANDROID
+        //        // Método para lidar com o resultado da solicitação de acesso ao diretório
+        //        public void HandleActivityResult(int requestCode, Result resultCode, Intent data)
+        //        {
+        //            AndroidPermissions androidPermissions = new();
+        //            androidPermissions.HandleActivityResult(requestCode, resultCode, data);
 
-//#if ANDROID
-//        // Método para lidar com o resultado da solicitação de acesso ao diretório
-//        public void HandleActivityResult(int requestCode, Result resultCode, Intent data)
-//        {
-//            AndroidPermissions androidPermissions = new();
-//            androidPermissions.HandleActivityResult(requestCode, resultCode, data);
-
-//            // Tente carregar os cards novamente após a concessão da permissão
-//            LoadAllCards();
-//        }
-//#endif
+        //            // Tente carregar os cards novamente após a concessão da permissão
+        //            LoadAllCards();
+        //        }
+        //#endif
     }
 }

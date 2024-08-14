@@ -8,8 +8,6 @@ namespace theflashcards.Converters
         {
             var array = value as List<string>;
 
-            //var categories = value.toList();
-
             return array[^1];
         }
 

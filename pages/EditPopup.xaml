@@ -2,17 +2,27 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:converters="clr-namespace:theflashcards.Converters"
                x:Class="theflashcards.pages.EditPopup"
                x:Name="EditPopupPage">
 
-    <Frame  Background="{StaticResource BlueDark}"
-            BorderColor="Transparent"
-            Padding="0">
+    <toolkit:Popup.Resources>
+        <ResourceDictionary>
+            <converters:LastItemCategoryConverter x:Key="LastItemCategoryConverter" />
+        </ResourceDictionary>
+    </toolkit:Popup.Resources>
 
-        <Grid
-            Background="{StaticResource BlueDark}">
+    <Border Background="{StaticResource BlueDark}"
+            Stroke="Transparent"
+            StrokeThickness="-10">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="4"/>
+        </Border.StrokeShape>
+
+        <Grid Background="{StaticResource BlueDark}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
@@ -24,66 +34,84 @@
 
             <ScrollView Grid.Row="1" 
                         Grid.Column="1">
-                <VerticalStackLayout Padding="{StaticResource DefaultPadding}"
+                <CollectionView ItemsSource="{Binding Card}"
+                                MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <VerticalStackLayout Padding="{StaticResource DefaultPadding}"
                                      Spacing="{StaticResource DefaultSpacing}">
 
-                    <Label
-                        Text="Modo de Edição"
-                        Style="{StaticResource Headline}"
-                        SemanticProperties.HeadingLevel="Level1" 
-                        TextColor="{StaticResource Platinum}"
-                        VerticalOptions="Center"/>
-                    
-                    <Label 
-                        Text="Pergunta"
-                        TextColor="{StaticResource Platinum}"
-                        FontSize="Medium"
-                        Margin="0, 0, 0, -20"
-                        WidthRequest="600"/>
-                    <Editor x:Name="Quest" 
-                        BackgroundColor="{StaticResource Platinum}"
-                        TextColor="{StaticResource BlueDark}"
-                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                        HeightRequest="100" />
+                                <Label Text="Modo de Edição"
+                                    Style="{StaticResource Headline}"
+                                    SemanticProperties.HeadingLevel="Level1" 
+                                    TextColor="{StaticResource Platinum}"
+                                    VerticalOptions="Center"/>
 
-                    <Label 
-                        Text="Resposta"
-                        TextColor="{StaticResource Platinum}"
-                        FontSize="Medium"
-                        Margin="0, 0, 0, -20"
-                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
-                    <Editor x:Name="Resp" 
-                        BackgroundColor="{StaticResource Platinum}"
-                        TextColor="{StaticResource BlueDark}" 
-                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                        HeightRequest="100" />
+                                <Label Text="Pergunta"
+                                    TextColor="{StaticResource Platinum}"
+                                    FontSize="Medium"
+                                    Margin="0, 0, 0, -20"
+                                    WidthRequest="600"/>
+                                <Editor x:Name="Quest" 
+                                        Text="{Binding Quest}"
+                                        BackgroundColor="{StaticResource Platinum}"
+                                        TextColor="{StaticResource BlueDark}"
+                                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                                        HeightRequest="100" />
 
-                    <Label 
-                        Text="Categoria"
-                        TextColor="{StaticResource Platinum}"
-                        FontSize="Medium"
-                        Margin="0, 0, 0, -20"
-                        WidthRequest="{StaticResource MaxDefaultWidth}"/>
-                    <Entry x:Name="Category" 
-                        Placeholder="residência/pediatria"
-                        PlaceholderColor="{StaticResource BlueMedium}"
-                        BackgroundColor="{StaticResource Platinum}"
-                        TextColor="{StaticResource BlueDark}" 
-                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+                                <Label Text="Resposta"
+                                    TextColor="{StaticResource Platinum}"
+                                    FontSize="Medium"
+                                    Margin="0, 0, 0, -20"
+                                    WidthRequest="{StaticResource MaxDefaultWidth}"/>
+                                <Editor x:Name="Resp" 
+                                        Text="{Binding Resp}"
+                                        BackgroundColor="{StaticResource Platinum}"
+                                        TextColor="{StaticResource BlueDark}" 
+                                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                                        HeightRequest="100" />
 
-                    <Button
-                        x:Name="EditCardBtn"
-                        Text="Editar" 
-                        SemanticProperties.Hint="Editação de Card"
-                        HorizontalOptions="Fill" 
-                        BackgroundColor="{StaticResource Platinum}"
-                        FontSize="Subtitle"
-                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                        TextColor="{StaticResource BlueDark}"/>
-                </VerticalStackLayout>
+                                <Label Text="Categoria"
+                                    TextColor="{StaticResource Platinum}"
+                                    FontSize="Medium"
+                                    Margin="0, 0, 0, -20"
+                                    WidthRequest="{StaticResource MaxDefaultWidth}"/>
+                                <Entry x:Name="Category" 
+                                       Text="{Binding Path=Category, Mode=OneWay, Converter={StaticResource LastItemCategoryConverter}}"
+                                       BackgroundColor="{StaticResource Platinum}"
+                                       TextColor="{StaticResource BlueDark}" 
+                                       MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+
+                                <Label Text="Categorias so serão alteração em allcards a principio"
+                                       TextColor="Red"
+                                       HorizontalOptions="Center"
+                                       FontSize="12"/>
+
+                                <Button
+                                    x:Name="EditBtn"
+                                    Text="Editar" 
+                                    SemanticProperties.Hint="Editação de Card"
+                                    Command="{Binding BindingContext.EditCommand, Source={x:Reference EditPopupPage}}"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnCloseButtonClicked"
+                                    HorizontalOptions="Fill" 
+                                    BackgroundColor="{StaticResource Platinum}"
+                                    FontSize="Subtitle"
+                                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                                    TextColor="{StaticResource BlueDark}"/>
+
+                            </VerticalStackLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
             </ScrollView>
         </Grid>
 
-    </Frame>
+    </Border>
+
 
 </toolkit:Popup>

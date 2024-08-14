@@ -86,7 +86,7 @@ namespace theflashcards.Services
 
 
         }
-        public async void SaveInCategoryFile(List<string> categories)
+        public async void SaveInCategoryFile(List<string> categories) // OBS
         {
             var filePathCategory = GetfilePathFor("categories");
 
@@ -117,22 +117,25 @@ namespace theflashcards.Services
             var rootDirSpecificPlataform = GetRootDirSpecificPlataform();
             return @$"{rootDirSpecificPlataform}/{fileName}/{fileName}.json";
         }
-        public string GetFilePathForCategory(string category)
+        public string GetFilePathForCategory(string category) // OBS
         {
             var rootPath = GetRootDirSpecificPlataform();
             var fileName = $"{category.Split("/").ToList()[^1]}_cards.json";
 
             return $"{rootPath}/{category}/{fileName}";
         }
-        public string GetFilePathForCategoryWithoutJson(string category)
+        public string GetFilePathForCategoryWithoutJson(string category) // OBS
         {
             var rootPath = GetRootDirSpecificPlataform();
 
             return $"{rootPath}/{category}";
         }
 
-        public List<string> GetValidsCategoriesPaths(List<string> categories)
+        public List<string> GetValidsCategoriesPaths(List<string> categories) // OBS
         {
+            // Seria tirado do Arquivo Categories
+            // A checagem de que existe ou não, deixa de ser necessária, pois so será salvo o paths validos em categories
+            // Uma vez que se foi add o path inteiro algo foi posto no fim, e n será quebrado esse path ma hora de salvar
             var rootPath = GetRootDirSpecificPlataform();
 
             var CategoriesValids = new List<string>();

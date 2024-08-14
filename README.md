@@ -8,8 +8,10 @@
        [x] Verificar se o arquivo json ficou vazio, se sim, deletar esse arquivo
        [x] So faz para o atual, precisa ter um for para verificar ate um diretorio que tem algo, para deletar em cascata
        [ ] Add confirmação pra exclusao
-   [ ] Editar card
-       [ ] Permitir mudar de categoria - Mostrar as categorias possiveis para escolher?
+   [x] Editar card
+       [ ] Permitir mudar de categoria 
+           [ ] Ao mudar de categoria, é preciso alterar a localizãção do card do seu diretorio especifico
+           [ ] Mostrar as categorias possiveis para escolher?
 
 [ ] Satinização dos dados
 [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
@@ -33,4 +35,6 @@ OBS:
         // Storage Access Framework - Scope Storages
         // https://developer.android.com/training/data-storage/shared/documents-files?hl=pt-br#java
             // Restrições de acesso - Conceder acesso ao conteúdo de um diretório - Manutenção de regras
-    [ ]
+        [ ] Importar AllCards dentro do app
+    [ ] 
+    [ ] EXLUIR DIRETORIOS ESPECIFICOS?

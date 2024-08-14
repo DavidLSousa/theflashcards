@@ -96,7 +96,7 @@
                             <Button 
                                 ImageSource="edit.png" 
                                 SemanticProperties.Hint="Editar"
-                                Command="{Binding BindingContext.EditCommand, Source={x:Reference AllCardsPage}}"
+                                Command="{Binding BindingContext.ShowEditPopupCommand, Source={x:Reference AllCardsPage}}"
                                 CommandParameter="{Binding .}"
                                 BackgroundColor="{StaticResource BlueDark}"
                                 Grid.Column="1"
