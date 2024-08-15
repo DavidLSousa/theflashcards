@@ -71,18 +71,13 @@
                     FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
                     Margin="0, 0, 0, -20"
                     MaximumWidthRequest="{StaticResource MaxDefaultWidth}"/>
-                    <Entry x:Name="Category" 
+                        <Entry x:Name="Category" 
                             Text="{Binding Path=Category, Mode=OneWay, Converter={StaticResource LastItemCategoryConverter}}"
                             BackgroundColor="{StaticResource Platinum}"
                             TextColor="{StaticResource BlueDark}" 
                             MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
 
-                    <Label Text="Categorias so serão alteração em allcards a principio"
-                    TextColor="Red"
-                    HorizontalOptions="Center"
-                    FontSize="12"/>
-
-                    <Button x:Name="EditBtn"
+                        <Button x:Name="EditBtn"
                             SemanticProperties.Hint="Editação de Card"
                             HorizontalOptions="Fill" 
                             BackgroundColor="{StaticResource Platinum}"

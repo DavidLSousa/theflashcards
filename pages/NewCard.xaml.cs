@@ -10,7 +10,7 @@ public partial class NewCard : ContentPage
     {
         InitializeComponent();
     }
-    public void SaveCard(object sender, EventArgs e)
+    public async void SaveCard(object sender, EventArgs e)
     {
         // Isso precisa passar pra view movel e usar o Binding
         var categoryList = new List<string>();
@@ -25,19 +25,17 @@ public partial class NewCard : ContentPage
             categoryList.Add(currentPathCategory);
         }
 
-        bool savedSuccessfully = viewModel
+        var savedSuccessfully = await viewModel
             .SaveCard(Quest.Text, Resp.Text, categoryList);
 
         if (!savedSuccessfully)
         {
-            var errorToast = Toast.Make("Erro ao salvar Cards :(");
-            errorToast.Show();
+            await Toast.Make("Erro ao salvar Cards :(").Show();
 
             return;
         }
 
-        var successToast = Toast.Make("Salvo com sucesso :)");
-        successToast.Show();
+        await Toast.Make("Salvo com sucesso :)").Show();
     }
 
 }

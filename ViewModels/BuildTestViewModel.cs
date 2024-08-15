@@ -28,12 +28,12 @@ namespace theflashcards.ViewModels
         [RelayCommand]
         private async Task ShowCategory()
         {
-            string filePathCategory = cardServices.GetfilePathFor("categories");
+            string filePathCategories = cardServices.GetfilePathFor("categories");
 
-            var allCategoriesPaths = await cardServices.GetDeserializedFile<List<string>>(filePathCategory);
-            var validsCategoriesPaths = cardServices.GetValidsCategoriesPaths(allCategoriesPaths);
+            var allCategoriesPaths = await cardServices
+                .GetDeserializedFile<List<string>>(filePathCategories);
 
-            Categories = new ObservableCollection<Category>(validsCategoriesPaths
+            Categories = new ObservableCollection<Category>(allCategoriesPaths
                 .Select(name => new Category 
                 { 
                     Name = name, 

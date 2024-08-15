@@ -105,7 +105,7 @@
                             <Button
                                 ImageSource="delete.png" 
                                 SemanticProperties.Hint="Deletar"
-                                Command="{Binding BindingContext.DeleteCommand, Source={x:Reference AllCardsPage}}"
+                                Command="{Binding BindingContext.ShowDeletePopupCommand, Source={x:Reference AllCardsPage}}"
                                 CommandParameter="{Binding .}"
                                 BackgroundColor="{StaticResource BlueDark}"
                                 Grid.Column="1"

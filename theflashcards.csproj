@@ -84,6 +84,9 @@
 	  <MauiXaml Update="pages\BuildTest.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="pages\DeletePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="pages\EditPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

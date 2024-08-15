@@ -1,5 +1,6 @@
 ﻿using theflashcards.Services;
 using theflashcards.Model;
+using CommunityToolkit.Maui.Alerts;
 
 namespace theflashcards.ViewModels
 {
@@ -7,7 +8,7 @@ namespace theflashcards.ViewModels
     {
         readonly CardsServices cardServices = new();
 
-        public bool SaveCard(string quest, string resp, List<string> category)
+        public async Task<bool> SaveCard(string quest, string resp, List<string> category)
         {
             try
             {
@@ -18,47 +19,22 @@ namespace theflashcards.ViewModels
                     Category = category
                 };
 
-                string filePathWithCategory = cardServices.BuildFilePath(card.Category)[0];
-
-                if (!PathExists(filePathWithCategory))
-                    CreateAndWriteFile(card);
-                else
-                    GetAndAddCardInFile(card);
+                cardServices.BuildFilePath();
 
                 cardServices.SaveInAllCardsFile(card);
                 cardServices.SaveInCategoryFile(card.Category);
 
                 return true;
 
-            }catch(Exception e)
+            }catch(Exception ex)
             {
+
+                System.Diagnostics.Debug.WriteLine($"--- SaveCards ---");
+                System.Diagnostics.Debug.WriteLine(ex);
+
+                await Toast.Make("Erro ao salvar cards :(").Show();
                 return false;
             }
-        }
-
-        private bool PathExists(string filePath) => File.Exists(filePath);
-        private void CreateAndWriteFile(Card newCardData)
-        {
-            string filePathWithoutCategory = cardServices.BuildFilePath(newCardData.Category)[1];
-            string filePathWithCategory = cardServices.BuildFilePath(newCardData.Category)[0];
-
-            var newCards = new List<Card>
-            {
-                newCardData
-            };
-
-            Directory.CreateDirectory(filePathWithoutCategory);
-
-            cardServices.SaveSerializedFile(filePathWithCategory, newCards);
-        }
-        private async void GetAndAddCardInFile(Card newCardData) 
-        {
-            string filePathWithCategory = cardServices.BuildFilePath(newCardData.Category)[0];
-
-            var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathWithCategory);
-            cards.Add(newCardData);
-
-            cardServices.SaveSerializedFile(filePathWithCategory, cards);
         }
 
     }

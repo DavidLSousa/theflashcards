@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using theflashcards.Model;
@@ -13,6 +14,8 @@ namespace theflashcards.ViewModels
         [ObservableProperty]
         private ObservableCollection<Card> _cardsForTest;
         private List<string> _categories;
+
+        //private List<Card> currentCardsForTest;
         public List<string> Categories
         {
             get => _categories;
@@ -43,55 +46,58 @@ namespace theflashcards.ViewModels
         {
             try
             {
-                var allCards = new List<Card>();
+                var cardsForTest = new List<Card>();
 
-                foreach (var category in Categories)
+                var filePathAllCards = cardServices.GetfilePathFor("allCards");
+                var cards = await cardServices
+                    .GetDeserializedFile<List<Card>>(filePathAllCards);
+
+                foreach (var card in cards)
                 {
-                    var filePathWithCategory = cardServices.GetFilePathForCategory(category);
-                    var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathWithCategory);
-
-                    allCards.AddRange(cards);
+                    if (Categories.Contains(card.Category[^1]))
+                    {
+                        card.IsAnswerVisible = false;
+                        cardsForTest.Add(card); 
+                    }
                 }
 
-                CardsForTest = new ObservableCollection<Card>(allCards);
+                //currentCardsForTest = cardsForTest;
+
+                CardsForTest = new ObservableCollection<Card>(cardsForTest);
             } 
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($" --- Show Cards Simulado ---");
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+
+
+                await Toast.Make("Erro ao mostrar cards").Show();
             }
         }
 
         // Methods
         private async void UpdateVisibilityCards(Card card)
         {
-            var allCards = new List<Card>();
+            var filePathAllCards = cardServices.GetfilePathFor("allCards");
+            var allCards = await cardServices
+                .GetDeserializedFile<List<Card>>(filePathAllCards);
 
-            var filePathOfCurrentCard = cardServices.GetFilePathForCategory(card.Category[^1]);
-            var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathOfCurrentCard);
-
-            foreach (var currentCard in cards)
+            foreach (var currentCard in allCards)
                 if (currentCard.Id == card.Id) 
                     currentCard.IsAnswerVisible = !currentCard.IsAnswerVisible;
 
+            cardServices.SaveSerializedFile(filePathAllCards, allCards);
 
-            foreach (var category in Categories)
+            var cardsForTest = new List<Card>();
+            foreach (var currentCard in allCards)
             {
-                var filePathWithCategory = cardServices.GetFilePathForCategory(category);
-                var cardsLoaded = await cardServices.GetDeserializedFile<List<Card>>(filePathWithCategory);
-
-                if (category == card.Category[^1])
+                if (Categories.Contains(currentCard.Category[^1]))
                 {
-                    allCards.AddRange(cards);
-                } else
-                {
-                    allCards.AddRange(cardsLoaded);
+                    cardsForTest.Add(currentCard);
                 }
             }
 
-            cardServices.SaveSerializedFile(filePathOfCurrentCard, cards);
-
-            CardsForTest = new ObservableCollection<Card>(allCards);
+            CardsForTest = new ObservableCollection<Card>(cardsForTest);
         }
     }
 }

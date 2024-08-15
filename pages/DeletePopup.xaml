@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="theflashcards.pages.DeletePopup"
+             x:Name="DeletePopupPage"
+             Color="{StaticResource BlueMedium}"
+             HorizontalOptions="Center">
+
+    <VerticalStackLayout 
+        Padding="{StaticResource DefaultPadding}"
+        Spacing="{StaticResource DefaultSpacing}"
+        Background="{StaticResource BlueDark}">
+
+        <Label  Text="Que deletar mesmo?"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" 
+                TextColor="{StaticResource Platinum}"
+                VerticalOptions="Center"
+                Grid.Row="0"/>
+
+        <Grid
+            ColumnDefinitions="*,*"
+            HorizontalOptions="Center">
+
+            <Button Text="Claro"
+            HorizontalOptions="End"
+            BackgroundColor="Transparent"
+            FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+            TextColor="Red"
+            Padding="10,0,10,0"
+            Grid.Column="0"
+            Command="{Binding BindingContext.DeleteCommand, Source={x:Reference DeletePopupPage}}"
+            CommandParameter="{Binding .}"
+            Clicked="OnCloseButtonClicked"/>
+
+            <Button Text="Hoje não"
+            HorizontalOptions="End"
+            BackgroundColor="Transparent"
+            FontSize="{OnPlatform Android='Medium', WinUI='Small'}"
+            MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+            TextColor="{StaticResource Platinum}"
+            Grid.Column="1"
+            Clicked="OnCloseButtonClicked"/>
+        </Grid>
+    </VerticalStackLayout>
+
+</toolkit:Popup>

@@ -18,13 +18,15 @@ namespace theflashcards.ViewModels
         private ObservableCollection<Card> _cardsCollection;
         [ObservableProperty]
         private ObservableCollection<Card> _card;
+        private Card cardToDelete;
         private readonly Action<Popup> _showPopup;
 
         // Construtor
         public AllCardsViewModel(Action<Popup> showPopup)
         {
-            CardsCollection = new ObservableCollection<Card>();
-            Card = new ObservableCollection<Card>();
+            CardsCollection = [];
+            Card = [];
+
             LoadAllCards();
 
             _showPopup = showPopup;
@@ -48,55 +50,48 @@ namespace theflashcards.ViewModels
             };
             _showPopup?.Invoke(popup);
 
-            Card = new ObservableCollection<Card> { card };
+            Card = [card];
         }
         [RelayCommand]
-        private async Task Edit(Card card)
+        private async Task Edit(Card updetedCard)
         {
-            // AllCards
             var filePathAllCards = cardsServices.GetfilePathFor("allCards");
             var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
 
-            await EditCards(cards, card);
+            await EditCards(cards, updetedCard);
             cardsServices.SaveSerializedFile(filePathAllCards, cards);
-
-            // Specific Directory
-            var filePathSpecificDirectory = cardsServices.GetFilePathForCategory(card.Category[^1]);
-            var cardsSpecificDirectory = await cardsServices.GetDeserializedFile<List<Card>>(filePathSpecificDirectory);
-
-            await EditCards(cardsSpecificDirectory, card);
-            cardsServices.SaveSerializedFile(filePathSpecificDirectory, cardsSpecificDirectory);
 
             CardsCollection = new ObservableCollection<Card>(cards);
 
-            var popup = new Popup
+        }
+
+        [RelayCommand]
+        private void ShowDeletePopup(Card card)
+        {
+            var popup = new DeletePopup { BindingContext = this };
+            _showPopup?.Invoke(popup);
+
+            cardToDelete = card;
+        }
+        [RelayCommand]
+        private async Task Delete()
+        {
+            try
             {
-                BindingContext = this // Set the BindingContext for the popup
-            };
-            popup.Close();
-        }
+                var filePathAllCards = cardsServices.GetfilePathFor("allCards");
+                var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
 
-        [RelayCommand]
-        private async Task Delete(Card card)
-        {
-            // AllCards
-            var filePathAllCards = cardsServices.GetfilePathFor("allCards");
-            var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
+                cardsServices.RemoveCards(cards, cardToDelete.Id);
+                await cardsServices.RemoveCategories(cards, cardToDelete.Category[^1]);
 
-            await RemoveCards(cards, card.Id);
-            cardsServices.SaveSerializedFile(filePathAllCards, cards);
+                cardsServices.SaveSerializedFile(filePathAllCards, cards);
 
-            // Specific Directory
-            var filePathSpecificDirectory = cardsServices.GetFilePathForCategory(card.Category[^1]);
-            var cardsSpecificDirectory = await cardsServices.GetDeserializedFile<List<Card>>(filePathSpecificDirectory);
+                CardsCollection = new ObservableCollection<Card>(cards);
 
-            await RemoveCards(cardsSpecificDirectory, card.Id);
-            cardsServices.SaveSerializedFile(filePathSpecificDirectory, cardsSpecificDirectory);
-
-            DeleteDirectoriesAndJson(cardsSpecificDirectory, filePathSpecificDirectory, card.Category[^1]);
-
-            // Atualizando view
-            CardsCollection = new ObservableCollection<Card>(cards);
+            } catch (Exception ex)
+            {
+                await Toast.Make("Erro ao deletar o card").Show();
+            }
         }
 
         // Métodos
@@ -104,13 +99,6 @@ namespace theflashcards.ViewModels
         {
             try
             {
-//#if ANDROID
-//                AndroidPermissions androidPermissions = new();
-//                bool hasAccess = androidPermissions.CheckDirectoryAccess();
-
-//                if (!hasAccess) return;
-//#endif
-
                 var filePathAllCards = cardsServices.GetfilePathFor("allCards");
 
                 var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
@@ -142,38 +130,7 @@ namespace theflashcards.ViewModels
 
             CardsCollection = new ObservableCollection<Card>(cards);
         }
-        private void DeleteDirectoriesAndJson(List<Card> cardsSpecificDirectory, string filePathSpecificDirectory, string category)
-        {
-            if (cardsSpecificDirectory.Count == 0)
-                File.Delete(filePathSpecificDirectory);
-
-            var directoryPath = cardsServices.GetFilePathForCategoryWithoutJson(category);
-            DeleteEmptyDirectories(directoryPath);
-        }
-        private void DeleteEmptyDirectories(string directoryPath)
-        {
-            bool isDirectoryEmpty = !Directory.EnumerateFileSystemEntries(directoryPath).Any();
-
-            if (isDirectoryEmpty)
-            {
-                Directory.Delete(directoryPath);
-
-                var parentDirectory = Directory.GetParent(directoryPath)?.FullName;
-
-                if (!string.IsNullOrEmpty(parentDirectory))
-                {
-                    DeleteEmptyDirectories(parentDirectory);
-                }
-            }
-        }
-        private async Task RemoveCards(List<Card> cards, Guid id)
-        {
-            var cardToRemove = cards.FirstOrDefault(c => c.Id == id);
-
-            if (cardToRemove == null) await Toast.Make("Erro ao deletar o card").Show();
-
-            cards.Remove(cardToRemove);
-        }
+        
         private async Task EditCards(List<Card> cards, Card updetedCard)
         {
             var cardToEdit = cards.FirstOrDefault(c => c.Id == updetedCard.Id);

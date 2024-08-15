@@ -6,7 +6,7 @@ namespace theflashcards.Services
     public class CardsServices
     {
         readonly JsonSerializerOptions options = new() { WriteIndented = true };
-        private string GetRootDirSpecificPlataform()
+        private string GetRootAppDirSpecificPlataform()
         {
             string folderPath;
 #if ANDROID
@@ -16,9 +16,10 @@ namespace theflashcards.Services
 #else
         throw new PlatformNotSupportedException("Plataforma não suportada.");
 #endif
-            string appSpecificPath = Path.Combine(folderPath, "theflashcards");
 
-            return appSpecificPath;
+            string rootDirApp = Path.Combine(folderPath, "theflashcards");
+
+            return rootDirApp;
         }
         private async Task<string> ReadFile(string filePath)
         {
@@ -27,26 +28,21 @@ namespace theflashcards.Services
             return await File.ReadAllTextAsync(filePath);
         }
         
-        public List<string> BuildFilePath(List<string> categories)
+        public void BuildFilePath()
         {
-            string rootDirApp = GetRootDirSpecificPlataform();
+            string rootAppDir = GetRootAppDirSpecificPlataform();
 
-            if (!Directory.Exists(rootDirApp))
+            if (!Directory.Exists(rootAppDir))
             {
-                Directory.CreateDirectory(rootDirApp);
-                Directory.CreateDirectory(Path.Combine(rootDirApp, "allCards"));
-                Directory.CreateDirectory(Path.Combine(rootDirApp, "categories"));
+                Directory.CreateDirectory(rootAppDir);
             }
-
-            string fullPathCategory = categories[^1];
-            string lastCategoryName = fullPathCategory.Split('/').ToList()[^1];
-
-            // Building directories for all categories
-            string filePath = @$"{rootDirApp}/{fullPathCategory}";
-            string filePathWithCategory = Path
-                .Combine(filePath, $"{lastCategoryName}_cards.json");
-
-            return [filePathWithCategory, filePath]; 
+        }
+        
+        public string GetfilePathFor(string fileName)
+        {
+            // Apenas para diretorios: AllCards e Categories
+            var rootAppDir = GetRootAppDirSpecificPlataform();
+            return @$"{rootAppDir}/{fileName}.json";
         }
         public async Task<T> GetDeserializedFile<T>(string filePath)
         {
@@ -54,13 +50,7 @@ namespace theflashcards.Services
 
             return JsonSerializer.Deserialize<T>(contentStringJson);
         }
-        public async void SaveSerializedFile(string filePath, List<Card> newDataCards)
-        {
-            string jsonString = JsonSerializer.Serialize(newDataCards, options);
-
-            await File.WriteAllTextAsync(filePath, jsonString);
-        }
-
+        
         public async void SaveInAllCardsFile(Card card)
         {
             var filePathAllCards = GetfilePathFor("allCards");
@@ -71,88 +61,70 @@ namespace theflashcards.Services
 
                 string allCardsSerialized = JsonSerializer.Serialize(newCards, options);
                 await File.WriteAllTextAsync(filePathAllCards, allCardsSerialized);
-            }
-            else
-            {
-                string contentAllCards = await ReadFile(filePathAllCards);
-                var allCardsJson = JsonSerializer.Deserialize<List<Card>>(contentAllCards);
-
-                allCardsJson.Add(card);
-
-                string allCardsSerialized = JsonSerializer.Serialize(allCardsJson, options);
-                await File.WriteAllTextAsync(filePathAllCards, allCardsSerialized);
+                return;
             }
 
+            string contentAllCards = await ReadFile(filePathAllCards);
+            var allCardsJson = JsonSerializer.Deserialize<List<Card>>(contentAllCards);
 
+            allCardsJson.Add(card);
+
+            string UploadedAllCardsSerialized = JsonSerializer.Serialize(allCardsJson, options);
+            await File.WriteAllTextAsync(filePathAllCards, UploadedAllCardsSerialized);
 
         }
-        public async void SaveInCategoryFile(List<string> categories) // OBS
+        public async void SaveInCategoryFile(List<string> categories)
         {
             var filePathCategory = GetfilePathFor("categories");
 
             if (!File.Exists(filePathCategory))
             {
-                string categoriesSerialized = JsonSerializer.Serialize(categories, options);
+                var lastCategoryAsAList = new List<string>{ categories[^1] };
+                string categoriesSerialized = JsonSerializer.Serialize(lastCategoryAsAList, options);
                 await File.WriteAllTextAsync(filePathCategory, categoriesSerialized);
+                return;
             }
-            else
+
+            string contentCategories = await ReadFile(filePathCategory);
+            var categoriesJson = JsonSerializer.Deserialize<List<string>>(contentCategories);
+
+            if (categoriesJson.Contains(categories[^1])) return;
+
+            categoriesJson.Add(categories[^1]);
+
+            string UpdatedCategoriesSerialized = JsonSerializer.Serialize(categoriesJson, options);
+            await File.WriteAllTextAsync(filePathCategory, UpdatedCategoriesSerialized);
+        }
+        public async void SaveSerializedFile<T>(string filePath, T data)
+        {
+            string jsonString = JsonSerializer.Serialize(data, options);
+
+            await File.WriteAllTextAsync(filePath, jsonString);
+        }
+
+        public void RemoveCards(List<Card> cards, Guid id)
+        {
+            var cardToRemove = cards.FirstOrDefault(c => c.Id == id);
+
+            cards.Remove(cardToRemove);
+        }
+        public async Task RemoveCategories(List<Card> cards, String category)
+        {
+            var filePathCaregories = GetfilePathFor("categories");
+            var categoriesData = await GetDeserializedFile<List<string>>(filePathCaregories);
+
+            bool shouldRemove = true;
+
+            // Se ainda houver outro card com essa categoria, impede de remover
+            foreach (var card in cards)
             {
-                string contentCategories = await ReadFile(filePathCategory);
-                var categoriesJson = JsonSerializer.Deserialize<List<string>>(contentCategories);
-
-                // checking if it already exists
-                foreach (var currentCategory in categoriesJson)
-                    if (categories.Contains(currentCategory)) categories.Remove(currentCategory);
-                
-                var allCategoriesJson = categoriesJson.Concat(categories);
-
-                string categoriesSerialized = JsonSerializer.Serialize(allCategoriesJson, options);
-                await File.WriteAllTextAsync(filePathCategory, categoriesSerialized);
-            }
-        }
-
-        public string GetfilePathFor(string fileName)
-        {
-            // Apenas para diretorios: AllCards e Categories
-            var rootDirSpecificPlataform = GetRootDirSpecificPlataform();
-            return @$"{rootDirSpecificPlataform}/{fileName}/{fileName}.json";
-        }
-        public string GetFilePathForCategory(string category) // OBS
-        {
-            var rootPath = GetRootDirSpecificPlataform();
-            var fileName = $"{category.Split("/").ToList()[^1]}_cards.json";
-
-            return $"{rootPath}/{category}/{fileName}";
-        }
-        public string GetFilePathForCategoryWithoutJson(string category) // OBS
-        {
-            var rootPath = GetRootDirSpecificPlataform();
-
-            return $"{rootPath}/{category}";
-        }
-
-        public List<string> GetValidsCategoriesPaths(List<string> categories) // OBS
-        {
-            // Seria tirado do Arquivo Categories
-            // A checagem de que existe ou não, deixa de ser necessária, pois so será salvo o paths validos em categories
-            // Uma vez que se foi add o path inteiro algo foi posto no fim, e n será quebrado esse path ma hora de salvar
-            var rootPath = GetRootDirSpecificPlataform();
-
-            var CategoriesValids = new List<string>();
-
-            foreach (var category in categories)
-            {
-                var fileName = $"{category.Split("/").ToList()[^1]}_cards.json";
-                
-                var filePathWithCategory = $"{rootPath}/{category}/{fileName}";
-
-                if ( File.Exists(filePathWithCategory) )
-                {
-                    CategoriesValids.Add(category);   
-                }
+                if (card.Category[^1] == category) shouldRemove = false;
             }
 
-            return CategoriesValids;
+            if (shouldRemove) categoriesData.Remove(category);
+
+            // Salva
+            SaveSerializedFile(filePathCaregories, categoriesData);
         }
     }
 }
