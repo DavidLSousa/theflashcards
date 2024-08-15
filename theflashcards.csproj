@@ -90,6 +90,9 @@
 	  <MauiXaml Update="pages\EditPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="pages\ImportCards.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="pages\NewCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

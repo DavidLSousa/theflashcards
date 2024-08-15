@@ -17,44 +17,52 @@
     </ContentPage.Background>
 
     <ScrollView>
-        <VerticalStackLayout
+        <VerticalStackLayout    
             Padding="{StaticResource DefaultPadding}"
             Spacing="{StaticResource DefaultSpacing}">
 
-            <!--<Image Source="logo_theflashcards_vetor" />-->
-            <Image 
-                Source="logo_theflashcards_sem_fundo.png" 
-                MaximumWidthRequest="200"/>
+            <Image  Source="logo_theflashcards_sem_fundo.png" 
+                    MaximumWidthRequest="200"/>
 
             <Button x:Name="NewCardBtn"
-                Text="Crie um novo card" 
-                SemanticProperties.Hint="Mudança de Pagina"
-                Clicked="GoToNewCardPage"
-                HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource Platinum}"
-                FontSize="Subtitle"
-                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource BlueDark}"/>
+                    Text="Crie um novo card" 
+                    SemanticProperties.Hint="Mudança de Pagina"
+                    Clicked="GoToNewCardPage"
+                    HorizontalOptions="Fill" 
+                    BackgroundColor="{StaticResource Platinum}"
+                    FontSize="Subtitle"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                    TextColor="{StaticResource BlueDark}"/>
 
             <Button x:Name="AllCardsBtn"
-                Text="Todos seus Cards" 
-                SemanticProperties.Hint="Mudança de Pagina"
-                Clicked="GoToAllCardsPage"
-                HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource Platinum}"
-                FontSize="Subtitle"
-                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource BlueDark}"/>
+                    Text="Todos seus Cards" 
+                    SemanticProperties.Hint="Mudança de Pagina"
+                    Clicked="GoToAllCardsPage"
+                    HorizontalOptions="Fill" 
+                    BackgroundColor="{StaticResource Platinum}"
+                    FontSize="Subtitle"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                    TextColor="{StaticResource BlueDark}"/>
 
             <Button x:Name="BuildTestBtn"
-                Text="Monte um Mini Teste" 
-                SemanticProperties.Hint="Mudança de Pagina"
-                Clicked="GoToBuildTestPage"
-                HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource Platinum}"
-                FontSize="Subtitle"
-                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                TextColor="{StaticResource BlueDark}"/>
+                    Text="Monte um Mini Teste" 
+                    SemanticProperties.Hint="Mudança de Pagina"
+                    Clicked="GoToBuildTestPage"
+                    HorizontalOptions="Fill" 
+                    BackgroundColor="{StaticResource Platinum}"
+                    FontSize="Subtitle"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                    TextColor="{StaticResource BlueDark}"/>
+
+            <Button x:Name="ImportCardsBtn"
+                    Text="Traga seus Cards" 
+                    SemanticProperties.Hint="Mudança de Pagina"
+                    Clicked="GoToImportCardsPageTest"
+                    HorizontalOptions="Fill" 
+                    BackgroundColor="{StaticResource Platinum}"
+                    FontSize="Subtitle"
+                    MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                    TextColor="{StaticResource BlueDark}"/>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -21,6 +21,10 @@ namespace theflashcards
         {
             await Navigation.PushAsync(new BuildTest());
         }
+        private async void GoToImportCardsPageTest(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ImportCards());
+        }
     }
 
 }
