@@ -5,7 +5,6 @@
 [ ] Mostrar as categorias possiveis para escolher?
 [ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
    // Pode ser um botao ao lado no entry que limpe isso ?
-[ ] Importar AllCards dentro do app
 
 --------------------------------------------------------------------------------------------------
 [ ] Baixar icones para Buttons da MainPage
@@ -20,8 +19,3 @@ PROBS:
     [ ] Porque a imagem na tela de carregamento esta sem fundo e nas paginas tem uam borda mais escura?
     [ ] UpdateVisibilityCards - PageTestViewModel:
         // Se criar um json para o currentCardsTest, evita essa segunda iteração por todo allCards
-
-
-Proximo commit:
-
-- Implementando ImportCardViewModel
