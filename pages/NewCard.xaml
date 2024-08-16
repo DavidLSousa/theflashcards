@@ -18,70 +18,115 @@
             Spacing="{StaticResource DefaultSpacing}">
 
             <Grid 
-        ColumnDefinitions="100,*"
-        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-        ColumnSpacing="0">
+                ColumnDefinitions="100,*"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                ColumnSpacing="0">
                 <Image 
-            Source="logo_theflashcards_sem_fundo.png" 
-            MaximumWidthRequest="100"
-            Grid.Column="0"/>
+                    Source="logo_theflashcards_sem_fundo.png" 
+                    MaximumWidthRequest="100"
+                    Grid.Column="0"/>
 
                 <Label
-            Text="Novo Card"
-            Style="{StaticResource Headline}"
-            SemanticProperties.HeadingLevel="Level1"
-            TextColor="{StaticResource Platinum}"
-            VerticalOptions="Center"
-            Grid.Column="1"/>
+                    Text="Novo Card"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1"
+                    TextColor="{StaticResource Platinum}"
+                    VerticalOptions="Center"
+                    Grid.Column="1"/>
             </Grid>
 
             <Label 
-        Text="Pergunta"
-        TextColor="{StaticResource Platinum}"
-        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-        Margin="0, 0, 0, -20"
-        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+                Text="Pergunta"
+                TextColor="{StaticResource Platinum}"
+                FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                Margin="0, 0, 0, -20"
+                WidthRequest="{StaticResource MaxDefaultWidth}"/>
             <Editor x:Name = "Quest" 
-        BackgroundColor="{StaticResource Platinum}"
-        TextColor="{StaticResource BlueDark}"
-        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-        HeightRequest="100" />
+                BackgroundColor="{StaticResource Platinum}"
+                TextColor="{StaticResource BlueDark}"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                HeightRequest="100" />
 
             <Label 
-        Text="Resposta"
-        TextColor="{StaticResource Platinum}"
-        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-        Margin="0, 0, 0, -20"
-        WidthRequest="{StaticResource MaxDefaultWidth}"/>
+                Text="Resposta"
+                TextColor="{StaticResource Platinum}"
+                FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                Margin="0, 0, 0, -20"
+                WidthRequest="{StaticResource MaxDefaultWidth}"/>
             <Editor x:Name = "Resp" 
-        BackgroundColor="{StaticResource Platinum}"
-        TextColor="{StaticResource BlueDark}" 
-        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-        HeightRequest="100" />
+                BackgroundColor="{StaticResource Platinum}"
+                TextColor="{StaticResource BlueDark}" 
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                HeightRequest="100" />
 
             <Label 
-        Text="Categoria"
-        TextColor="{StaticResource Platinum}"
-        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-        Margin="0, 0, 0, -20"
-        WidthRequest="{StaticResource MaxDefaultWidth}"/>
-            <Entry x:Name = "Category" 
-        Placeholder="residência/pediatria"
-        PlaceholderColor="{StaticResource BlueMedium}"
-        BackgroundColor="{StaticResource Platinum}"
-        TextColor="{StaticResource BlueDark}" 
-        MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+                Text="Categoria"
+                TextColor="{StaticResource Platinum}"
+                FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                Margin="0, 0, 0, -20"
+                WidthRequest="{StaticResource MaxDefaultWidth}"/>
+            <Grid ColumnDefinitions="*, Auto"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                ColumnSpacing="10">
+                <Entry x:Name="Category"
+                   Placeholder="residência/pediatria"
+                   PlaceholderColor="{StaticResource BlueMedium}"
+                   BackgroundColor="{StaticResource Platinum}"
+                   TextColor="{StaticResource BlueDark}"
+                   Grid.Column="0"
+                   MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />
+
+                <Button x:Name="ToggleCategorySourceBtn"
+                    Text="Usar existente"
+                    LineBreakMode="WordWrap"
+                    BackgroundColor="{StaticResource Platinum}"
+                    TextColor="{StaticResource BlueDark}"
+                    Clicked="ToggleCategorySource"
+                    Grid.Column="1"
+                    WidthRequest="{OnIdiom Phone='90', Tablet='120', Desktop='120'}" 
+                    Command="{Binding ToogleVisibilitCategoriesCommand}"/>
+            </Grid>
+
+
+            <CollectionView ItemsSource="{Binding Categories}"
+                            IsVisible="{Binding AreCategoriesVisible}"
+                            MaximumWidthRequest="{StaticResource MaxDefaultWidth}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout 
+                        Span="{OnIdiom Phone='1', Tablet='2', Desktop='2'}" 
+                        HorizontalItemSpacing="10" 
+                        VerticalItemSpacing="10" 
+                        Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox 
+                                IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                Color="{StaticResource Platinum}"
+                                CheckedChanged="CheckedChanged"/>
+                            <Label
+                                Text="{Binding Name}" 
+                                FontSize="20"
+                                Padding="10"
+                                TextColor="{StaticResource Platinum}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
 
             <Button
-        x:Name="SaveCardBtn"
-        Text="Crie um novo card" 
-        SemanticProperties.Hint="Mudança de Pagina"
-        Clicked="SaveCard"
-        HorizontalOptions="Fill" 
-        BackgroundColor="{StaticResource Platinum}"
-        FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
-        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-        TextColor="{StaticResource BlueDark}"/>
+                x:Name="SaveCardBtn"
+                Text="Crie um novo card" 
+                SemanticProperties.Hint="Mudança de Pagina"
+                Clicked="SaveCard"
+                HorizontalOptions="Fill" 
+                BackgroundColor="{StaticResource Platinum}"
+                FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                TextColor="{StaticResource BlueDark}"/>
         </VerticalStackLayout>
     </ScrollView>
     

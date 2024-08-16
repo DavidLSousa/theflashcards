@@ -2,8 +2,8 @@
 
 
 ### Tarefas para serem executadas:
-[ ] Mostrar as categorias possiveis para escolher?
-[ ] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
+[x] Mostrar as categorias possiveis para escolher?
+[x] Limpar os campos(quest e resp) para uma novo Card quando for salvo com sucesso;
    // Pode ser um botao ao lado no entry que limpe isso ?
 
 --------------------------------------------------------------------------------------------------

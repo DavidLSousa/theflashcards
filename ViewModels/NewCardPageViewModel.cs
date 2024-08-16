@@ -1,13 +1,64 @@
 ﻿using theflashcards.Services;
 using theflashcards.Model;
 using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace theflashcards.ViewModels
 {
-    class NewCardPageViewModel
+    partial class NewCardPageViewModel : ObservableObject
     {
+        // Props
         readonly CardsServices cardServices = new();
+        private bool AreCategoriesVisible = false;
+        private Category _selectedCategory;
+        public Category SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
 
+        [ObservableProperty]
+        private ObservableCollection<Category> _categories;
+
+        // Constructor
+        public NewCardPageViewModel()
+        {
+            Categories = new ObservableCollection<Category>();
+        }
+
+        //Commands
+        [RelayCommand]
+        private async Task ToogleVisibilitCategories()
+        {
+            AreCategoriesVisible = !AreCategoriesVisible;
+
+            if (AreCategoriesVisible)
+            {
+                string filePathCategories = cardServices.GetfilePathFor("categories");
+
+                var allCategoriesPaths = await cardServices
+                    .GetDeserializedFile<List<string>>(filePathCategories);
+
+                Categories = new ObservableCollection<Category>(allCategoriesPaths
+                    .Select(name => new Category
+                    {
+                        Name = name,
+                        IsChecked = false
+                    }));
+            }
+            else
+            {
+                Categories = new ObservableCollection<Category>();
+            }
+        }
+
+        // Methods
         public async Task<bool> SaveCard(string quest, string resp, string category)
         {
             try
@@ -26,7 +77,8 @@ namespace theflashcards.ViewModels
 
                 return true;
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
 
                 System.Diagnostics.Debug.WriteLine($"--- SaveCards ---");

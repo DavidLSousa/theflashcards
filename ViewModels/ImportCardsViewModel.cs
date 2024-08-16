@@ -12,9 +12,7 @@ namespace theflashcards.ViewModels
         CardsServices cardServices = new();
 
         // Constructor
-        public ImportCardsViewModel()
-        {
-        }
+        public ImportCardsViewModel(){ }
 
         public bool ImportCards(string cardsData)
         {
