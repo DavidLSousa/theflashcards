@@ -23,7 +23,5 @@ PROBS:
 
 
 Proximo commit:
-- Implementando xaml da ImportCardsPage
-- Corrigindo edição de categorias
 
 - Implementando ImportCardViewModel

@@ -149,9 +149,14 @@ namespace theflashcards.Services
 
             var cardCategories = cards.Select(card => card.Category).ToHashSet();
 
+            int initialCount = categoriesData.Count;
+
             categoriesData.RemoveAll(category => !cardCategories.Contains(category));
 
-            categoriesData.Add(UpdatedCategory);
+            if (categoriesData.Count < initialCount)
+            {
+                categoriesData.Add(UpdatedCategory);
+            }
 
             SaveSerializedFile(filePathCaregories, categoriesData);
         }
