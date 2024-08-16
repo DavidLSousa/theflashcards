@@ -50,7 +50,7 @@
 
             <Button
                 x:Name="ImportCardsBtn"
-                Text="Crie um novo card" 
+                Text="Importar Card" 
                 SemanticProperties.Hint="Mudança de Pagina"
                 HorizontalOptions="Fill" 
                 BackgroundColor="{StaticResource Platinum}"
