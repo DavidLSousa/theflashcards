@@ -56,7 +56,9 @@
                 BackgroundColor="{StaticResource Platinum}"
                 FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
                 WidthRequest="{OnIdiom Phone='350', Tablet={StaticResource MaxDefaultWidth}, Desktop={StaticResource MaxDefaultWidth}}"
-                TextColor="{StaticResource BlueDark}"/>
+                TextColor="{StaticResource BlueDark}"
+                Clicked="ImportCardsData"
+                />
         </VerticalStackLayout>
     </ScrollView>
 
