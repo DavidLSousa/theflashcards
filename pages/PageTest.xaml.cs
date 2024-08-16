@@ -10,7 +10,7 @@ public partial class PageTest : ContentPage
         BindingContext = new PageTestViewModel()
         {
             //Categories = selectedCategoriesString.Split(',').ToList()
-            Categories = [.. selectedCategoriesString.Split(',')]
+            CategoriesList = [.. selectedCategoriesString.Split(',')]
         };
     }
 }

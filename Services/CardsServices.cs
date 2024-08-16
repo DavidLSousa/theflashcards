@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using CommunityToolkit.Maui.Alerts;
+using System.Linq;
+using System.Text.Json;
 using theflashcards.Model;
 
 namespace theflashcards.Services
@@ -44,13 +46,20 @@ namespace theflashcards.Services
             var rootAppDir = GetRootAppDirSpecificPlataform();
             return @$"{rootAppDir}/{fileName}.json";
         }
+        
         public async Task<T> GetDeserializedFile<T>(string filePath)
         {
             string contentStringJson = await ReadFile(filePath);
 
             return JsonSerializer.Deserialize<T>(contentStringJson);
         }
-        
+        public async void SaveSerializedFile<T>(string filePath, T data)
+        {
+            string jsonString = JsonSerializer.Serialize(data, options);
+
+            await File.WriteAllTextAsync(filePath, jsonString);
+        }
+
         public async void SaveInAllCardsFile(Card card)
         {
             var filePathAllCards = GetfilePathFor("allCards");
@@ -73,13 +82,13 @@ namespace theflashcards.Services
             await File.WriteAllTextAsync(filePathAllCards, UploadedAllCardsSerialized);
 
         }
-        public async void SaveInCategoryFile(List<string> categories)
+        public async void SaveInCategoryFile(string category)
         {
             var filePathCategory = GetfilePathFor("categories");
 
             if (!File.Exists(filePathCategory))
             {
-                var lastCategoryAsAList = new List<string>{ categories[^1] };
+                var lastCategoryAsAList = new List<string> { category };
                 string categoriesSerialized = JsonSerializer.Serialize(lastCategoryAsAList, options);
                 await File.WriteAllTextAsync(filePathCategory, categoriesSerialized);
                 return;
@@ -88,18 +97,12 @@ namespace theflashcards.Services
             string contentCategories = await ReadFile(filePathCategory);
             var categoriesJson = JsonSerializer.Deserialize<List<string>>(contentCategories);
 
-            if (categoriesJson.Contains(categories[^1])) return;
+            if (categoriesJson.Contains(category)) return;
 
-            categoriesJson.Add(categories[^1]);
+            categoriesJson.Add(category);
 
             string UpdatedCategoriesSerialized = JsonSerializer.Serialize(categoriesJson, options);
             await File.WriteAllTextAsync(filePathCategory, UpdatedCategoriesSerialized);
-        }
-        public async void SaveSerializedFile<T>(string filePath, T data)
-        {
-            string jsonString = JsonSerializer.Serialize(data, options);
-
-            await File.WriteAllTextAsync(filePath, jsonString);
         }
 
         public void RemoveCards(List<Card> cards, Guid id)
@@ -108,7 +111,7 @@ namespace theflashcards.Services
 
             cards.Remove(cardToRemove);
         }
-        public async Task RemoveCategories(List<Card> cards, String category)
+        public async Task RemoveAndSaveCategories(List<Card> cards, String category)
         {
             var filePathCaregories = GetfilePathFor("categories");
             var categoriesData = await GetDeserializedFile<List<string>>(filePathCaregories);
@@ -118,12 +121,38 @@ namespace theflashcards.Services
             // Se ainda houver outro card com essa categoria, impede de remover
             foreach (var card in cards)
             {
-                if (card.Category[^1] == category) shouldRemove = false;
+                if (card.Category == category) shouldRemove = false;
             }
 
             if (shouldRemove) categoriesData.Remove(category);
 
-            // Salva
+            SaveSerializedFile(filePathCaregories, categoriesData);
+        }
+
+        public void EditCards(List<Card> cards, Card updetedCard)
+        {
+
+            foreach (var currentCard in cards)
+            {
+                if (currentCard.Id == updetedCard.Id)
+                {
+                    currentCard.Quest = updetedCard.Quest;
+                    currentCard.Resp = updetedCard.Resp;
+                    currentCard.Category = updetedCard.Category;
+                }
+            }
+        }
+        public async Task EditAndSaveCategories(List<Card> cards, string UpdatedCategory)
+        {
+            var filePathCaregories = GetfilePathFor("categories");
+            var categoriesData = await GetDeserializedFile<List<string>>(filePathCaregories);
+
+            var cardCategories = cards.Select(card => card.Category).ToHashSet();
+
+            categoriesData.RemoveAll(category => !cardCategories.Contains(category));
+
+            categoriesData.Add(UpdatedCategory);
+
             SaveSerializedFile(filePathCaregories, categoriesData);
         }
     }

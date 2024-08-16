@@ -13,15 +13,15 @@ namespace theflashcards.ViewModels
         CardsServices cardServices = new();
         [ObservableProperty]
         private ObservableCollection<Card> _cardsForTest;
-        private List<string> _categories;
+        private List<string> _categoriesList;
 
         //private List<Card> currentCardsForTest;
-        public List<string> Categories
+        public List<string> CategoriesList
         {
-            get => _categories;
+            get => _categoriesList;
             set 
-            { 
-                _categories = value;
+            {
+                _categoriesList = value;
                 ShowCards();
             }
         }
@@ -54,7 +54,7 @@ namespace theflashcards.ViewModels
 
                 foreach (var card in cards)
                 {
-                    if (Categories.Contains(card.Category[^1]))
+                    if (CategoriesList.Contains(card.Category))
                     {
                         card.IsAnswerVisible = false;
                         cardsForTest.Add(card); 
@@ -91,7 +91,7 @@ namespace theflashcards.ViewModels
             var cardsForTest = new List<Card>();
             foreach (var currentCard in allCards)
             {
-                if (Categories.Contains(currentCard.Category[^1]))
+                if (CategoriesList.Contains(currentCard.Category))
                 {
                     cardsForTest.Add(currentCard);
                 }

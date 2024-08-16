@@ -4,12 +4,60 @@
              x:Class="theflashcards.pages.ImportCards"
              x:Name="ImportCardPage"
              Shell.NavBarIsVisible="False">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-    
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout
+        Padding="{StaticResource DefaultPadding}"
+        Spacing="{StaticResource DefaultSpacing}">
+
+            <Grid 
+                ColumnDefinitions="100,*"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                ColumnSpacing="0">
+                <Image 
+                Source="logo_theflashcards_sem_fundo.png" 
+                MaximumWidthRequest="100"
+                Grid.Column="0"/>
+
+                <Label
+                Text="Importar Cards"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1"
+                TextColor="{StaticResource Platinum}"
+                VerticalOptions="Center"
+                Grid.Column="1"/>
+            </Grid>
+
+            <Label  Text="Copie o conteudo do seu arquivo JSON para o campo abaixo"
+                    LineBreakMode="WordWrap"
+                    TextColor="{StaticResource Platinum}"
+                    FontSize="{OnPlatform Android='Medium', WinUI='Small'}"
+                    WidthRequest="{OnIdiom Phone='350', Tablet={StaticResource MaxDefaultWidth}, Desktop={StaticResource MaxDefaultWidth}}"
+                    />
+            <Editor x:Name = "CardsData" 
+                    BackgroundColor="{StaticResource Platinum}"
+                    TextColor="{StaticResource BlueDark}"
+                    WidthRequest="{OnIdiom Phone='350', Tablet={StaticResource MaxDefaultWidth}, Desktop={StaticResource MaxDefaultWidth}}"
+                    HeightRequest="350"
+                    />
+
+            <Button
+                x:Name="ImportCardsBtn"
+                Text="Crie um novo card" 
+                SemanticProperties.Hint="Mudança de Pagina"
+                HorizontalOptions="Fill" 
+                BackgroundColor="{StaticResource Platinum}"
+                FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                WidthRequest="{OnIdiom Phone='350', Tablet={StaticResource MaxDefaultWidth}, Desktop={StaticResource MaxDefaultWidth}}"
+                TextColor="{StaticResource BlueDark}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

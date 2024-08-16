@@ -12,21 +12,8 @@ public partial class NewCard : ContentPage
     }
     public async void SaveCard(object sender, EventArgs e)
     {
-        // Isso precisa passar pra view movel e usar o Binding
-        var categoryList = new List<string>();
-        var currentPathCategory = string.Empty;
-
-        foreach (var currentCategory in Category.Text.Split('/').ToList())
-        {
-            currentPathCategory = string.IsNullOrEmpty(currentPathCategory) 
-                ? currentCategory 
-                : $"{currentPathCategory}/{currentCategory}";
-
-            categoryList.Add(currentPathCategory);
-        }
-
         var savedSuccessfully = await viewModel
-            .SaveCard(Quest.Text, Resp.Text, categoryList);
+            .SaveCard(Quest.Text, Resp.Text, Category.Text);
 
         if (!savedSuccessfully)
         {

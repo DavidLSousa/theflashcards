@@ -14,8 +14,8 @@
 
     <ScrollView>
         <VerticalStackLayout
-    Padding="{StaticResource DefaultPadding}"
-    Spacing="{StaticResource DefaultSpacing}">
+            Padding="{StaticResource DefaultPadding}"
+            Spacing="{StaticResource DefaultSpacing}">
 
             <Grid 
         ColumnDefinitions="100,*"

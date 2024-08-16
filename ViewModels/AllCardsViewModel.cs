@@ -58,7 +58,9 @@ namespace theflashcards.ViewModels
             var filePathAllCards = cardsServices.GetfilePathFor("allCards");
             var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
 
-            await EditCards(cards, updetedCard);
+            cardsServices.EditCards(cards, updetedCard);
+            await cardsServices.EditAndSaveCategories(cards, updetedCard.Category);
+
             cardsServices.SaveSerializedFile(filePathAllCards, cards);
 
             CardsCollection = new ObservableCollection<Card>(cards);
@@ -82,7 +84,7 @@ namespace theflashcards.ViewModels
                 var cards = await cardsServices.GetDeserializedFile<List<Card>>(filePathAllCards);
 
                 cardsServices.RemoveCards(cards, cardToDelete.Id);
-                await cardsServices.RemoveCategories(cards, cardToDelete.Category[^1]);
+                await cardsServices.RemoveAndSaveCategories(cards, cardToDelete.Category);
 
                 cardsServices.SaveSerializedFile(filePathAllCards, cards);
 
@@ -129,18 +131,6 @@ namespace theflashcards.ViewModels
             cardsServices.SaveSerializedFile(filePathAllCards, cards);
 
             CardsCollection = new ObservableCollection<Card>(cards);
-        }
-        
-        private async Task EditCards(List<Card> cards, Card updetedCard)
-        {
-            var cardToEdit = cards.FirstOrDefault(c => c.Id == updetedCard.Id);
-
-            if (cardToEdit == null) await Toast.Make("Erro ao editar o card").Show();
-
-            cardToEdit.Quest = updetedCard.Quest;
-            cardToEdit.Resp = updetedCard.Resp;
-            cardToEdit.Category = updetedCard.Category;
-            // Category, se for mudado precis mudar a localização do card nos diretorios
         }
 
     }

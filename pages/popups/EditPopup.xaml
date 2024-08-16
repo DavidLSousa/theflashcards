@@ -2,20 +2,13 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-            xmlns:converters="clr-namespace:theflashcards.Converters"
             x:Class="theflashcards.pages.EditPopup"
             x:Name="EditPopupPage"
             Color="Transparent"
             HorizontalOptions="Center">
 
-<toolkit:Popup.Resources>
-    <ResourceDictionary>
-        <converters:LastItemCategoryConverter x:Key="LastItemCategoryConverter" />
-    </ResourceDictionary>
-</toolkit:Popup.Resources>
 
-
-<ScrollView>
+    <ScrollView>
     <CollectionView 
         ItemsSource="{Binding Card}"
         Margin="{OnIdiom Phone='10', Tablet='200,0,200,0', Desktop='50'}">
@@ -72,7 +65,7 @@
                     Margin="0, 0, 0, -20"
                     MaximumWidthRequest="{StaticResource MaxDefaultWidth}"/>
                         <Entry x:Name="Category" 
-                            Text="{Binding Path=Category, Mode=OneWay, Converter={StaticResource LastItemCategoryConverter}}"
+                            Text="{Binding Category}"
                             BackgroundColor="{StaticResource Platinum}"
                             TextColor="{StaticResource BlueDark}" 
                             MaximumWidthRequest="{StaticResource MaxDefaultWidth}" />

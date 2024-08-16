@@ -8,7 +8,7 @@ namespace theflashcards.ViewModels
     {
         readonly CardsServices cardServices = new();
 
-        public async Task<bool> SaveCard(string quest, string resp, List<string> category)
+        public async Task<bool> SaveCard(string quest, string resp, string category)
         {
             try
             {

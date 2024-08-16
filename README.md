@@ -7,17 +7,23 @@
    // Pode ser um botao ao lado no entry que limpe isso ?
 [ ] Importar AllCards dentro do app
 
+--------------------------------------------------------------------------------------------------
+[ ] Baixar icones para Buttons da MainPage
+
 [ ] Satinização dos dados
-[ ] Mostrar as categorias que ja existem na hor de criar um novo card, para poder selecionar
-[ ] 
+[ ] Category pode ser um HashSet
 
 [ ] Implementar pag de simulado automatico, gerado por uma IA;
     [ ] Interação com API ou salvar em diretorio cards pre-gerados?
-[ ] 
-[ ] Transformar menu em quadrados
-[ ] UpdateVisibilityCards - PageTestViewModel -> Se criar um json para o currentCardsTest, evita essa segunda iteração por todo allCards
 
-
-OBS:
+PROBS:
     [ ] Porque a imagem na tela de carregamento esta sem fundo e nas paginas tem uam borda mais escura?
-    [ ] 
+    [ ] UpdateVisibilityCards - PageTestViewModel:
+        // Se criar um json para o currentCardsTest, evita essa segunda iteração por todo allCards
+
+
+Proximo commit:
+- Implementando xaml da ImportCardsPage
+- Corrigindo edição de categorias
+
+- Implementando ImportCardViewModel

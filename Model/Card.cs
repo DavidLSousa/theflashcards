@@ -9,17 +9,13 @@ namespace theflashcards.Model
         public string Quest { get; set; }
         public string Resp { get; set; }
 
-        private List<string> _category;
-        public List<string> Category
+        private string _category;
+        public string Category
         {
             get { return _category; }
             set 
             {
-                _category = [];
-                foreach (var currentValue in value)
-                {
-                    _category.Add(currentValue.ToLower()); 
-                }
+                _category = value.ToLower();
             }
         }
 
@@ -33,7 +29,7 @@ namespace theflashcards.Model
         }
 
         [JsonConstructor]
-        public Card(Guid id, string quest, string resp, List<string> category, bool isAnswerVisible)
+        public Card(Guid id, string quest, string resp, string category, bool isAnswerVisible)
         {
             Id = id;
             Quest = quest;
