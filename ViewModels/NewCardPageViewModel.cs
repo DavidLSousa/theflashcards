@@ -36,25 +36,32 @@ namespace theflashcards.ViewModels
         [RelayCommand]
         private async Task ToogleVisibilitCategories()
         {
-            AreCategoriesVisible = !AreCategoriesVisible;
+            try 
+            { 
+                AreCategoriesVisible = !AreCategoriesVisible;
 
-            if (AreCategoriesVisible)
+                if (AreCategoriesVisible)
+                {
+                    string filePathCategories = cardServices.GetfilePathFor("categories");
+
+                    var allCategoriesPaths = await cardServices
+                        .GetDeserializedFile<List<string>>(filePathCategories);
+
+                    Categories = new ObservableCollection<Category>(allCategoriesPaths
+                        .Select(name => new Category
+                        {
+                            Name = name,
+                            IsChecked = false
+                        }));
+                }
+                else
+                {
+                    Categories = new ObservableCollection<Category>();
+                }
+            } 
+            catch (Exception ex)
             {
-                string filePathCategories = cardServices.GetfilePathFor("categories");
-
-                var allCategoriesPaths = await cardServices
-                    .GetDeserializedFile<List<string>>(filePathCategories);
-
-                Categories = new ObservableCollection<Category>(allCategoriesPaths
-                    .Select(name => new Category
-                    {
-                        Name = name,
-                        IsChecked = false
-                    }));
-            }
-            else
-            {
-                Categories = new ObservableCollection<Category>();
+                await Toast.Make("Erro ao buscar categorias").Show();
             }
         }
 

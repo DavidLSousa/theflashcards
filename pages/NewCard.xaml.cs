@@ -1,5 +1,4 @@
 using CommunityToolkit.Maui.Alerts;
-using Microsoft.Maui.Controls;
 using theflashcards.Model;
 using theflashcards.ViewModels;
 

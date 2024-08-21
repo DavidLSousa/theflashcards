@@ -83,7 +83,7 @@
                     TextColor="{StaticResource BlueDark}"
                     Clicked="ToggleCategorySource"
                     Grid.Column="1"
-                    WidthRequest="{OnIdiom Phone='90', Tablet='120', Desktop='120'}" 
+                    WidthRequest="{OnIdiom Phone='90', Tablet='130', Desktop='130'}" 
                     Command="{Binding ToogleVisibilitCategoriesCommand}"/>
             </Grid>
 
