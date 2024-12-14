@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="theflashcards.pages.Dashboard"
+             x:Name="DashboardPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="{StaticResource BlueLazuli}" Offset="0.0"/>
+            <GradientStop Color="{StaticResource BlueDark}" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="{StaticResource DefaultPadding}"
+            Spacing="{StaticResource DefaultSpacing}">
+
+            <Label 
+                Text="Test"
+                TextColor="{StaticResource Platinum}"
+                FontSize="{OnPlatform Android='Large', WinUI='Medium'}"
+                Margin="0, 0, 0, -20"
+                WidthRequest="{StaticResource MaxDefaultWidth}"/>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

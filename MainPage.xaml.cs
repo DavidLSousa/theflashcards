@@ -25,6 +25,11 @@ namespace theflashcards
         {
             await Navigation.PushAsync(new ImportCards());
         }
+
+        private async void GoToDashboardPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Dashboard());
+        }
     }
 
 }

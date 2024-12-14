@@ -106,17 +106,18 @@
 />
 
                 <Button x:Name="Btn"
-                Text="..." 
-                LineBreakMode="WordWrap"
-                SemanticProperties.Hint="Mudança de Pagina"
-                HorizontalOptions="Fill" 
-                BackgroundColor="{StaticResource Platinum}"
-                FontSize="Subtitle"
-                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
-                HeightRequest="120"
-                TextColor="{StaticResource BlueDark}"
-                Grid.Row="3"
-                Grid.Column="1"
+                        Text="Estatíticas" 
+                        LineBreakMode="WordWrap"
+                        SemanticProperties.Hint="Mudança de Pagina"
+                        HorizontalOptions="Fill" 
+                        BackgroundColor="{StaticResource Platinum}"
+                        FontSize="Subtitle"
+                        MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                        HeightRequest="120"
+                        TextColor="{StaticResource BlueDark}"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Clicked="GoToDashboardPage"
 />
 
             </Grid>
