@@ -1,46 +1,58 @@
-# theflashcards
+﻿# The Flashcards
 
+**The Flashcards** é um aplicativo para criação, organização e estudo de cartões de perguntas e respostas (flashcards). Ideal para estudantes, professores e entusiastas da aprendizagem, ele ajuda a revisar conteúdos de forma prática e eficiente.
 
-### Tarefas para serem executadas:
-[ ] Baixar icones para Buttons da MainPage
-[ ] Implementar pag de simulado automatico, gerado por uma IA;
-    [ ] button par cards gerados por IA
-        // Leva a lista de Lista de testes (Nome da categoria, como na buildTest)
-        // Leva a page de teste com os cards em ordem aleatoria
-    [ ] Diretorio cards pre-gerados por uma IA?
+## 📋 Funcionalidades
 
-[ ] Implementar Estado de resp -> Se acertou ou errou
-    // Salva o estado de acerto e erro ? OU Salva a contagem de numero de bzs que acertou ou errou? OU Essa contagem deve ser feita e mantida so nas estastisticas?
-        // Acho que acerto ou erro deve:
-            // levar a informa��o pra estatistica
-            // Add a uma contagem e erros e acertos dentro do proprio obj Card
-                // Permite estatistica fultura de card por card
-    // Isso vai para estatisticas
+- 🖋 **Criação de Flashcards**: Adicione perguntas e respostas personalizadas.
+- 📂 **Organização por Categorias**: Agrupe os flashcards em categorias para facilitar o estudo.
+- 🔄 **Revisão Eficiente**: Use o modo de estudo para revisar as perguntas e verificar suas respostas.
+- 💾 **Persistência de Dados**: Os flashcards são salvos localmente no dispositivo.
+- 🌐 **Suporte Multiplataforma**: Disponível para Android e Windows.
 
-[ ] Avalia��os e dificudade do card -> F�cil, Medio e Dificil
-    // Mostrar rela��o de atualiza��o, quando ao classificar o card com uma dificuldade diferente da ultima selecionada
-        // Aciona a mudan�a de estado e entra pra estatistica
-    // Isso vai ser mostrado na tela de estatistica
+## 🚀 Tecnologias Utilizadas
 
-[ ] Implementar Estatisticas
-    // Vai receber as informa��es de dificuldade e acerto, sera instanciado e atualizado quando chamado
-    // Vai ter um button, que leva a uma pagina com as estatisticas nela
-    // Ideias ate agr:
-        [ ] Numera��o de cards classificados com Facil, Med e dif
-            [ ] Mostrar evolu��o de cards de transtaram de dificuldade
-                // De dif virou med, de med virou facil e etc
-        [ ] Montar grafico com historio de acertos e erros
-            // ser� geral de todas as questoes
-            // Como ser� feita a rela��o?
-                // Calculo a ser feito para montar esse gradico
-                // Mostrar acertos e erros por peridos de tempo -> di�rio e semanal
-                    // E se nao fizer todo dia? ou toda semana?
-                    // Ter� um maximo de quantos dias/semanas no grafico?
-[ ] 
+- **Framework**: .NET MAUI  
+- **Linguagem**: C#  
+- **Banco de Dados**: Arquivo JSON (armazenamento local)  
+- **Arquitetura**: MVVM (Model-View-ViewModel)  
 
-[ ] Satiniza��o dos dados
+## 🛠 Como Usar
 
+1. **Criação de Cartões**:  
+   - Insira a pergunta no campo correspondente.  
+   - Insira a resposta no campo abaixo.  
+   - Insira a categora ou selecione uma ja existente.
+   - Salve o cartão.  
 
-PROBS:
-    [ ] Porque a imagem na tela de carregamento esta sem fundo e nas paginas tem uam borda mais escura?
-    [ ] Tela de Android quando apertada as labels Resposta e Pergunta saem da tela
+2. **Modo de Estudo**:  
+   - Escolha uma categoria.  
+   - Responda às perguntas mentalmente ou escrevendo.  
+   - Reveja as respostas para conferir.  
+
+## 📦 Instalação
+
+### Android
+1. Baixe o APK mais recente na [seção de Releases](#).
+2. Instale no seu dispositivo Android.
+
+### Windows
+1. Faça o download do instalador para Windows na [seção de Releases](#).
+2. Siga as instruções do instalador.
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Siga os passos abaixo:  
+1. Faça um fork do repositório.  
+2. Crie um branch para sua feature: `git checkout -b minha-feature`.  
+3. Realize as alterações e comite: `git commit -m 'Adiciona minha feature'`.  
+4. Faça um push para o branch: `git push origin minha-feature`.  
+5. Abra um Pull Request.  
+
+## 📝 Licença
+
+Este projeto está licenciado sob a licença [MIT](LICENSE).
+
+---
+
+**The Flashcards** - Tornando o aprendizado mais fácil e divertido! 🎓✨
