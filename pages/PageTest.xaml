@@ -87,13 +87,13 @@
                                       Margin="0, 10, 0, 0">
 
                                     <Label Text="Iai, acertou?"
-                                           FontSize="10"
+                                           FontSize="16"
                                            TextColor="{StaticResource BlueMedium}"
                                            Grid.Column="0"
                                            Grid.Row="0"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" 
-                                           Margin="0, 0, 0, -5"/>
+                                           Margin="0, 0, 0, -3"/>
 
                                     <StackLayout Orientation="Horizontal"
                                          Grid.Column="0"
@@ -101,24 +101,26 @@
                                          HorizontalOptions="Center"
                                          VerticalOptions="Center">
                                         <RadioButton Content="Acertei"
+                                                     TextColor="{StaticResource BlueMedium}"
                                                      Value="True"
                                                      CheckedChanged="OnAnswerCheckedChanged">
                                         </RadioButton>
 
                                         <RadioButton Content="Errei"
+                                                     TextColor="{StaticResource BlueMedium}"
                                                      Value="False"
                                                      CheckedChanged="OnAnswerCheckedChanged">
                                         </RadioButton>
                                     </StackLayout>
 
                                     <Label Text="O que achou desse card?"
-                                           FontSize="10"
+                                           FontSize="16"
                                            TextColor="{StaticResource BlueMedium}"
                                            Grid.Column="1"
                                            Grid.Row="0"
                                            HorizontalTextAlignment="Center"
                                            VerticalTextAlignment="Center" 
-                                           Margin="0, 0, 0, -5"/>
+                                           Margin="0, 0, 0, -3"/>
 
                                     <StackLayout Orientation="Horizontal"
                                          Grid.Column="1"
@@ -126,16 +128,19 @@
                                          HorizontalOptions="Center"
                                          VerticalOptions="Center">
                                         <RadioButton Content="Fácil"
+                                                     TextColor="{StaticResource BlueMedium}"
                                                      Value="Easy"
                                                      CheckedChanged="OnDifficultyCheckedChanged">
                                         </RadioButton>
 
                                         <RadioButton Content="Médio"
+                                                     TextColor="{StaticResource BlueMedium}"
                                                      Value="Medium"
                                                      CheckedChanged="OnDifficultyCheckedChanged">
                                         </RadioButton>
 
                                         <RadioButton Content="Difícil"
+                                                     TextColor="{StaticResource BlueMedium}"
                                                      Value="Hard"
                                                      CheckedChanged="OnDifficultyCheckedChanged">
                                         </RadioButton>
