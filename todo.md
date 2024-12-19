@@ -42,3 +42,9 @@
             // Leva a lista de Lista de testes (Nome da categoria, como na buildTest)
             // Leva a page de teste com os cards em ordem aleatoria
         [ ] Diretorio cards pre-gerados por uma IA?
+
+5: [ ] Poderia ser utilizado um dicionario inves de um json?
+        // Oq implicaria na hora de importar cards ?
+        // Tortaria significativamente mais rapido o app? 
+        // A consulta do Dict no C# é de (O)1?
+        // 
