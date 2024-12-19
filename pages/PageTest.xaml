@@ -32,7 +32,7 @@
                        MaximumWidthRequest="100"
                        Grid.Column="0"/>
 
-                <Label Text="Mini Teste!"
+                <Label Text="Simulado!"
                        Style="{StaticResource Headline}" 
                        SemanticProperties.HeadingLevel="Level1" 
                        TextColor="{StaticResource Platinum}"

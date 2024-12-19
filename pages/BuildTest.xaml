@@ -27,7 +27,7 @@
                     Grid.Column="0"/>
 
                 <Label
-                    Text="Monte seu Mini Teste!"
+                    Text="Monte seu Simulado!"
                     Style="{StaticResource Headline}"
                     SemanticProperties.HeadingLevel="Level1" 
                     TextColor="{StaticResource Platinum}"
