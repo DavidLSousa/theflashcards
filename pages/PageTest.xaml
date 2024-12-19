@@ -50,8 +50,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Background="{StaticResource Platinum}"
-                           HasShadow="True"
-                           BorderColor="Transparent" >
+                               HasShadow="True"
+                               BorderColor="Transparent" >
                             <VerticalStackLayout>
                                 <Label 
                                     Text="{Binding Category}" 
@@ -153,6 +153,13 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Button 
+                Text="Finalizar simulado!" 
+                FontSize="Subtitle"
+                MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
+                BackgroundColor="{StaticResource BlueDark}"
+                TextColor="{StaticResource Platinum}"/>
 
         </VerticalStackLayout>
     </ScrollView>
