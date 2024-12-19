@@ -62,7 +62,7 @@
                         />
 
                 <Button x:Name="BuildTestBtn"
-                        Text="Monte um Mini Teste" 
+                        Text="Monte seu simulado" 
                         LineBreakMode="WordWrap"
                         SemanticProperties.Hint="Mudança de Pagina"
                         HorizontalOptions="Fill" 
