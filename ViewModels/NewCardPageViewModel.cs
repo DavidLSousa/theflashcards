@@ -87,10 +87,6 @@ namespace theflashcards.ViewModels
             }
             catch (Exception ex)
             {
-
-                System.Diagnostics.Debug.WriteLine($"--- SaveCards ---");
-                System.Diagnostics.Debug.WriteLine(ex);
-
                 await Toast.Make("Erro ao salvar cards :(").Show();
                 return false;
             }
