@@ -10,6 +10,7 @@ namespace theflashcards.ViewModels;
 public partial class PageTestViewModel : ObservableObject
 {
     private List<string> _categoriesList;
+    readonly CardsServices cardsServices = new();
 
     [ObservableProperty]
     private ObservableCollection<Card> _cardsForTest;
@@ -82,7 +83,7 @@ public partial class PageTestViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void SelectAnswer((Card card, bool isCorrect) parameters)
+    private async Task SelectAnswer((Card card, bool isCorrect) parameters)
     {
         var (card, isCorrect) = parameters;
 
@@ -91,46 +92,108 @@ public partial class PageTestViewModel : ObservableObject
 
         try
         {
-            if (!card.Answer.ContainsKey(card.Id))
+            // Atualizar a resposta com base na seleção (correto ou errado)
+            if (isCorrect)
             {
-                // Inicializa o dicionário apenas uma vez.
-                card.Answer[card.Id] = (0, 0);
+                card.TestResult.Answer["correct"] = 1;
+                card.TestResult.Answer["wrong"] = 0;
+            }
+            else
+            {
+                card.TestResult.Answer["correct"] = 0;
+                card.TestResult.Answer["wrong"] = 1;
             }
 
-            var currentAnswer = card.Answer[card.Id];
-            card.Answer[card.Id] = isCorrect
-                ? (currentAnswer.correct + 1, currentAnswer.wrong)
-                : (currentAnswer.correct, currentAnswer.wrong + 1);
+            await cardServices.SaveTestResultsToFile(card.TestResult); 
+
+            // Log para debug
+            System.Diagnostics.Debug.WriteLine($"Resultado salvo para o card {card.Id}, Resposta correta: {isCorrect}");
         }
         catch (Exception ex)
         {
-            // Log ou exibir mensagem para debugging.
             System.Diagnostics.Debug.WriteLine($"Erro ao selecionar resposta: {ex.Message}");
         }
     }
 
 
     [RelayCommand]
-    private void SelectDifficulty((Card card, string difficulty) parameters)
+    private async Task SelectDifficulty((Card card, string difficulty) parameters)
     {
         var (card, difficulty) = parameters;
 
-        if (card != null)
+        if (card == null)
         {
-            if (!card.Difficulty.ContainsKey(card.Id))
+            return;
+        }
+
+        try
+        {
+            if (difficulty == "Easy")
             {
-                card.Difficulty[card.Id] = (0, 0, 0);
+                card.TestResult.Difficulty["easy"] = 1;
+                card.TestResult.Difficulty["medium"] = 0;
+                card.TestResult.Difficulty["difficult"] = 0;
+            }
+            else if (difficulty == "Medium")
+            {
+                card.TestResult.Difficulty["easy"] = 0;
+                card.TestResult.Difficulty["medium"] = 1;
+                card.TestResult.Difficulty["difficult"] = 0;
+            }
+            else if (difficulty == "Hard")
+            {
+                card.TestResult.Difficulty["easy"] = 0;
+                card.TestResult.Difficulty["medium"] = 0;
+                card.TestResult.Difficulty["difficult"] = 1;
             }
 
-            var currentDifficulty = card.Difficulty[card.Id];
+            await cardServices.SaveTestResultsToFile(card.TestResult);
 
-            card.Difficulty[card.Id] = difficulty switch
+            // Log para debug
+            System.Diagnostics.Debug.WriteLine($"Dificuldade selecionada para o card {card.Id}: {difficulty}");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Erro ao selecionar dificuldade: {ex.Message}");
+        }
+    }
+
+
+    [RelayCommand]
+    private async void SubmitTest()
+    {
+        try
+        {
+            var filePathTestResults = cardServices.GetfilePathFor("testResults");
+            var filePathAllCards = cardServices.GetfilePathFor("allCards");
+
+            var testResults = await cardServices.GetDeserializedFile<List<TestResult>>(filePathTestResults);
+            var cards = await cardServices.GetDeserializedFile<List<Card>>(filePathAllCards);
+
+            if (testResults == null || cards == null)
             {
-                "Easy" => (currentDifficulty.facil + 1, currentDifficulty.medio, currentDifficulty.dificil),
-                "Medium" => (currentDifficulty.facil, currentDifficulty.medio + 1, currentDifficulty.dificil),
-                "Hard" => (currentDifficulty.facil, currentDifficulty.medio, currentDifficulty.dificil + 1),
-                _ => currentDifficulty
-            };
+                System.Diagnostics.Debug.WriteLine("Erro: Arquivos vazios ou inexistentes.");
+                return;
+            }
+
+            foreach (var testResult in testResults)
+            {
+                var cardToUpdate = cards.FirstOrDefault(c => c.Id == testResult.Id);
+
+                if (cardToUpdate != null)
+                {
+                    cardToUpdate.TestResult = testResult;
+                }
+            }
+
+            await cardServices.SaveSerializedFile(filePathAllCards, cards);
+
+            // Mostrar popup de parabens e volvar para criação do teste(buildtest);
+
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Erro ao submeter teste: {ex.Message}");
         }
     }
 }

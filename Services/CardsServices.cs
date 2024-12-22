@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.Json;
 using theflashcards.Model;
 
@@ -46,21 +46,22 @@ namespace theflashcards.Services
             var rootAppDir = GetRootAppDirSpecificPlataform();
             return @$"{rootAppDir}/{fileName}.json";
         }
-        
+
+        //Manipulando JSON
         public async Task<T> GetDeserializedFile<T>(string filePath)
         {
             string contentStringJson = await ReadFile(filePath);
 
             return JsonSerializer.Deserialize<T>(contentStringJson);
         }
-        public async void SaveSerializedFile<T>(string filePath, T data)
+        public async Task SaveSerializedFile<T>(string filePath, T data)
         {
             string jsonString = JsonSerializer.Serialize(data, options);
 
             await File.WriteAllTextAsync(filePath, jsonString);
         }
 
-        // Overloads
+        // Saves - Overloads
         public async Task SaveInAllCardsFile(Card card)
         {
             await SaveInAllCardsFile(new List<Card> { card });
@@ -114,7 +115,63 @@ namespace theflashcards.Services
             await File.WriteAllTextAsync(filePathCategory, updatedCategoriesSerialized);
         }
 
+        //Saves
+        public async Task SaveTestResultsToFile(TestResult testResult)
+        {
+            var filePathTestResult = GetfilePathFor("testResults");
 
+            if (!File.Exists(filePathTestResult))
+            {
+                var testResultList = new List<TestResult> { testResult };
+
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string categoriesSerialized = JsonSerializer.Serialize(testResultList, options);
+
+                await File.WriteAllTextAsync(filePathTestResult, categoriesSerialized);
+                return;
+            }
+
+            try
+            {
+                string contentTestResult = await ReadFile(filePathTestResult);
+                var testResultJson = JsonSerializer.Deserialize<List<TestResult>>(contentTestResult) ?? new List<TestResult>();
+
+                var existingTestResult = testResultJson.FirstOrDefault(tr => tr.Id == testResult.Id);
+
+                if (existingTestResult != null)
+                {
+                    existingTestResult.Answer["correct"] = testResult.Answer["correct"];
+                    existingTestResult.Answer["wrong"] = testResult.Answer["wrong"];
+                    existingTestResult.Difficulty["easy"] = testResult.Difficulty["easy"];
+                    existingTestResult.Difficulty["medium"] = testResult.Difficulty["medium"];
+                    existingTestResult.Difficulty["difficult"] = testResult.Difficulty["difficult"];
+                }
+                else
+                {
+                    testResultJson.Add(testResult);
+                }
+
+
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string uploadedTestResultSerialized = JsonSerializer.Serialize(testResultJson, options);
+
+                await File.WriteAllTextAsync(filePathTestResult, uploadedTestResultSerialized);
+            }
+            catch (JsonException)
+            {
+                System.Diagnostics.Debug.WriteLine("Erro ao desserializar o arquivo testResults. Inicializando uma nova lista.");
+
+                // Se o arquivo atual for inválido, recria a lista com o novo resultado
+                var testResultList = new List<TestResult> { testResult };
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string categoriesSerialized = JsonSerializer.Serialize(testResultList, options);
+
+                await File.WriteAllTextAsync(filePathTestResult, categoriesSerialized);
+            }
+        }
+
+
+        // Remove
         public void RemoveCards(List<Card> cards, Guid id)
         {
             var cardToRemove = cards.FirstOrDefault(c => c.Id == id);
@@ -139,6 +196,7 @@ namespace theflashcards.Services
             SaveSerializedFile(filePathCaregories, categoriesData);
         }
 
+        //Edit
         public void EditCards(List<Card> cards, Card updetedCard)
         {
 

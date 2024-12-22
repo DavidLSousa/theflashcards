@@ -15,20 +15,28 @@ public partial class Card : ObservableObject
     private bool _isAnswerVisible;
 
     [ObservableProperty]
-    private Dictionary<Guid, (int correct, int wrong)> _answer;
-
-    [ObservableProperty]
-    private Dictionary<Guid, (int facil, int medio, int dificil)> _difficulty;
+    private TestResult _testResult;
 
     public Card()
     {
         if (Id == Guid.Empty) Id = Guid.NewGuid();
         IsAnswerVisible = false;
 
-        // Answer = new Dictionary<Guid, (int correct, int wrong)>();
-        Answer = [];
-        // Difficulty = new Dictionary<Guid, (int facil, int medio, int dificil)>();
-        Difficulty = [];
+        TestResult = new TestResult
+        {
+            Id = Id,
+            Answer = new Dictionary<string, int>
+            {
+                { "correct", 0 },
+                { "wrong", 0 }
+            },
+            Difficulty = new Dictionary<string, int>
+            {
+                { "easy", 0 },
+                { "medium", 0 },
+                { "difficult", 0 }
+            }
+        };
     }
 
     [JsonConstructor]
@@ -40,7 +48,20 @@ public partial class Card : ObservableObject
         Category = category;
         IsAnswerVisible = isAnswerVisible;
 
-        Answer = [];
-        Difficulty = [];
+        TestResult = new TestResult
+        {
+            Id = Id,
+            Answer = new Dictionary<string, int>
+            {
+                { "correct", 0 },
+                { "wrong", 0 }
+            },
+            Difficulty = new Dictionary<string, int>
+            {
+                { "easy", 0 },
+                { "medium", 0 },
+                { "difficult", 0 }
+            }
+        };
     }
 }
