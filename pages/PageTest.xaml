@@ -157,6 +157,7 @@
             <Button 
                 Text="Finalizar simulado!" 
                 FontSize="Subtitle"
+                Command="{Binding SubmitTestCommand}"
                 MaximumWidthRequest="{StaticResource MaxDefaultWidth}"
                 BackgroundColor="{StaticResource BlueDark}"
                 TextColor="{StaticResource Platinum}"/>
