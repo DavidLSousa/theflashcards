@@ -124,10 +124,9 @@ namespace theflashcards.Services
             {
                 var testResultList = new List<TestResult> { testResult };
 
-                var options = new JsonSerializerOptions { WriteIndented = true };
-                string categoriesSerialized = JsonSerializer.Serialize(testResultList, options);
+                string TestResultSerialized = JsonSerializer.Serialize(testResultList, options);
 
-                await File.WriteAllTextAsync(filePathTestResult, categoriesSerialized);
+                await File.WriteAllTextAsync(filePathTestResult, TestResultSerialized);
                 return;
             }
 
@@ -152,21 +151,13 @@ namespace theflashcards.Services
                 }
 
 
-                var options = new JsonSerializerOptions { WriteIndented = true };
                 string uploadedTestResultSerialized = JsonSerializer.Serialize(testResultJson, options);
 
                 await File.WriteAllTextAsync(filePathTestResult, uploadedTestResultSerialized);
             }
             catch (JsonException)
             {
-                System.Diagnostics.Debug.WriteLine("Erro ao desserializar o arquivo testResults. Inicializando uma nova lista.");
-
-                // Se o arquivo atual for inválido, recria a lista com o novo resultado
-                var testResultList = new List<TestResult> { testResult };
-                var options = new JsonSerializerOptions { WriteIndented = true };
-                string categoriesSerialized = JsonSerializer.Serialize(testResultList, options);
-
-                await File.WriteAllTextAsync(filePathTestResult, categoriesSerialized);
+                Debug.WriteLine("Erro ao desserializar o arquivo testResults.");
             }
         }
 
@@ -194,6 +185,19 @@ namespace theflashcards.Services
             if (shouldRemove) categoriesData.Remove(category);
 
             SaveSerializedFile(filePathCaregories, categoriesData);
+        }
+        public void CleanJsonFile(string fileName)
+        {
+            try
+            {
+                var filePathTestResult = GetfilePathFor(fileName);
+
+                File.WriteAllText(filePathTestResult, "[]");
+            }
+            catch (Exception e) 
+            {
+                Debug.WriteLine($"Erro em CleanJsonFile: {e.Message}");
+            }
         }
 
         //Edit

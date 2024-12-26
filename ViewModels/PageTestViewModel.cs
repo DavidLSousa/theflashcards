@@ -182,13 +182,20 @@ public partial class PageTestViewModel : ObservableObject
 
                 if (cardToUpdate != null)
                 {
-                    cardToUpdate.TestResult = testResult;
+                    cardToUpdate.TestResult.Answer["correct"] += testResult.Answer["correct"];
+                    cardToUpdate.TestResult.Answer["wrong"] += testResult.Answer["wrong"];
+                    cardToUpdate.TestResult.Difficulty["easy"] += testResult.Difficulty["easy"];
+                    cardToUpdate.TestResult.Difficulty["medium"] += testResult.Difficulty["medium"];
+                    cardToUpdate.TestResult.Difficulty["difficult"] += testResult.Difficulty["difficult"];
                 }
             }
 
             await cardServices.SaveSerializedFile(filePathAllCards, cards);
 
+            cardServices.CleanJsonFile("testResults");
+
             // Mostrar popup de parabens e volvar para criação do teste(buildtest);
+            // 
 
         }
         catch (Exception ex)
