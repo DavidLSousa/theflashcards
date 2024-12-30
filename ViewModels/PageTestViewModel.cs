@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+
+using theflashcards.pages;
 using theflashcards.Model;
 using theflashcards.Services;
 
@@ -11,6 +14,8 @@ public partial class PageTestViewModel : ObservableObject
 {
     private List<string> _categoriesList;
     readonly CardsServices cardsServices = new();
+    private readonly Action<Popup> _showPopup;
+    private readonly INavigation _navigation;
 
     [ObservableProperty]
     private ObservableCollection<Card> _cardsForTest;
@@ -27,9 +32,12 @@ public partial class PageTestViewModel : ObservableObject
 
     private CardsServices cardServices = new();
 
-    public PageTestViewModel()
+    public PageTestViewModel(Action<Popup> showPopup, INavigation navigation)
     {
         CardsForTest = new ObservableCollection<Card>();
+
+        _navigation = navigation;
+        _showPopup = showPopup;
     }
 
     [RelayCommand]
@@ -194,13 +202,24 @@ public partial class PageTestViewModel : ObservableObject
 
             cardServices.CleanJsonFile("testResults");
 
-            // Mostrar popup de parabens e volvar para criação do teste(buildtest);
-            // 
+            ShowEndTestPopup();
+            
+            await _navigation.PushAsync(new MainPage());
 
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Erro ao submeter teste: {ex.Message}");
         }
+    }
+
+    private async void ShowEndTestPopup()
+    {
+        var popup = new EndTestPopup { BindingContext = this };
+        _showPopup?.Invoke(popup);
+
+        await Task.Delay(3000);
+
+        popup.Close();
     }
 }

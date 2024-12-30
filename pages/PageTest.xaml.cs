@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using CommunityToolkit.Maui.Views;
 using theflashcards.Model;
 using theflashcards.ViewModels;
 
@@ -10,8 +10,10 @@ public partial class PageTest : ContentPage
     {
         InitializeComponent();
 
-        // Configuração do BindingContext com a lista das categorias
-        BindingContext = new PageTestViewModel
+        BindingContext = new PageTestViewModel(
+            popup => this.ShowPopup(popup), 
+            Navigation
+        )
         {
             CategoriesList = selectedCategoriesString.Split(',').ToList()
         };

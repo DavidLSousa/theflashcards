@@ -102,6 +102,9 @@
 	  <MauiXaml Update="pages\PageTest.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="pages\EndTestPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Sizes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
