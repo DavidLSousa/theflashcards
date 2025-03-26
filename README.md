@@ -30,6 +30,35 @@
    - Responda às perguntas mentalmente ou escrevendo.  
    - Reveja as respostas para conferir.  
 
+3. **Como importar seus cards**:  
+   - Copie e cole o conteudo de AllCards.json na caixa de texto na pagina "importe seus cards"."
+   - OU
+   - Solicite a uma IA peguntas e respostas no formado no json abaixo.
+   - Deixe claro que so deve alterar as informações do id(formado guid), Quest, Resp e Category(todos no formato de string).
+   - Certifique-se que o json gerado esta no formato correto.
+   - Copie e cole na cada de texto da pagina "importe seus cards"
+[
+  {
+    "Id": "",
+    "Quest": "",
+    "Resp": "",
+    "Category": "",
+    "IsAnswerVisible": false,
+    "TestResult": {
+      "Id": "",
+      "Answer": {
+        "correct": 0,
+        "wrong": 0
+      },
+      "Difficulty": {
+        "easy": ,
+        "medium": 0,
+        "difficult": 0
+      }
+    }
+  },
+] 
+
 ## 📦 Instalação
 
 ### Android
