@@ -22,7 +22,7 @@
 1. **Criação de Cartões**:  
    - Insira a pergunta no campo correspondente.  
    - Insira a resposta no campo abaixo.  
-   - Insira a categora ou selecione uma ja existente.
+   - Insira a categoria ou selecione uma já existente.  
    - Salve o cartão.  
 
 2. **Modo de Estudo**:  
@@ -31,33 +31,36 @@
    - Reveja as respostas para conferir.  
 
 3. **Como importar seus cards**:  
-   - Copie e cole o conteudo de AllCards.json na caixa de texto na pagina "importe seus cards"."
-   - OU
-   - Solicite a uma IA peguntas e respostas no formado no json abaixo.
-   - Deixe claro que so deve alterar as informações do id(formado guid), Quest, Resp e Category(todos no formato de string).
-   - Certifique-se que o json gerado esta no formato correto.
-   - Copie e cole na cada de texto da pagina "importe seus cards"
+   - Copie e cole o conteúdo de `AllCards.json` na caixa de texto na página "Importe seus cards".  
+   - **OU**  
+   - Solicite a uma IA perguntas e respostas no formato do JSON abaixo.  
+   - Deixe claro que só deve alterar as informações do `Id` (formato GUID), `Quest`, `Resp` e `Category` (todos no formato de string).  
+   - Certifique-se de que o JSON gerado está no formato correto.  
+   - Copie e cole na caixa de texto da página "Importe seus cards".  
+
+```json
 [
   {
-    "Id": "",
-    "Quest": "",
-    "Resp": "",
-    "Category": "",
+    "Id": "GUID_AQUI",
+    "Quest": "Pergunta aqui",
+    "Resp": "Resposta aqui",
+    "Category": "Categoria aqui",
     "IsAnswerVisible": false,
     "TestResult": {
-      "Id": "",
+      "Id": "GUID_AQUI",
       "Answer": {
         "correct": 0,
         "wrong": 0
       },
       "Difficulty": {
-        "easy": ,
+        "easy": 0,
         "medium": 0,
         "difficult": 0
       }
     }
-  },
-] 
+  }
+]
+```
 
 ## 📦 Instalação
 
