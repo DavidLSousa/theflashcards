@@ -1,10 +1,8 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import Header from "@/src/components/header";
 
 export default function Index() {
   return (
-    <View>
-      <Text>Index</Text>
-      <Text>This is the index page.</Text>
-    </View>
+    <Header />
   );
 }
