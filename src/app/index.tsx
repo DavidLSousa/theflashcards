@@ -1,12 +1,17 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+
 import Header from "@/src/components/header";
 import { colors } from "../constants/colors";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
+    <LinearGradient 
+      colors={[colors.blueLazuli, colors.blueMedium]}
+      style={styles.container}
+    >
       <Header />
-    </View>
+    </LinearGradient>
   );
 }
 
