@@ -1,3 +1,4 @@
+import { colors } from "@/src/constants/colors"
 import { StyleSheet } from "react-native"
 
 export const styles = StyleSheet.create({
@@ -13,6 +14,6 @@ export const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: "#666",
+    color: colors.text,
   },
 })
