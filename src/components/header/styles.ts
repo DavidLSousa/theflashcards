@@ -10,10 +10,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    color: colors.whiteIce,
     marginTop: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: colors.text,
-  },
+  }
 })
