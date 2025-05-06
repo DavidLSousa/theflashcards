@@ -6,8 +6,9 @@ export const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.whiteIce,
     alignItems: "center",
-    padding: 10,
-    margin: 10,
+    padding: 15,
+    marginHorizontal: 30,
+    marginVertical: 10,
     borderRadius: 8,
     overflow: "hidden",
   },
