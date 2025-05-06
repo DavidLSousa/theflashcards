@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Header from "@/src/components/header";
-import { colors } from "../constants/colors";
 import ButtonHome from "@/src/components/buttonHome";
+import { colors } from "@/src/constants/colors";
+import { styles } from "./styles";
 
 export default function Index() {
   return (
@@ -13,7 +14,6 @@ export default function Index() {
     >
       <Header />
       
-
       <View style={  styles.buttonsContainer }>
         <ButtonHome title="Criar Flash Card" />
         <ButtonHome title="Todos Flash Cards" />
@@ -25,17 +25,3 @@ export default function Index() {
     </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.whiteIce,
-  },
-  button: {
-    backgroundColor: colors.whiteIce,
-  },
-  buttonsContainer: {
-    flex: 1,
-    justifyContent: "center",
-  }
-})
