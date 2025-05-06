@@ -15,10 +15,10 @@ export default function Index() {
       <Header />
       
       <View style={  styles.buttonsContainer }>
-        <ButtonHome title="Criar Flash Card" />
-        <ButtonHome title="Todos Flash Cards" />
-        <ButtonHome title="Crie seu Simulado" />
-        <ButtonHome title="Traga seus cards" />
+        <ButtonHome title="Criar Flash Card" page="/newCardPage" />
+        <ButtonHome title="Todos Flash Cards" page="/allCardsPage" />
+        <ButtonHome title="Crie seu Simulado" page="/simulatedPage" />
+        <ButtonHome title="Traga seus cards" page="/importCardsPage" />
       </View>
     
     </LinearGradient>
