@@ -19,7 +19,6 @@ export default function Index() {
         <ButtonHome title="Todos Flash Cards" />
         <ButtonHome title="Crie seu Simulado" />
         <ButtonHome title="Traga seus cards" />
-        <ButtonHome title="Traga seus cards" />
       </View>
     
     </LinearGradient>
