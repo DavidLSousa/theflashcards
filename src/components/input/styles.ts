@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.whiteIce,
     padding: 12,
     borderRadius: 8,
-    height: 100,
+    height: 200,
     textAlignVertical: "top",
     color: colors.text,
   },
