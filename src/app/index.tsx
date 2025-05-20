@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Header from "@/src/components/header";
-import ButtonHome from "@/src/components/buttonHome";
+import NavegationBtn from "@/src/components/navegationBtn";
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles";
 
@@ -15,10 +15,10 @@ export default function Index() {
       <Header />
       
       <View style={  styles.buttonsContainer }>
-        <ButtonHome title="Criar Flash Card" page="/newCardPage" />
-        <ButtonHome title="Todos Flash Cards" page="/allCardsPage" />
-        <ButtonHome title="Crie seu Simulado" page="/simulatedPage" />
-        <ButtonHome title="Traga seus cards" page="/importCardsPage" />
+        <NavegationBtn title="Criar Flash Card" page="/newCardPage" />
+        <NavegationBtn title="Todos Flash Cards" page="/allCardsPage" />
+        <NavegationBtn title="Crie seu Simulado" page="/simulatedPage" />
+        <NavegationBtn title="Traga seus cards" page="/importCardsPage" />
       </View>
     
     </LinearGradient>

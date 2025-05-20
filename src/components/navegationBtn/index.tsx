@@ -8,7 +8,7 @@ type Props = {
   page: Href,
 }
 
-export default function Index({ title, page }: Props) {
+export default function NavegationBtn({ title, page }: Props) {
 
   function handleNavigate() {
     router.navigate(page);
