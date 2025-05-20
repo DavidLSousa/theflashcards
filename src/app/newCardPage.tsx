@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { TextInput, TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 import { colors } from "@/src/constants/colors";
 import Header from "@/src/components/header";
