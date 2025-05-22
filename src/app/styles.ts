@@ -12,5 +12,10 @@ export const styles = StyleSheet.create({
   buttonsContainer: {
     flex: 1,
     justifyContent: "center",
-  }
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
 })
