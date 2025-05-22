@@ -18,4 +18,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
+    form: {
+    marginTop: 30,
+    gap: 16,
+  },
 })

@@ -1,8 +1,9 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 
 import { colors } from "@/src/constants/colors";
+import { styles } from "./styles";
 import Header from "@/src/components/header";
 import Input from "@/src/components/input";
 import Button from "@/src/components/button";
@@ -14,7 +15,7 @@ export default function NewCardPage() {
 
   const handleCreateCard = () => {
     console.log("Novo card:", { category, quest, resp });
-    
+
     // Logic
 
     setQuest("");
@@ -26,48 +27,40 @@ export default function NewCardPage() {
       colors={[colors.blueLazuli, colors.blueMedium]}
       style={styles.container}
     >
-      <Header />
 
-      <View style={styles.form}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
 
-        <Input
-          placeholder="Pergunta"
-          value={quest}
-          onChangeText={setQuest}
-          multiline
-          numberOfLines={4}
-        />
-        <Input
-          placeholder="Resposta"
-          value={resp}
-          onChangeText={setResp}
-          multiline
-          numberOfLines={4}
-        />
-        <Input
-          placeholder="Categoria"
-          value={category}
-          onChangeText={setCategory}
-        />
+        <Header />
 
-        <Button
-          title="Criar Flash Card"
-          onPress={handleCreateCard}
-        />
-      </View>
+        <View style={styles.form}>
+
+          <Input
+            placeholder="Pergunta"
+            value={quest}
+            onChangeText={setQuest}
+            multiline
+            numberOfLines={4}
+          />
+          <Input
+            placeholder="Resposta"
+            value={resp}
+            onChangeText={setResp}
+            multiline
+            numberOfLines={4}
+          />
+          <Input
+            placeholder="Categoria"
+            value={category}
+            onChangeText={setCategory}
+          />
+
+          <Button
+            title="Criar Flash Card"
+            onPress={handleCreateCard}
+          />
+        </View>
+      </ScrollView>
 
     </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 60,
-  },
-  form: {
-    marginTop: 30,
-    gap: 16,
-  }
-});
