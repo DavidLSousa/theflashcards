@@ -6,9 +6,11 @@ import Header from "@/src/components/header";
 import Card from "@/src/components/card";
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles";
+import { useCard } from "../hooks/useCard";
 
 export default function AllCardsPage() {
-  const [showAnswer, setShowAnswer] = useState(false);
+
+  const cards = useCard.getState().cards;
 
   return (
     <LinearGradient
@@ -19,7 +21,14 @@ export default function AllCardsPage() {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         
-        <Card showAnswer={showAnswer} setShowAnswer={setShowAnswer} />
+        {/* <Card showAnswer={showAnswer} setShowAnswer={setShowAnswer} /> */}
+
+        {cards.map((card, index) => (
+        <Card
+          key={index}
+          id={card.id}
+        />
+      ))}
         
       </ScrollView>
     </LinearGradient>

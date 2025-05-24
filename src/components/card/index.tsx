@@ -2,27 +2,39 @@ import { View, Text } from "react-native";
 
 import Button from "../button";
 import { styles } from "./styles";
+import { useCard } from "@/src/hooks/useCard";
 
 type Props = {
-  showAnswer: boolean;
-  setShowAnswer: (showAnswer: boolean) => void;
+  id: string;
 }
 
-export default function Card({showAnswer, setShowAnswer}: Props) {
+export default function Index({id}: Props) {
+  
+  const card = useCard((state) => 
+    state.cards)
+    .find((card) => card.id === id)!;
+  const toggleAnswer = useCard((state) => state.toggleAnswer); 
+
   return (
     <View style={styles.container}>
 
-      <Text style={styles.category}>Categoria do Card 1</Text>
+      <Text style={styles.category}>
+        {card.category}
+      </Text>
 
-      <Text style={styles.quest}>Pergunta do Card 1</Text>
+      <Text style={styles.quest}>
+        {card.quest}
+      </Text>
 
-      {showAnswer && (
-        <Text style={styles.resp}>Resposta do Card 1</Text>
+      {card.isAnswerVisible && (
+        <Text style={styles.resp}>
+          {card.resp}
+        </Text>
       )}
 
       <Button
-        title={showAnswer ? "Ocultar Resposta" : "Ver Resposta"}
-        onPress={() => setShowAnswer(!showAnswer)}
+        title={card.isAnswerVisible ? "Ocultar Resposta" : "Ver Resposta"}
+        onPress={() => toggleAnswer(card.id)}
       />
     </View>
   );
