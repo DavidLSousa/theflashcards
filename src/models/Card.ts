@@ -1,4 +1,5 @@
 import { TestResult } from './TestResult';
+import uuid from 'react-native-uuid';
 
 export class Card {
   id: string;
@@ -9,17 +10,15 @@ export class Card {
   testResult: TestResult;
 
   constructor(
-    id: string = crypto.randomUUID(),
-    quest: string = '',
-    resp: string = '',
-    category: string = '',
-    isAnswerVisible: boolean = false
+    quest: string,
+    resp: string,
+    category: string,
   ) {
-    this.id = id;
+    this.id = uuid.v4();
     this.quest = quest;
     this.resp = resp;
     this.category = category;
-    this.isAnswerVisible = isAnswerVisible;
+    this.isAnswerVisible = false;
 
     this.testResult = new TestResult(this.id);
   }
