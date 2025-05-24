@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView } from "react-native";
 
