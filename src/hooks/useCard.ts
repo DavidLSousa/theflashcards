@@ -16,6 +16,8 @@ export const useCard = create<CardType>((set) => ({
       const newCard = new Card(quest, resp, category);
       const newCards = [...state.cards, newCard];
 
+      // use repository for save
+
       return { cards: newCards }
     }),
   editCard: (updatedCard: Partial<Card>) => 
