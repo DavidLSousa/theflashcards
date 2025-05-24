@@ -21,7 +21,8 @@ export default function AllCardsPage() {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         
-        {/* <Card showAnswer={showAnswer} setShowAnswer={setShowAnswer} /> */}
+        {/* Os Cards precisam ser carregados do DB -> add ao estado global do zustand e depois renderizado */}
+        {/* A renderização pode ser feita com Flatlist inves de Scrollview */}
 
         {cards.map((card, index) => (
         <Card
