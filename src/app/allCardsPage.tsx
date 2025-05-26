@@ -6,10 +6,14 @@ import Card from "@/src/components/card";
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles";
 import { useCard } from "../hooks/useCard";
+import { useEffect } from "react";
 
 export default function AllCardsPage() {
-
-  const cards = useCard.getState().cards;
+  const { cards, fetchCards } = useCard();;
+  
+  useEffect(() => {
+    fetchCards();
+  }, []);
 
   return (
     <LinearGradient
