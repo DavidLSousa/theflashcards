@@ -5,6 +5,7 @@ import { CardRepository } from "@/src/repositories/cardRepository";
 
 type CardType = {
   cards: Card[];
+  fetchCards: () => Promise<void>;
   addCard: (quest: string, resp: string, category: string) => void;
   editCard: (cards: Card[], updatedCard: Card) => void;
   removeCard: (id: string) => void;
@@ -13,6 +14,11 @@ type CardType = {
 
 export const useCard = create<CardType>((set) => ({
   cards: [],
+  fetchCards: async () => {
+    const repo = new CardRepository();
+    const cards = await repo.getAllCards();
+    set({ cards });
+  },
   addCard: (quest, resp, category) =>
     set((state) => {
       const newCard = new Card(quest, resp, category);
