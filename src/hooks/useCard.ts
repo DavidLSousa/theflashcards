@@ -1,5 +1,7 @@
 import { create } from 'zustand';
+
 import { Card } from "@/src/models/Card";
+import { CardRepository } from "@/src/repositories/cardRepository";
 
 type CardType = {
   cards: Card[];
@@ -16,7 +18,9 @@ export const useCard = create<CardType>((set) => ({
       const newCard = new Card(quest, resp, category);
       const newCards = [...state.cards, newCard];
 
-      // use repository for save
+      // Repository
+      const cardRepository = new CardRepository();
+      cardRepository.saveCard(newCard);
 
       return { cards: newCards }
     }),
