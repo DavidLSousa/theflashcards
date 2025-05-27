@@ -10,8 +10,8 @@ type Props = {
 
 export default function Index({id}: Props) {
   
-  const card = useCard((state) => 
-    state.cards)
+  const card = useCard(
+    (state) => state.cards)
     .find((card) => card.id === id)!;
   const toggleAnswer = useCard((state) => state.toggleAnswer); 
 
