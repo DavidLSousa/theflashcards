@@ -40,6 +40,7 @@ export const useCard = create<CardType>((set) => ({
           : currentCard);
 
       // Update the repository with the new cards
+      repo.editCard(updatedCard);
       
       return { cards: updatedCards };
     }),
@@ -48,6 +49,7 @@ export const useCard = create<CardType>((set) => ({
       const updatedCards = state.cards.filter((card) => card.id !== id);
       
       // Remove the card from the repository
+      repo.removeCard(id);
 
       return { cards: updatedCards };
     }),

@@ -24,11 +24,27 @@ export class CardRepository {
       throw new Error('Failed to save card');
     }
   }
-  public async editCard(card: Partial<Card>) {
+  public async editCard(updatedCard: Partial<Card>) {
+    const fileContent = await FileSystem.readAsStringAsync(this.path);
+    const savedCards: Card[] = JSON.parse(fileContent);
 
+    const updatedCards = savedCards.map((currentCard) => 
+      currentCard.id === updatedCard.id 
+        ? { ...currentCard, ...updatedCard } 
+        : currentCard
+    );
+
+    await FileSystem.writeAsStringAsync(this.path, JSON.stringify(updatedCards, null, 2));
   };
 
-  public async removeCard(id: string) {};
+  public async removeCard(id: string) {
+    const fileContent = await FileSystem.readAsStringAsync(this.path);
+    const savedCards: Card[] = JSON.parse(fileContent);
+
+    const updatedCards = savedCards.filter((currentCard) => currentCard.id !== id);
+
+    await FileSystem.writeAsStringAsync(this.path, JSON.stringify(updatedCards, null, 2));
+  };
 
   public async getAllCards(): Promise<Card[]> {
     try {
