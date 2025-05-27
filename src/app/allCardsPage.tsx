@@ -26,8 +26,6 @@ export default function AllCardsPage() {
       />
 
       <SafeAreaView style={{ flex: 1 }}>
-        <Header />
-
         <FlatList
           contentContainerStyle={styles.scrollContent}
           data={cards}
