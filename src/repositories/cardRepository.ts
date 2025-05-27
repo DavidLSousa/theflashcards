@@ -19,6 +19,8 @@ export class CardRepository {
       savedCards.push(card);
       await FileSystem.writeAsStringAsync(this.path, JSON.stringify(savedCards, null, 2));
     } catch (error) {
+      if (error instanceof Error) throw new Error(error.message);
+      
       throw new Error('Failed to save card');
     }
   }
@@ -34,6 +36,8 @@ export class CardRepository {
       const fileContent = await FileSystem.readAsStringAsync(this.path);
       return JSON.parse(fileContent);
     } catch (error) {
+      if (error instanceof Error) throw new Error(error.message);
+      
       throw new Error('Failed to fetch cards');
     }
   }
@@ -50,7 +54,9 @@ export class CardRepository {
       Clipboard.setStringAsync(fileContent);
 
     } catch (error) {
-      throw new Error(error.message);
+      if (error instanceof Error) throw new Error(error.message);
+      
+      throw new Error('An unknown error occurred');
     }
   };
 }
