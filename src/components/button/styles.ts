@@ -9,6 +9,8 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     marginVertical: 5,
+    marginHorizontal: 5,
+    minWidth: 100,
   },
   buttonText: {
     color: colors.whiteIce,
