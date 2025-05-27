@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.whiteIce,
+    paddingHorizontal: 20,
   },
   button: {
     backgroundColor: colors.whiteIce,
@@ -16,7 +17,6 @@ export const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     justifyContent: "center",
-    padding: 20,
   },
     form: {
     marginTop: 30,
