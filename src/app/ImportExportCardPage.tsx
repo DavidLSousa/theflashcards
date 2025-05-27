@@ -44,7 +44,10 @@ export default function ImportExportCardPage() {
         />
       </View>
 
-      <Button title="Copiar Cards" onPress={copyCards} />
+      <Button 
+        title="Copiar Cards" 
+        onPress={copyCards} 
+        />
 
     </LinearGradient>
   );
