@@ -2,7 +2,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { FlatList, StatusBar, SafeAreaView } from "react-native";
 import { useEffect } from "react";
 
-import Header from "@/src/components/header";
 import Card from "@/src/components/card";
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles"; 
