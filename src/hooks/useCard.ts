@@ -7,11 +7,11 @@ type CardType = {
   cards: Card[];
   fetchCards: () => Promise<void>;
   addCard: (quest: string, resp: string, category: string) => void;
-  editCard: (cards: Card[], updatedCard: Card) => void;
+  editCard: (updatedCard: Partial<Card>) => void;
   removeCard: (id: string) => void;
   toggleAnswer: (id: string) => void;
   importNewCards: (cards: Card[]) => void;
-  copyCardsToClipboard: () => Promise<Card[]>;
+  copyCardsToClipboard: () => Promise<void>;
 }
 
 const repo = new CardRepository();
@@ -28,8 +28,7 @@ export const useCard = create<CardType>((set) => ({
       const newCards = [...state.cards, newCard];
 
       // Repository
-      const cardRepository = new CardRepository();
-      cardRepository.saveCard(newCard);
+      repo.saveCard(newCard);
 
       return { cards: newCards }
     }),
@@ -61,8 +60,8 @@ export const useCard = create<CardType>((set) => ({
       
       return { cards: updatedCards };
     }),
-  // importNewCards: (cards) => {},
+  importNewCards: (cards) => {},
   copyCardsToClipboard: async () => {
-    return await repo.copyCardsToClipboard();
+    await repo.copyCardsToClipboard();
   }
 }));
