@@ -10,12 +10,15 @@ type CardType = {
   editCard: (cards: Card[], updatedCard: Card) => void;
   removeCard: (id: string) => void;
   toggleAnswer: (id: string) => void;
+  importNewCards: (cards: Card[]) => void;
+  copyCardsToClipboard: () => Promise<Card[]>;
 }
+
+const repo = new CardRepository();
 
 export const useCard = create<CardType>((set) => ({
   cards: [],
   fetchCards: async () => {
-    const repo = new CardRepository();
     const cards = await repo.getAllCards();
     set({ cards });
   },
@@ -58,4 +61,8 @@ export const useCard = create<CardType>((set) => ({
       
       return { cards: updatedCards };
     }),
+  // importNewCards: (cards) => {},
+  copyCardsToClipboard: async () => {
+    return await repo.copyCardsToClipboard();
+  }
 }));
