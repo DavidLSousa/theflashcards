@@ -6,14 +6,12 @@ import Card from "@/src/components/card";
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles"; 
 import { useCard } from "../hooks/useCard";
-// import { CardRepository } from "../repositories/cardRepository";
 
 export default function AllCardsPage() {
   const { cards, fetchCards } = useCard();
 
   useEffect(() => {
     fetchCards();
-    // CardRepository.delete();
   }, []);
 
   return (

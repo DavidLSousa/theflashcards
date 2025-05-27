@@ -6,9 +6,6 @@ import { Card } from '@/src/models/Card';
 export class CardRepository {
   private path = `${FileSystem.documentDirectory}allCards.json`;
 
-  // public static async delete() {
-  //   await FileSystem.deleteAsync(`${FileSystem.documentDirectory}allCards.json`, { idempotent: true });
-  // }
   public async saveCard(card: Card) {
     try {
       const created = await this.createFileAndSaveContentIfNotExists(JSON.stringify([card], null, 2));
@@ -27,8 +24,11 @@ export class CardRepository {
       throw new Error('Failed to save card');
     }
   }
-  public editCard(card: Partial<Card>) { };
-  public removeCard(id: string) { };
+  public async editCard(card: Partial<Card>) {
+
+  };
+
+  public async removeCard(id: string) {};
 
   public async getAllCards(): Promise<Card[]> {
     try {
