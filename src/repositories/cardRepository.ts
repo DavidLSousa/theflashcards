@@ -7,15 +7,12 @@ export class CardRepository {
   private path = `${FileSystem.documentDirectory}allCards.json`;
 
   // public static async delete() {
-  //   await FileSystem.writeAsStringAsync(`${FileSystem.documentDirectory}allCards.json`, '[]');
+  //   await FileSystem.deleteAsync(`${FileSystem.documentDirectory}allCards.json`, { idempotent: true });
   // }
   public async saveCard(card: Card) {
     try {
-      const fileExists = await FileSystem.getInfoAsync(this.path);
-      if (!fileExists.exists) {
-        await FileSystem.writeAsStringAsync(this.path, JSON.stringify([card], null, 2));
-        return;
-      }
+      const created = await this.createFileAndSaveContentIfNotExists(JSON.stringify([card], null, 2));
+      if (created) return;
 
       const fileContent = await FileSystem.readAsStringAsync(this.path);
       const savedCards: Card[] = JSON.parse(fileContent);
@@ -70,11 +67,8 @@ export class CardRepository {
 
   public async importCards(importedCards: string) {
     try {
-      const fileExists = await FileSystem.getInfoAsync(this.path);
-      if (!fileExists.exists) {
-        await FileSystem.writeAsStringAsync(this.path, importedCards);
-        return;
-      }
+      const created = await this.createFileAndSaveContentIfNotExists(importedCards);
+      if (created) return;
 
       const fileContent = await FileSystem.readAsStringAsync(this.path);
       const savedCards: Card[] = JSON.parse(fileContent);
@@ -88,6 +82,15 @@ export class CardRepository {
       if (error instanceof Error) throw new Error(error.message);
 
       throw new Error('Failed to import cards');
+    }
+  };
+
+  private async createFileAndSaveContentIfNotExists(cardsForSave: string) : Promise<boolean | void> {
+    const fileExists = await FileSystem.getInfoAsync(this.path);
+
+    if (!fileExists.exists) {
+      await FileSystem.writeAsStringAsync(this.path, cardsForSave);
+      return true;
     }
   };
 
