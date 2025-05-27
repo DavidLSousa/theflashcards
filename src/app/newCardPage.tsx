@@ -27,7 +27,10 @@ export default function NewCardPage() {
       colors={[colors.blueLazuli, colors.blueMedium]}
       style={styles.container}
     >
-      <StatusBar hidden={true} />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={colors.blueLazuli}
+      />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
 

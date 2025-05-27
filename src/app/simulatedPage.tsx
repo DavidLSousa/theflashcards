@@ -11,7 +11,10 @@ export default function SimulatedPage() {
           colors={[colors.blueLazuli, colors.blueMedium]}
           style={styles.container}
         >
-          <StatusBar hidden={true} />
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={colors.blueLazuli}
+          />
           
           <Header />
           

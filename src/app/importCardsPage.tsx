@@ -10,7 +10,10 @@ export default function ImportCardsPage() {
           colors={[colors.blueLazuli, colors.blueMedium]}
           style={styles.container}
         >
-          <StatusBar hidden={true} />
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={colors.blueLazuli}
+          />
 
           <Header />
           
