@@ -26,7 +26,7 @@ export default function Index() {
           <NavegationBtn title="Criar Flash Card" page="/newCardPage" />
           <NavegationBtn title="Todos Flash Cards" page="/allCardsPage" />
           <NavegationBtn title="Crie seu Simulado" page="/simulatedPage" />
-          <NavegationBtn title="Traga seus cards" page="/importCardsPage" />
+          <NavegationBtn title="Traga ou copie seus cards" page="/ImportExportCardPage" />
         </View>
       </ScrollView>
     </LinearGradient>
