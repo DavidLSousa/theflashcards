@@ -13,14 +13,18 @@ export default function ImportExportCardPage() {
   const [importedCards, setImportedCards] = useState('');
   const { copyCardsToClipboard, importNewCards } = useCard();
 
-  const copyCards = async () => {
+  const copyCards = async () => { 
     await copyCardsToClipboard();
     
     Alert.alert('Tudo pronto...', 'Cards copiados!');
     // showModal('Cards copiados');
   };
 
-  const importCards = async () => {};
+  const importCards = async () => {
+    await importNewCards(importedCards);
+    
+    Alert.alert('Tudo pronto...', 'Cards importados!');
+  };
 
   return (
     <LinearGradient

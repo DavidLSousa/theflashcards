@@ -10,7 +10,7 @@ type CardType = {
   editCard: (updatedCard: Partial<Card>) => void;
   removeCard: (id: string) => void;
   toggleAnswer: (id: string) => void;
-  importNewCards: (cards: Card[]) => void;
+  importNewCards: (importedCards: string) => Promise<void>;
   copyCardsToClipboard: () => Promise<void>;
 }
 
@@ -60,7 +60,9 @@ export const useCard = create<CardType>((set) => ({
       
       return { cards: updatedCards };
     }),
-  importNewCards: (cards) => {},
+  importNewCards: async (importedCards) => {
+    await repo.importCards(importedCards);
+  },
   copyCardsToClipboard: async () => {
     await repo.copyCardsToClipboard();
   }
