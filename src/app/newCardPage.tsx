@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, StatusBar } from "react-native";
 
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles";
@@ -27,6 +27,7 @@ export default function NewCardPage() {
       colors={[colors.blueLazuli, colors.blueMedium]}
       style={styles.container}
     >
+      <StatusBar hidden={true} />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
 

@@ -1,5 +1,5 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { ScrollView } from "react-native";
+import { ScrollView, StatusBar } from "react-native";
 
 import Header from "@/src/components/header";
 import { colors } from "@/src/constants/colors";
@@ -11,6 +11,8 @@ export default function SimulatedPage() {
           colors={[colors.blueLazuli, colors.blueMedium]}
           style={styles.container}
         >
+          <StatusBar hidden={true} />
+          
           <Header />
           
           <ScrollView contentContainerStyle={styles.scrollContent}>

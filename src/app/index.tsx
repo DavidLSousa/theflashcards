@@ -1,4 +1,4 @@
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import Header from "@/src/components/header";
@@ -12,6 +12,8 @@ export default function Index() {
       colors={[colors.blueLazuli, colors.blueMedium]}
       style={styles.container}
     >
+      <StatusBar hidden={true} />
+
       <Header />
       
       <ScrollView contentContainerStyle={styles.scrollContent}>
