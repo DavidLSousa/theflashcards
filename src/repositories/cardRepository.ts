@@ -132,6 +132,4 @@ export class CardRepository {
     });
     return mergedCards;
   }
-
-  // private async writeCards<type>(cards: type) {};
 }

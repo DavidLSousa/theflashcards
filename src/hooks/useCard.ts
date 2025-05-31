@@ -27,6 +27,7 @@ export const useCard = create<CardType>((set) => ({
       const newCard = new Card(quest, resp, category);
       const newCards = [...state.cards, newCard];
 
+      // Repository
       repo.saveCard(newCard);
 
       return { cards: newCards }
@@ -38,6 +39,7 @@ export const useCard = create<CardType>((set) => ({
           ? { ...currentCard, ...updatedCard } 
           : currentCard);
 
+      // Update the repository with the new cards
       repo.editCard(updatedCard);
       
       return { cards: updatedCards };
@@ -46,6 +48,7 @@ export const useCard = create<CardType>((set) => ({
     set((state) => {
       const updatedCards = state.cards.filter((card) => card.id !== id);
       
+      // Remove the card from the repository
       repo.removeCard(id);
 
       return { cards: updatedCards };
