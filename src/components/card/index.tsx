@@ -21,7 +21,7 @@ export default function Index({ id }: Props) {
   const [resp, setResp] = useState(card.resp);
   const [category, setCategory] = useState(card.category);
 
-  function handleSave() {
+  function handleSaveEdit() {
     editCard({
       id: card.id,
       quest,
@@ -84,7 +84,7 @@ export default function Index({ id }: Props) {
             />
 
             <View style={styleModal.buttonRow}>
-              <Button title="Salvar" onPress={handleSave} />
+              <Button title="Salvar" onPress={handleSaveEdit} />
               <Button title="Deletar" onPress={handleDelete} />
               <Button title="Cancelar" onPress={() => setModalVisible(false)} />
             </View>
