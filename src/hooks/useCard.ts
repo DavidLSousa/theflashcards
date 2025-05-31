@@ -50,7 +50,6 @@ export const useCard = create<CardType>((set) => ({
     set((state) => {
       // Update Cartegory
       const [originalCard] = state.cards.filter((currentCard: Card) => currentCard.id === updatedCard.id);
-
       categoryRepository.editCategory(originalCard.category, String(updatedCard.category));
 
       // Update Card
@@ -66,6 +65,8 @@ export const useCard = create<CardType>((set) => ({
     }),
   removeCard: (id) =>
     set((state) => {
+      categoryRepository.deleteCategory(id)
+      
       const updatedCards = state.cards.filter((card) => card.id !== id);
 
       // Remove the card from the repository
