@@ -84,6 +84,7 @@ export const useCard = create<CardType>((set) => ({
     }),
   importNewCards: async (importedCards) => {
     await cardRepository.importCards(importedCards);
+    await categoryRepository.importCategories(importedCards);
   },
   copyCardsToClipboard: async () => {
     await cardRepository.copyCardsToClipboard();
