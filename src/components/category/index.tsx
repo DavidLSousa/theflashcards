@@ -1,5 +1,5 @@
-import { ViewStyle, TextStyle, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from "@/src/constants/colors";
+import { Text, TouchableOpacity, View } from "react-native";
+import { getCheckboxStyle, getContainerStyle, styles } from './styles'
 
 type Props = {
   name: string;
@@ -15,31 +15,3 @@ export default function Category({ name, selected, onPress }: Props) {
     </TouchableOpacity>
   );
 }
-
-const getContainerStyle = (selected: boolean): ViewStyle => ({
-  flexDirection: "row",
-  alignItems: "center",
-  padding: 12,
-  marginBottom: 10,
-  backgroundColor: colors.whiteIce,
-  borderRadius: 8,
-  borderWidth: 2,
-  borderColor: selected ? colors.blueDark : colors.platinum,
-});
-
-const getCheckboxStyle = (selected: boolean): ViewStyle => ({
-  height: 20,
-  width: 20,
-  marginRight: 12,
-  borderWidth: 2,
-  borderColor: selected ? colors.blueDark : colors.text,
-  backgroundColor: selected ? colors.blueDark : "transparent",
-  borderRadius: 4,
-});
-
-const styles = StyleSheet.create({
-  label: {
-    color: colors.text,
-    fontSize: 16,
-  } as TextStyle,
-});
