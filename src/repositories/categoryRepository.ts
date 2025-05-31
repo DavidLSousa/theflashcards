@@ -7,6 +7,14 @@ export class CategoryRepository {
 
   public async saveCategory(category: string) {
     try {
+      // Clean Category
+      // if (true) {
+      //   await FileSystem.deleteAsync(this.path);
+      //   const fileExists = await FileSystem.getInfoAsync(this.path);
+      //   console.log('exists: ', fileExists)
+      //   return
+      // }
+
       const fileExists = await FileSystem.getInfoAsync(this.path);
 
       if (!fileExists.exists) {
@@ -50,11 +58,17 @@ export class CategoryRepository {
       const fileContent = await FileSystem.readAsStringAsync(this.path);
       const savedCategories: Category[] = JSON.parse(fileContent);
 
-      const updatedNames = savedCategories.map(c => c.name === originalCategory ? editedCategory : c.name);
-      const uniqueNames = Array.from(new Set(updatedNames));
-      const updatedCategories: Category[] = uniqueNames.map(name => ({ name }));
+      //logica:
+        /*
+          Isso é um Set, entao se eu add e for repetido noa tem problema, ele nao vaiduplicar
+          Se a categoria editada nao existir ele vai add
+          Verificar apenas se ainda existe cards com a categoria anterior a edição
+        */
 
-      await FileSystem.writeAsStringAsync(this.path, JSON.stringify(updatedCategories, null, 2));
+      const cards: Card[] = await this.getCards();
+
+      // await FileSystem.writeAsStringAsync(this.path, JSON.stringify(finalCategories, null, 2));
+
     } catch (error) {
       console.error('editCategory: ', error);
       if (error instanceof Error) throw new Error(error.message);
@@ -62,13 +76,30 @@ export class CategoryRepository {
     }
   }
 
-  public async deleteCategory(categoryToDelete: string) {
+  public async deleteCategory(cardId: string) {
     try {
       const fileContent = await FileSystem.readAsStringAsync(this.path);
       const savedCategories: Category[] = JSON.parse(fileContent);
 
-      const updatedCategories = savedCategories
-        .filter(c => c.name !== categoryToDelete);
+      const cards: Card[] = await this.getCards();
+
+      const cardToDelete = cards.find(card => card.id === cardId);
+      if (!cardToDelete) throw new Error(`Card com id ${cardId} não encontrado.`);
+
+      const category = cardToDelete.category;
+
+      // Verifica se há outros cards usando essa categoria
+      const categoryStillUsed = cards.some(card =>
+        card.category === category && card.id !== cardId
+      );
+
+      if (categoryStillUsed) {
+        console.log(`Categoria "${category}" ainda está em uso por outros cards. Não será removida.`);
+        return;
+      }
+
+      // Remove a categoria do arquivo se não está sendo usada mais
+      const updatedCategories = savedCategories.filter(c => c.name !== category);
 
       await FileSystem.writeAsStringAsync(this.path, JSON.stringify(updatedCategories, null, 2));
     } catch (error) {
@@ -102,5 +133,9 @@ export class CategoryRepository {
       if (error instanceof Error) throw new Error(error.message);
       throw new Error('Failed to import categories');
     }
+  }
+
+  private async getCards(): Promise<Card[]> {
+    return JSON.parse(await FileSystem.readAsStringAsync(`${FileSystem.documentDirectory}allCards.json`))
   }
 }
