@@ -16,6 +16,12 @@ export default function NewCardPage() {
   const [category, setCategory] = useState("");
 
   const handleCreateCard = () => {
+    
+    if (!quest.trim() || !resp.trim() || !category.trim()) {
+      alert("Preencha todos os campos");
+      return;
+    }
+
     useCard.getState().addCard(quest, resp, category);
 
     setQuest("");
