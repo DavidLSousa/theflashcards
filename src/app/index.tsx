@@ -25,7 +25,7 @@ export default function Index() {
         <View style={styles.buttonsContainer}>
           <NavegationBtn title="Criar Flash Card" page="/newCardPage" />
           <NavegationBtn title="Todos Flash Cards" page="/allCardsPage" />
-          <NavegationBtn title="Crie seu Simulado" page="/simulatedPage" />
+          <NavegationBtn title="Crie seu Simulado" page="/createSimulatedPage" />
           <NavegationBtn title="Traga ou copie seus cards" page="/ImportExportCardPage" />
         </View>
       </ScrollView>
