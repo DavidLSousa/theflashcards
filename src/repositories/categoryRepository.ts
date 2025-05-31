@@ -53,28 +53,51 @@ export class CategoryRepository {
     }
   }
 
-  public async editCategory(originalCategory: string, editedCategory: string) {
-    try {
-      const fileContent = await FileSystem.readAsStringAsync(this.path);
-      const savedCategories: Category[] = JSON.parse(fileContent);
-
-      //logica:
+//logica:
         /*
           Isso é um Set, entao se eu add e for repetido noa tem problema, ele nao vaiduplicar
           Se a categoria editada nao existir ele vai add
           Verificar apenas se ainda existe cards com a categoria anterior a edição
         */
+  public async editCategory(originalCategory: string, editedCategory: string) {
+  try {
+    const fileContent = await FileSystem.readAsStringAsync(this.path);
+    const savedCategories: Category[] = JSON.parse(fileContent);
 
-      const cards: Card[] = await this.getCards();
+    const cards: Card[] = await this.getCards();
 
-      // await FileSystem.writeAsStringAsync(this.path, JSON.stringify(finalCategories, null, 2));
+    // Verifica se ainda há outros cards usando a categoria original
+    const otherCardsStillUseOriginal = cards.filter(card => card.category === originalCategory).length > 1;
 
-    } catch (error) {
-      console.error('editCategory: ', error);
-      if (error instanceof Error) throw new Error(error.message);
-      throw new Error('Failed to edit category');
+    // Monta um Set com as categorias considerando a edição
+    const categorySet = new Set<string>();
+
+    for (const card of cards) {
+      if (card.category === originalCategory) {
+        // Simula a mudança de categoria no card editado
+        categorySet.add(editedCategory);
+      } else {
+        categorySet.add(card.category);
+      }
     }
+
+    // Se ainda tem outros cards usando a categoria original, ela deve continuar
+    if (otherCardsStillUseOriginal) {
+      categorySet.add(originalCategory);
+    }
+
+    // Transforma em array de objetos { name: string }
+    const finalCategories: Category[] = Array.from(categorySet).map(name => ({ name }));
+    console.log('finalCategories: ', finalCategories)
+    await FileSystem.writeAsStringAsync(this.path, JSON.stringify(finalCategories, null, 2));
+
+  } catch (error) {
+    console.error('editCategory: ', error);
+    if (error instanceof Error) throw new Error(error.message);
+    throw new Error('Failed to edit category');
   }
+}
+
 
   public async deleteCategory(cardId: string) {
     try {
