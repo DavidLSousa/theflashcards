@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
-import { ScrollView, StatusBar, Text } from "react-native";
+import { ScrollView, StatusBar, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+
 
 import Header from "@/src/components/header";
 import Category from "@/src/components/category";
+import Button from "@/src/components/button";
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles";
 
 import { Category as CategoryModel } from "@/src/models/Category";
 import { CategoryRepository } from "@/src/repositories/categoryRepository";
+import { CardRepository } from "@/src/repositories/cardRepository";
 
 export default function CreateSimulatedPage() {
   const [categories, setCategories] = useState<CategoryModel[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const cardsRepository = new CardRepository();
 
   useEffect(() => {
     async function loadCategories() {
@@ -31,8 +36,31 @@ export default function CreateSimulatedPage() {
     });
   }
 
+  function CreateSimulate(selectedCategories: string[]) {
+    const navigation = useNavigation<any>();
+
+  const handleStart = async () => {
+    try {
+      const cards = await cardsRepository.getCardsByCategories(selectedCategories);
+
+      if (cards.length === 0) {
+        alert('Nenhum card encontrado para as categorias selecionadas.');
+        return;
+      }
+
+      navigation.navigate('simulatedPage', { cards });
+
+      } catch (error) {
+        console.error('Erro ao buscar cards:', error);
+        alert('Erro ao iniciar simulado. Tente novamente.');
+      }
+    };
+
+    return handleStart;
+  }
+
   return (
-    <LinearGradient 
+    <LinearGradient
       colors={[colors.blueLazuli, colors.blueMedium]}
       style={styles.container}
     >
@@ -53,11 +81,11 @@ export default function CreateSimulatedPage() {
           />
         ))}
       </ScrollView>
+
+      <Button title="Criar Simulado" onPress={CreateSimulate(Array.from(selected))} />
     </LinearGradient>
   );
 }
-
-import { StyleSheet } from "react-native";
 
 const style = StyleSheet.create({
   title: {
