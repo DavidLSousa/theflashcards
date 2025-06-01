@@ -17,6 +17,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.davidlsousa.theflashcards",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icone_theflashcards.png",
         "backgroundColor": "#ffffff"
