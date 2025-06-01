@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 8,
     overflow: "hidden",
+    elevation: 4,
+    shadowColor: '#000',
   },
   buttonText: {
     color: colors.blueMedium,
