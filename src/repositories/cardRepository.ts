@@ -28,9 +28,9 @@ export class CardRepository {
     const fileContent = await FileSystem.readAsStringAsync(this.path);
     const savedCards: Card[] = JSON.parse(fileContent);
 
-    const updatedCards = savedCards.map((currentCard) => 
-      currentCard.id === updatedCard.id 
-        ? { ...currentCard, ...updatedCard } 
+    const updatedCards = savedCards.map((currentCard) =>
+      currentCard.id === updatedCard.id
+        ? { ...currentCard, ...updatedCard }
         : currentCard
     );
 
@@ -101,7 +101,7 @@ export class CardRepository {
     }
   };
 
-  private async createFileAndSaveContentIfNotExists(cardsForSave: string) : Promise<boolean | void> {
+  private async createFileAndSaveContentIfNotExists(cardsForSave: string): Promise<boolean | void> {
     const fileExists = await FileSystem.getInfoAsync(this.path);
 
     if (!fileExists.exists) {
@@ -120,8 +120,8 @@ export class CardRepository {
       if (!existing) {
         mergedCards.push(importedCard);
       } else {
-        const isSameContent = 
-          existing.quest === importedCard.quest 
+        const isSameContent =
+          existing.quest === importedCard.quest
           && existing.resp === importedCard.resp;
 
         if (!isSameContent) {
@@ -142,9 +142,9 @@ export class CardRepository {
       const fileContent = await FileSystem.readAsStringAsync(this.path);
       const allCards: Card[] = JSON.parse(fileContent);
 
-      const filtered = allCards.filter(card =>
-        categories.includes(card.category)
-      );
+      const filtered = allCards
+        .filter(card => categories.includes(card.category))
+        .sort(() => Math.random() - 0.5);
 
       return filtered;
     } catch (error) {
