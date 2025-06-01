@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 5,
     minWidth: 100,
+    elevation: 4,
+    shadowColor: '#000',
   },
   buttonText: {
     color: colors.whiteIce,
