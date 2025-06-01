@@ -1,27 +1,42 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StatusBar, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, ScrollView } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { Card as CardModel } from '@/src/models/Card';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../constants/colors';
 import { styles } from './styles';
+import Button from '@/src/components/button';
+import { router } from 'expo-router';
 
 type RouteParams = {
-  cards: CardModel[]
+  cards: CardModel[];
 };
 
-export default function SimulateScreen() {
+export default function SimulatePage() {
   const route = useRoute<RouteProp<{ params: RouteParams }, 'params'>>();
   const { cards } = route.params;
 
   const [index, setIndex] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  if (!cards || cards.length === 0) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={{ color: 'white', fontSize: 18 }}>Nenhum card disponível.</Text>
+        <Text style={{ color: 'white', fontSize: 18 }}>Você pode criar voltando na pagina inicial e clicando em "Criar Flash Card".</Text>
+      </View>
+    );
+  }
+
   const currentCard = cards[index];
 
   const handleNext = () => {
     if (index < cards.length - 1) {
       setIndex(index + 1);
+      setShowAnswer(false);
     } else {
       alert('Fim do simulado');
+      router.back();
     }
   };
 
@@ -32,42 +47,53 @@ export default function SimulateScreen() {
     >
       <StatusBar barStyle="light-content" backgroundColor={colors.blueLazuli} />
 
-      <View style={stylesLocal.cardContainer}>
-        <Text style={stylesLocal.question}>{currentCard.quest}</Text>
-        <Text style={stylesLocal.answer}>{currentCard.resp}</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={localStyles.cardContainer}>
+          <Text style={localStyles.category}>{currentCard.category}</Text>
+          <Text style={localStyles.quest}>{currentCard.quest}</Text>
 
-        <Button title="Não responder" onPress={handleNext} />
-      </View>
+          {showAnswer && <Text style={localStyles.resp}>{currentCard.resp}</Text>}
 
+          <View style={styles.form}>
+            <Button
+              title={showAnswer ? 'Ocultar Resposta' : 'Ver Resposta'}
+              onPress={() => setShowAnswer(prev => !prev)}
+            />
+            <Button title="Próxima" onPress={handleNext} />
+          </View>
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
-};
+}
 
-const stylesLocal = StyleSheet.create({
+const localStyles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.whiteIce,
     borderRadius: 12,
     padding: 20,
-    marginHorizontal: 20,
-    marginVertical: 40,
-    elevation: 4, // sombra no Android
-    shadowColor: '#000', // sombra no iOS
+    elevation: 8,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
-  question: {
-    fontSize: 18,
+  category: {
+    color: colors.blueLazuli,
+    marginBottom: 10,
     fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
-    alignSelf: 'center',
+    fontSize: 14,
   },
-  answer: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 20,
-    alignSelf: 'center',
+  quest: {
+    fontSize: 24,
+    marginVertical: 10,
+    color: colors.blueDark,
+    textAlign: 'center',
+  },
+  resp: {
+    fontSize: 20,
+    marginVertical: 10,
+    color: colors.blueDark,
+    textAlign: 'center',
   },
 });
-
