@@ -61,9 +61,6 @@ export class CategoryRepository {
         */
   public async editCategory(originalCategory: string, editedCategory: string) {
   try {
-    const fileContent = await FileSystem.readAsStringAsync(this.path);
-    const savedCategories: Category[] = JSON.parse(fileContent);
-
     const cards: Card[] = await this.getCards();
 
     // Verifica se ainda há outros cards usando a categoria original
@@ -88,7 +85,6 @@ export class CategoryRepository {
 
     // Transforma em array de objetos { name: string }
     const finalCategories: Category[] = Array.from(categorySet).map(name => ({ name }));
-    console.log('finalCategories: ', finalCategories)
     await FileSystem.writeAsStringAsync(this.path, JSON.stringify(finalCategories, null, 2));
 
   } catch (error) {
@@ -117,7 +113,6 @@ export class CategoryRepository {
       );
 
       if (categoryStillUsed) {
-        console.log(`Categoria "${category}" ainda está em uso por outros cards. Não será removida.`);
         return;
       }
 
