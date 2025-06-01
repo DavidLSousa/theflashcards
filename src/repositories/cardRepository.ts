@@ -132,4 +132,26 @@ export class CardRepository {
     });
     return mergedCards;
   }
+
+  // Simulate
+  public async getCardsByCategories(categories: string[]): Promise<Card[]> {
+    try {
+      const fileExists = await FileSystem.getInfoAsync(this.path);
+      if (!fileExists.exists) return [];
+
+      const fileContent = await FileSystem.readAsStringAsync(this.path);
+      const allCards: Card[] = JSON.parse(fileContent);
+
+      const filtered = allCards.filter(card =>
+        categories.includes(card.category)
+      );
+
+      return filtered;
+    } catch (error) {
+      console.error('getCardsByCategories:', error);
+      if (error instanceof Error) throw new Error(error.message);
+
+      throw new Error('Failed to get cards');
+    }
+  }
 }
