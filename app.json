@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "The Flash Cards",
-    "slug": "The Flash Cards",
+    "name": "TheFlash Cards",
+    "slug": "theflashcards",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/images/icone_theflashcards.png",
@@ -33,6 +33,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "09349fc3-b895-4158-a666-9d686aa31a1c"
+      }
     }
   }
 }
