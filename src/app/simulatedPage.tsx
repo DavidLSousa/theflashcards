@@ -7,6 +7,7 @@ import { colors } from '../constants/colors';
 import { styles } from './styles';
 import Button from '@/src/components/button';
 import { router } from 'expo-router';
+import MarkdownRenderer from '@/src/components/markdownRenderer'; // Importe o novo componente
 
 type RouteParams = {
   cards: CardModel[];
@@ -52,7 +53,7 @@ export default function SimulatePage() {
           <Text style={localStyles.category}>{currentCard.category}</Text>
           <Text style={localStyles.quest}>{currentCard.quest}</Text>
 
-          {showAnswer && <Text style={localStyles.resp}>{currentCard.resp}</Text>}
+          {showAnswer && <MarkdownRenderer content={currentCard.resp} style={localStyles.resp} />}
 
           <View style={styles.form}>
             <Button
@@ -66,6 +67,7 @@ export default function SimulatePage() {
     </LinearGradient>
   );
 }
+
 
 const localStyles = StyleSheet.create({
   cardContainer: {
@@ -94,6 +96,5 @@ const localStyles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
     color: colors.blueDark,
-    textAlign: 'center',
   },
 });

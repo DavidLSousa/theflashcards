@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useState } from "react";
-import { View, ScrollView, StatusBar, StyleSheet } from "react-native";
+import { View, ScrollView, StatusBar, StyleSheet, NativeSyntheticEvent, TextInputSelectionChangeEventData } from "react-native";
 
 import { colors } from "@/src/constants/colors";
 import { styles } from "./styles";
@@ -8,6 +8,7 @@ import Header from "@/src/components/header";
 import Input from "@/src/components/input";
 import Button from "@/src/components/button";
 import ButtonCategory from "@/src/components/buttonCategory";
+import MarkdownToolbar, { MarkdownAction } from "@/src/components/markdownToolbar";
 
 import { useCard } from "@/src/hooks/useCard";
 import { CategoryRepository } from "@/src/repositories/categoryRepository";
@@ -16,6 +17,7 @@ export default function NewCardPage() {
   const [quest, setQuest] = useState("");
   const [resp, setResp] = useState("");
   const [category, setCategory] = useState("");
+  const [selection, setSelection] = useState({ start: 0, end: 0 });
 
   const [showCategoryList, setShowCategoryList] = useState(false);
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
@@ -35,11 +37,39 @@ export default function NewCardPage() {
       alert("Preencha todos os campos");
       return;
     }
-
     useCard.getState().addCard(quest, resp, category);
-
     setQuest("");
     setResp("");
+  };
+
+  const handleMarkdownAction = (action: MarkdownAction) => {
+    const { start, end } = selection;
+    const selectedText = resp.substring(start, end);
+    const before = resp.substring(0, start);
+    const after = resp.substring(end);
+    let newText = '';
+
+    switch (action) {
+      case 'bold':
+        newText = `${before}**${selectedText || 'texto em negrito'}**${after}`;
+        break;
+      case 'italic':
+        newText = `${before}*${selectedText || 'texto em itálico'}*${after}`;
+        break;
+      case 'h1':
+        newText = `${before}# ${selectedText || 'Título 1'}\n${after}`;
+        break;
+      case 'h2':
+        newText = `${before}## ${selectedText || 'Título 2'}\n${after}`;
+        break;
+      case 'h3':
+        newText = `${before}### ${selectedText || 'Título 3'}\n${after}`;
+        break;
+      case 'list':
+        newText = `${before}\n- ${selectedText || 'Item da lista'}\n${after}`;
+        break;
+    }
+    setResp(newText);
   };
 
   const toggleShowCategories = () => {
@@ -67,13 +97,18 @@ export default function NewCardPage() {
             multiline
             numberOfLines={4}
           />
-          <Input
-            placeholder="Resposta"
-            value={resp}
-            onChangeText={setResp}
-            multiline
-            numberOfLines={4}
-          />
+
+          <View>
+            <MarkdownToolbar onAction={handleMarkdownAction} />
+            <Input
+              placeholder="Resposta (suporta Markdown)"
+              value={resp}
+              onChangeText={setResp}
+              multiline
+              numberOfLines={8}
+              onSelectionChange={(e) => setSelection(e.nativeEvent.selection)}
+            />
+          </View>
 
           <View style={styleLocal.categoryRow}>
             <View style={styleLocal.categoryInputContainer}>

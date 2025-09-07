@@ -19,8 +19,7 @@ export const styles = StyleSheet.create({
     color: colors.blueDark 
   },
   resp: {
-    fontSize: 20,
-    alignSelf: "center",
+    fontSize: 16,
     marginVertical: 10,
     color: colors.blueDark,
   }

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "../button";
 import { styles } from "./styles";
 import { useCard } from "@/src/hooks/useCard";
+import MarkdownRenderer from "../markdownRenderer"; // Importe o novo componente
 
 type Props = {
   id: string;
@@ -42,7 +43,7 @@ export default function Index({ id }: Props) {
       <Text style={styles.quest}>{card.quest}</Text>
 
       {card.isAnswerVisible && (
-        <Text style={styles.resp}>{card.resp}</Text>
+        <MarkdownRenderer content={card.resp} style={styles.resp} />
       )}
 
       <Button
@@ -80,7 +81,7 @@ export default function Index({ id }: Props) {
               value={resp}
               onChangeText={setResp}
               multiline
-              style={styleModal.textarea}
+              style={[styleModal.textarea, { height: 200 }]}
             />
 
             <View style={styleModal.buttonRow}>
@@ -120,7 +121,7 @@ const styleModal = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 10,
     padding: 8,
-    height: 60,
+    height: 100,
     textAlignVertical: 'top',
   },
   buttonRow: {
