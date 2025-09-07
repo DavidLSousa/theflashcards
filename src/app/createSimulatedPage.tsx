@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ScrollView, StatusBar, Text, StyleSheet } from "react-native";
+import { ScrollView, StatusBar, Text, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -39,16 +39,16 @@ export default function CreateSimulatedPage() {
   function CreateSimulate(selectedCategories: string[]) {
     const navigation = useNavigation<any>();
 
-  const handleStart = async () => {
-    try {
-      const cards = await cardsRepository.getCardsByCategories(selectedCategories);
+    const handleStart = async () => {
+      try {
+        const cards = await cardsRepository.getCardsByCategories(selectedCategories);
 
-      if (cards.length === 0) {
-        alert('Nenhum card encontrado para as categorias selecionadas.');
-        return;
-      }
+        if (cards.length === 0) {
+          alert('Nenhum card encontrado para as categorias selecionadas.');
+          return;
+        }
 
-      navigation.navigate('simulatedPage', { cards });
+        navigation.navigate('simulatedPage', { cards });
 
       } catch (error) {
         console.error('Erro ao buscar cards:', error);
@@ -82,7 +82,11 @@ export default function CreateSimulatedPage() {
         ))}
       </ScrollView>
 
-      <Button title="Criar Simulado" onPress={CreateSimulate(Array.from(selected))} />
+      <Button title="Criar Simulado" onPress={CreateSimulate(Array.from(selected))} style={{
+        alignSelf: "center",
+        maxWidth: 800,
+        width: '100%'
+      }} />
     </LinearGradient>
   );
 }
