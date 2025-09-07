@@ -8,6 +8,7 @@ import { CategoryRepository } from "@/src/repositories/categoryRepository";
 type CardType = {
   cards: Card[];
   fetchCards: () => Promise<void>;
+  fetchCardsByCategory: (category: string) => Promise<void>;
   categories: Category[];
   fetchCategories: () => Promise<void>;
 
@@ -28,6 +29,10 @@ export const useCard = create<CardType>((set) => ({
   categories: [],
   fetchCards: async () => {
     const cards = await cardRepository.getAllCards();
+    set({ cards });
+  },
+  fetchCardsByCategory: async (category: string) => {
+    const cards = await cardRepository.getCardsByCategory(category);
     set({ cards });
   },
   fetchCategories: async () => {

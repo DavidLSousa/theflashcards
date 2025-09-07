@@ -62,6 +62,29 @@ export class CardRepository {
     }
   }
 
+  public async getCardsByCategory(category: string): Promise<Card[]> {
+    try {
+      const fileExists = await FileSystem.getInfoAsync(this.path);
+      if (!fileExists.exists) {
+        return [];
+      }
+      const fileContent = await FileSystem.readAsStringAsync(this.path);
+      const allCards: Card[] = JSON.parse(fileContent);
+
+      if (!category) {
+        return allCards;
+      }
+
+      const filtered = allCards.filter(card => card.category.toLowerCase().includes(category.toLowerCase()));
+      return filtered;
+    } catch (error) {
+      console.error('getCardsByCategory: ', error);
+      if (error instanceof Error) throw new Error(error.message);
+
+      throw new Error('Failed to fetch cards');
+    }
+  }
+
   public async copyCardsToClipboard() {
     try {
       const fileExists = await FileSystem.getInfoAsync(this.path);
