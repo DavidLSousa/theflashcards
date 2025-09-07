@@ -14,6 +14,9 @@ export const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     justifyContent: "center",
+    alignSelf: "center",
+    maxWidth: 800,
+    width: '100%'
   },
     form: {
     marginTop: 30,

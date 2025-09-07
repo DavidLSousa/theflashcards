@@ -24,7 +24,6 @@ export default function NewCardPage() {
     async function loadCategories() {
       const repo = new CategoryRepository();
       const loaded = await repo.getAllCategories();
-      console.log("Categorias carregadas:", loaded);
       const names = loaded.map(c => c.name);
       setAvailableCategories(names);
     }
@@ -87,7 +86,7 @@ export default function NewCardPage() {
             </View>
             <View style={styleLocal.categoryButtonContainer}>
               <Button
-                title="Usar categoria existênte"
+                title="Usar existente"
                 onPress={toggleShowCategories}
               />
             </View>

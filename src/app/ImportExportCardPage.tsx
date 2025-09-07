@@ -13,16 +13,16 @@ export default function ImportExportCardPage() {
   const [importedCards, setImportedCards] = useState('');
   const { copyCardsToClipboard, importNewCards } = useCard();
 
-  const copyCards = async () => { 
+  const copyCards = async () => {
     await copyCardsToClipboard();
-    
+
     Alert.alert('Tudo pronto...', 'Cards copiados!');
     // showModal('Cards copiados');
   };
 
   const importCards = async () => {
     await importNewCards(importedCards);
-    
+
     Alert.alert('Tudo pronto...', 'Cards importados!');
   };
 
@@ -37,25 +37,26 @@ export default function ImportExportCardPage() {
       />
       <Header />
 
-      <View style={styles.form}>
-        <Input
-          placeholder="Cole seus cards aqui"
-          value={importedCards}
-          onChangeText={setImportedCards}
-          multiline
-          numberOfLines={4}
-        />
+      <View style={styles.scrollContent}>
+        <View style={styles.form}>
+          <Input
+            placeholder="Cole seus cards aqui"
+            value={importedCards}
+            onChangeText={setImportedCards}
+            multiline
+            numberOfLines={4}
+          />
+
+          <Button
+            title="Importar Cards"
+            onPress={importCards}
+          />
+        </View>
 
         <Button
-          title="Importar Cards"
-          onPress={importCards}
-        />
-      </View>
-
-      <Button 
-        title="Copiar Cards" 
-        onPress={copyCards} 
-        />
+          title="Copiar Cards"
+          onPress={copyCards}
+        /></View>
     </LinearGradient>
   );
 }
